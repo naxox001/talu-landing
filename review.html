@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TÄLU · Review Hub · 14 páginas</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0503;
+    --panel: #14110e;
+    --panel-soft: #1c1814;
+    --ivory: #f0e6d2;
+    --ivory-soft: #b8ad98;
+    --ivory-mute: #7d7363;
+    --gold: #c9a35d;
+    --gold-bright: #f4be72;
+    --gold-deep: #a86a2a;
+    --rose: #f0c9c2;
+    --green: #4caf81;
+    --serif: "Cormorant Garamond", "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, sans-serif;
+  }
+  *{ box-sizing: border-box; margin: 0; padding: 0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ivory);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(244,190,114,.10), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 100% 100%, rgba(168,106,42,.08), transparent 70%);
+  }
+  a{ color: inherit; text-decoration: none; }
+
+  /* HEADER */
+  .topbar{
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    background: rgba(10,5,3,.78);
+    border-bottom: 1px solid rgba(244,190,114,.18);
+    padding: 18px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .topbar .brand{
+    font-family: var(--serif);
+    font-size: 24px;
+    letter-spacing: .14em;
+    font-weight: 500;
+    color: var(--ivory);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .topbar .brand .dot{
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--gold-bright);
+    box-shadow: 0 0 12px var(--gold-bright);
+  }
+  .topbar .meta{
+    font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ivory-mute);
+  }
+  .topbar .meta strong{ color: var(--gold-bright); margin: 0 4px; }
+  .filters{ display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter{
+    padding: 8px 16px;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    border-radius: 999px;
+    border: 1px solid rgba(244,190,114,.3);
+    color: var(--ivory-soft);
+    cursor: pointer;
+    transition: all .3s ease;
+    background: transparent;
+    font-family: inherit;
+  }
+  .filter:hover{ border-color: var(--gold-bright); color: var(--gold-bright); }
+  .filter.is-active{
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color: #1a0a02;
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* HERO */
+  .review-hero{
+    padding: 80px 32px 50px;
+    text-align: center;
+    border-bottom: 1px solid rgba(244,190,114,.12);
+  }
+  .review-hero h1{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(40px, 5vw, 64px);
+    letter-spacing: -.02em;
+    line-height: 1;
+    margin-bottom: 14px;
+    color: var(--ivory);
+  }
+  .review-hero h1 em{
+    font-style: italic;
+    color: var(--gold-bright);
+  }
+  .review-hero p{
+    font-family: var(--serif); font-style: italic;
+    font-size: 18px;
+    color: var(--ivory-soft);
+    max-width: 600px; margin: 0 auto;
+  }
+
+  /* GRID */
+  .grid{
+    max-width: 1500px; margin: 50px auto 80px;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 28px;
+  }
+
+  /* CARD */
+  .card{
+    background: linear-gradient(180deg, rgba(40,28,20,.5) 0%, rgba(20,17,14,.85) 100%);
+    border: 1px solid rgba(244,190,114,.18);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform .5s cubic-bezier(.2,.7,.3,1), border-color .4s ease, box-shadow .4s ease;
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .card:hover{
+    transform: translateY(-5px);
+    border-color: rgba(244,190,114,.45);
+    box-shadow: 0 30px 60px -28px rgba(0,0,0,.85), 0 12px 28px -10px rgba(168,106,42,.3);
+  }
+  .card.is-hidden{ display: none; }
+
+  /* badge sección arriba */
+  .card .section-tag{
+    position: absolute; top: 14px; left: 14px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 600;
+    z-index: 5;
+    backdrop-filter: blur(8px);
+  }
+  .card[data-section="skincare"] .section-tag{ background: rgba(245,222,160,.85); color: #1a0a02; }
+  .card[data-section="cocina"] .section-tag{ background: rgba(244,190,114,.92); color: #1a0a02; }
+  .card[data-section="packs"] .section-tag{ background: rgba(232,207,148,.92); color: #1a0a02; }
+  .card[data-section="madre"] .section-tag{ background: rgba(240,201,194,.92); color: #1a0a02; }
+  .card[data-section="wow"] .section-tag{ background: rgba(201,163,93,.92); color: #1a0a02; }
+  .card[data-section="otro"] .section-tag{ background: rgba(184,173,152,.85); color: #1a0a02; }
+
+  /* badge "NUEVO" */
+  .card .new-flag{
+    position: absolute; top: 14px; right: 14px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+    font-weight: 600;
+    z-index: 5;
+    background: linear-gradient(135deg, var(--green), #2e8b57);
+    color: white;
+    box-shadow: 0 4px 10px -2px rgba(76,175,129,.5);
+  }
+
+  /* IFRAME PREVIEW */
+  .preview{
+    position: relative;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: var(--panel);
+    border-bottom: 1px solid rgba(244,190,114,.12);
+  }
+  .preview iframe{
+    position: absolute;
+    top: 0; left: 0;
+    width: 1400px; height: 875px;
+    transform: scale(0.257);
+    transform-origin: top left;
+    border: 0;
+    pointer-events: none;
+  }
+  .preview::after{
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 70%, rgba(10,5,3,.6) 100%);
+    pointer-events: none;
+  }
+
+  /* BODY de la card */
+  .card-body{
+    padding: 22px 22px 18px;
+    display: flex; flex-direction: column; gap: 10px;
+    flex: 1;
+  }
+  .card-body h3{
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--ivory);
+    line-height: 1.15;
+  }
+  .card-body p{
+    font-size: 13px;
+    color: var(--ivory-soft);
+    line-height: 1.55;
+  }
+  .card-body .url{
+    font-family: ui-monospace, "JetBrains Mono", monospace;
+    font-size: 10px;
+    color: var(--ivory-mute);
+    letter-spacing: 0;
+    word-break: break-all;
+    padding-top: 4px;
+    border-top: 1px dashed rgba(244,190,114,.15);
+    margin-top: auto;
+  }
+
+  /* ACTIONS */
+  .actions{
+    display: flex; gap: 8px;
+    padding: 0 22px 22px;
+  }
+  .btn{
+    flex: 1;
+    padding: 11px 14px;
+    font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .3s ease;
+    text-align: center;
+    font-family: inherit;
+    border: 1px solid;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .btn-open{
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold) 70%, var(--gold-deep));
+    color: #1a0a02;
+    border-color: rgba(255,255,255,.3);
+    box-shadow: 0 8px 20px -8px rgba(168,106,42,.55);
+  }
+  .btn-open:hover{
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow: 0 12px 26px -8px rgba(168,106,42,.7);
+  }
+  .btn-note{
+    background: transparent;
+    color: var(--ivory-soft);
+    border-color: rgba(244,190,114,.3);
+  }
+  .btn-note:hover{
+    background: rgba(244,190,114,.08);
+    color: var(--gold-bright);
+    border-color: var(--gold-bright);
+  }
+  .btn-note.has-note{
+    background: rgba(76,175,129,.14);
+    border-color: rgba(76,175,129,.5);
+    color: #c8e6c9;
+  }
+
+  /* NOTE BOX (oculto, se abre on click) */
+  .note-box{
+    padding: 0 22px 0;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .4s cubic-bezier(.2,.7,.3,1), padding-bottom .4s ease;
+  }
+  .card.note-open .note-box{
+    max-height: 320px;
+    padding-bottom: 22px;
+  }
+  .note-box textarea{
+    width: 100%;
+    min-height: 110px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: rgba(10,5,3,.7);
+    border: 1px solid rgba(244,190,114,.25);
+    color: var(--ivory);
+    font-family: inherit;
+    font-size: 13px;
+    resize: vertical;
+    outline: none;
+    transition: border-color .3s ease;
+  }
+  .note-box textarea:focus{
+    border-color: var(--gold-bright);
+  }
+  .note-box .saved-indicator{
+    font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--green);
+    margin-top: 6px;
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+  .note-box .saved-indicator.show{ opacity: 1; }
+
+  /* EXPORT BUTTON */
+  .export-bar{
+    position: fixed;
+    bottom: 24px; right: 24px;
+    z-index: 200;
+    display: flex; gap: 8px;
+  }
+  .export-btn{
+    padding: 14px 22px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color: #1a0a02;
+    font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    font-weight: 700;
+    border: 1px solid rgba(255,255,255,.4);
+    box-shadow: 0 18px 40px -10px rgba(168,106,42,.65);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all .3s ease;
+  }
+  .export-btn:hover{
+    transform: translateY(-3px);
+    filter: brightness(1.08);
+  }
+  .clear-btn{
+    background: transparent;
+    color: var(--ivory-mute);
+    border: 1px solid rgba(244,190,114,.25);
+    padding: 14px 18px;
+  }
+
+  @media (max-width: 700px){
+    .grid{ grid-template-columns: 1fr; gap: 20px; padding: 0 16px; }
+    .topbar{ padding: 14px 16px; }
+    .review-hero{ padding: 50px 16px 30px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="brand">
+    <span class="dot"></span>
+    TÄLU · Review Hub
+  </a>
+  <div class="meta">
+    <strong>14</strong> páginas · v2 ·
+    <strong id="notes-count">0</strong> notas guardadas
+  </div>
+  <div class="filters" id="filters">
+    <button class="filter is-active" data-filter="all">Todas</button>
+    <button class="filter" data-filter="skincare">Skincare</button>
+    <button class="filter" data-filter="cocina">Cocina</button>
+    <button class="filter" data-filter="packs">Packs</button>
+    <button class="filter" data-filter="madre">Día Madre</button>
+    <button class="filter" data-filter="wow">WOW</button>
+    <button class="filter" data-filter="otro">Otros</button>
+  </div>
+</header>
+
+<section class="review-hero">
+  <h1>Las 14 páginas <em>en revisión</em></h1>
+  <p>Click "Abrir" para ver completa. Click "Notas" para anotar fixes — se guardan automáticamente y al final descargas todas como texto.</p>
+</section>
+
+<main class="grid" id="grid">
+
+  <!-- ===== SKINCARE ===== -->
+  <article class="card" data-section="skincare" data-id="raw">
+    <span class="section-tag">Skincare</span>
+    <div class="preview"><iframe src="products/raw.html" loading="lazy"></iframe></div>
+    <div class="card-body">
+      <h3>TÄLU RÄW</h3>
+      <p>Sebo de ternero puro 100%. Hidrata sin grasa, reemplaza 6 productos. 4 reseñas reales.</p>
+      <div class="url">products/raw.html</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-open" href="products/raw.html" target="_blank" rel="noopener">Abrir →</a>
+      <button class="btn btn-note" data-action="note">📝 Notas</button>
+    </div>
+    <div class="note-box">
+      <textarea placeholder="Anota aquí los fixes/cambios para TÄLU RÄW..."></textarea>
+      <div class="saved-indicator">✓ Guardado</div>
+    </div>
+  </article>
+
+  <article class="card" data-section="skincare" data-id="clear">
+    <span class="section-tag">Skincare</span>
+    <div class="preview"><iframe src="products/clear.html" loading="lazy"></iframe></div>
+    <div class="card-body">
+      <h3>TÄLU CLEAR</h3>
+      <p>Sebo de ternero + activos para acné/rosácea. Calma sin químicos agresivos.</p>
+      <div class="url">products/clear.html</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-open" href="products/clear.html" target="_blank" rel="noopener">Abrir →</a>
+      <button class="btn btn-note" data-action="note">📝 Notas</button>
+    </div>
+    <div class="note-box">
+      <textarea placeholder="Anota aquí los fixes/cambios para TÄLU CLEAR..."></textarea>
+      <div class="saved-indicator">✓ Guardado</div>
+    </div>
+  </article>
+
+  <article class="card" data-section="skincare" data-id="premium">
+    <span class="section-tag">Skincare</span>
+    <div class="preview"><iframe src="products/premium.html" loading="lazy"></iframe></div>
+    <div class="card-body">
+      <h3>TÄLU PREMIUM</h3>
+      <p>Antiedad de sebo de ternero con activos premium. Reparación profunda nocturna. 7 reseñas.</p>
+      <div class="url">products/premium.html</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-open" href="products/premium.html" target="_blank" rel="noopener">Abrir →</a>
+      <button class="btn btn-note" data-action="note">📝 Notas</button>
+    </div>
+    <div class="note-box">
+      <textarea placeholder="Anota aquí los fixes/cambios para TÄLU PREMIUM..."></textarea>
+      <div class="saved-indicator">✓ Guardado</div>
+    </div>
+  </article>
+
+  <!-- ===== COCINA ===== -->
+  <article class="card" data-section="cocina" data-id="tallow-res">
+    <span class="section-tag">Cocina</span>
+    <span class="new-flag">★ Nueva</span>
+    <div class="preview"><iframe src="products/tallow-res.html" loading="lazy"></iframe></div>
+    <div class="card-body">
+      <h3>TALLOW Res · grass-fed</h3>
+      <p>Sebo de res adulta 410ml/300ml. Punto humo 250°C. Variantes + tabla comparativa + 4 reseñas reales.</p>
+      <div class="url">products/tallow-res.html</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-open" href="products/tallow-res.html" target="_blank" rel="noopener">Abrir →</a>
+      <button class="btn btn-note" data-action="note">📝 Notas</button>
+    </div>
+    <div class="note-box">
+      <textarea placeholder="Anota aquí los fixes/cambios para TALLOW Res..."></textarea>
+      <div class="saved-indicator">✓ Guardado</div>
+    </div>
+  </article>
+
+  <article class="card" data-section="cocina" data-id="tallow-ternero">
+    <span class="section-tag">Cocina</span>
+    <span class="new-flag">★ Nueva</span>
+    <div class="preview"><iframe src="products/tallow-ternero.html" loading="lazy"></iframe></div>
+    <div class="card-body">
+      <h3>TALLOW Ternero · más fino</h3>
+      <p>Sebo de ternero grass-fed para cocinar. Mini galería + sello TERNERO oficial del WOW.</p>
+      <div class="url">products/tallow-ternero.html</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-open" href="products/tallow-ternero.html" target="_blank" rel="noopener">Abrir →</a>
+      <button class="btn btn-note" data-action="note">📝 Notas</button>
+    </div>
+    <div class="note-box">
+      <textarea placeholder="Anota aquí los fixes/cambios para TALLOW Ternero..."></textarea>
+      <div class="saved-indicator">✓ Guardado</div>
+    </div>
+  </article>
+
+  <article class="card" data-section="cocina" data-id="pack-cocina">
+    <span class="section-tag">Cocina</span>
+    <span class="new-flag">★ Nueva</span>
+    <div class="preview"><iframe src="products/pack-cocina-ancestral.html" loading="lazy"></iframe></div>
+    <div class="card-body">
+      <h3>Pack Cocina Ancestral</h3>
+      <p>Res robusta + ternero fino. Ahorra 17%. Plan de cocina semanal con 3 escenas.</p>
+      <div class="url">products/pack-cocina-ancestral.html</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-open" href="products/pack-cocina-ancestral.html" target="_blank" rel="noopener">Abrir →</a>
+      <button class="btn btn-note" data-action="note">📝 Notas</button>
+    </div>
+    <div class="note-box">
+      <textarea placeholder="Anota aquí los fixes/cambios para Pack Cocina..."></textarea>
+      <div class="saved-indicator">✓ Guardado</div>
+    </div>
+  </article>
+
+  <!-- ===== PACKS ===== -->
+  <article class="card" data-section="packs" data-id="pack-rutina">
+    <span class="section-tag">Pack</span>
+    <span class="new-flag">★ Nueva</span>
+    <div class="preview"><iframe src="products/pack-rutina-skincare.html" loading="lazy"></iframe></div>
+    <div class="card-body">
+      <h3>Pack Rutina Skincare</h3>
+      <p>RÄW + CLEAR + PREMIUM. Rutina ancestral completa día y noche. Ahorra 23% ($14.890).</p>
+      <div class="url">products/pack-rutina-skincare.html</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-open" href="products/pack-rutina-skincare.html" target="_blank" rel="noopener">Abrir →</a>
+      <button class="btn btn-note" data-action="note">📝 Notas</button>
+    </div>
+    <div class="note-box">
+      <textarea placeholder="Anota aquí los fixes/cambios para Pack Rutina Skincare..."></textarea>
+      <div class="saved-indicator">✓ Guardado</div>
+    </div>
+  </article>
+
+  <article class="card" data-section="packs" data-id="pack-familia">
+    <span class="section-tag">Pack</span>
+    <span class="new-flag">★ Nueva</span>
+    <div class="preview"><iframe src="products/pack-familia.html" loading="lazy"></iframe></div>
+    <div class="card-body">
+      <h3>Pack Familia DUAL</h3>
+      <p>Split skincare/cocina con sello TÄLU central uniendo. 5 productos (3 cremas + 2 grasas). 30% off.</p>
+      <div class="url">products/pack-familia.html</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-open" href="products/pack-familia.html" target="_blank" rel="noopener">Abrir →</a>
+      <button class="btn btn-note" data-action="note">📝 Notas</button>
+    </div>
+    <div class="note-box">
+      <textarea placeholder="Anota aquí los fixes/cambios para Pack Familia..."></textarea>
+      <div class="saved-indicator">✓ Guardado</div>
+    </div>
+  </article>
+
+  <!-- ===== DÍA DE LA MADRE ===== -->
+  <article class="card" data-section="madre" data-id="pack-dia-madre">
+    <span class="section-tag">Día Madre</span>
+    <span class="new-flag">★ Nueva</span>
+    <div class="preview"><iframe src="products/pack-dia-madre.html" loading="lazy"></iframe></div>
+    <div class="card-body">
+      <h3>Pack Día de la Madre 2026</h3>
+      <p>Edición limitada · paleta rosa+oro. Banner 25% OFF + envío GRATIS + 3 pills exclusive event.</p>
+      <div class="url">products/pack-dia-madre.html</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-open" href="products/pack-dia-madre.html" target="_blank" rel="noopener">Abrir →</a>
+      <button class="btn btn-note" data-action="note">📝 Notas</button>
+    </div>
+    <div class="note-box">
+      <textarea placeholder="Anota aquí los fixes/cambios para Pack Día de la Madre..."></textarea>
+      <div class="saved-indicator">✓ Guardado</div>
+    </div>
+  </article>
+
+  <!-- ===== WOW ===== -->
+  <article class="card" data-section="wow" data-id="wow-rm">
+    <span class="section-tag">WOW</span>
+    <div class="preview"><iframe src="products/reprogramacion-metabolica.html" loading="lazy"></iframe></div>
+    <div class="card-body">
+      <h3>Pack Reprogramación Metabólica</h3>
+      <p>La página WOW original. Sello TERNERO oficial · oro frío · ritual exclusivo. Solo miembros.</p>
+      <div class="url">products/reprogramacion-metabolica.html</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-open" href="products/reprogramacion-metabolica.html" target="_blank" rel="noopener">Abrir →</a>
+      <button class="btn btn-note" data-action="note">📝 Notas</button>
+    </div>
+    <div class="note-box">
+      <textarea placeholder="Anota aquí los fixes/cambios para Reprogramación Metabólica WOW..."></textarea>
+      <div class="saved-indicator">✓ Guardado</div>
+    </div>
+  </article>
+
+  <!-- ===== OTROS ===== -->
+  <article class="card" data-section="otro" data-id="ternero">
+    <span class="section-tag">Manifesto</span>
+    <span class="new-flag">★ Nueva</span>
+    <div class="preview"><iframe src="products/ternero.html" loading="lazy"></iframe></div>
+    <div class="card-body">
+      <h3>El Ternero TÄLU</h3>
+      <p>Manifesto del ternero — sello WOW masivo (320px), 5 razones con iconos Lucide, catálogo de 4 productos.</p>
+      <div class="url">products/ternero.html</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-open" href="products/ternero.html" target="_blank" rel="noopener">Abrir →</a>
+      <button class="btn btn-note" data-action="note">📝 Notas</button>
+    </div>
+    <div class="note-box">
+      <textarea placeholder="Anota aquí los fixes/cambios para El Ternero..."></textarea>
+      <div class="saved-indicator">✓ Guardado</div>
+    </div>
+  </article>
+
+  <article class="card" data-section="otro" data-id="gift-card">
+    <span class="section-tag">Gift Card</span>
+    <span class="new-flag">★ Nueva</span>
+    <div class="preview"><iframe src="gift-card.html" loading="lazy"></iframe></div>
+    <div class="card-body">
+      <h3>Tarjeta de Regalo</h3>
+      <p>Tarjeta visual con tilt 3D animado. Selector $20.000 / $30.000 / $50.000. 3 pasos cómo funciona.</p>
+      <div class="url">gift-card.html</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-open" href="gift-card.html" target="_blank" rel="noopener">Abrir →</a>
+      <button class="btn btn-note" data-action="note">📝 Notas</button>
+    </div>
+    <div class="note-box">
+      <textarea placeholder="Anota aquí los fixes/cambios para Gift Card..."></textarea>
+      <div class="saved-indicator">✓ Guardado</div>
+    </div>
+  </article>
+
+  <article class="card" data-section="otro" data-id="contacto">
+    <span class="section-tag">Contacto</span>
+    <span class="new-flag">★ Nueva</span>
+    <div class="preview"><iframe src="contacto.html" loading="lazy"></iframe></div>
+    <div class="card-body">
+      <h3>Contacto</h3>
+      <p>Hero "Hablemos cuando quieras" con email card mailto + 5 quick FAQ + 2 method cards.</p>
+      <div class="url">contacto.html</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-open" href="contacto.html" target="_blank" rel="noopener">Abrir →</a>
+      <button class="btn btn-note" data-action="note">📝 Notas</button>
+    </div>
+    <div class="note-box">
+      <textarea placeholder="Anota aquí los fixes/cambios para Contacto..."></textarea>
+      <div class="saved-indicator">✓ Guardado</div>
+    </div>
+  </article>
+
+  <article class="card" data-section="otro" data-id="home">
+    <span class="section-tag">Home</span>
+    <div class="preview"><iframe src="index.html" loading="lazy"></iframe></div>
+    <div class="card-body">
+      <h3>Home (con banner Día Madre)</h3>
+      <p>Landing principal. Hero "Cuidado por dentro y por fuera" + jar 3D fallback + banner temporal Día Madre.</p>
+      <div class="url">index.html</div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-open" href="index.html" target="_blank" rel="noopener">Abrir →</a>
+      <button class="btn btn-note" data-action="note">📝 Notas</button>
+    </div>
+    <div class="note-box">
+      <textarea placeholder="Anota aquí los fixes/cambios para Home..."></textarea>
+      <div class="saved-indicator">✓ Guardado</div>
+    </div>
+  </article>
+
+</main>
+
+<!-- Export bar -->
+<div class="export-bar">
+  <button class="export-btn clear-btn" id="clear-notes" title="Borrar todas las notas">🗑 Limpiar</button>
+  <button class="export-btn" id="export-notes" title="Descargar notas como .txt">📥 Descargar notas</button>
+</div>
+
+<script>
+  const STORAGE_KEY = 'talu-review-notes-v2';
+
+  // ============ Cargar notas guardadas ============
+  function loadNotes() {
+    let notes = {};
+    try { notes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) {}
+    document.querySelectorAll('.card').forEach(card => {
+      const id = card.dataset.id;
+      const ta = card.querySelector('textarea');
+      const noteBtn = card.querySelector('[data-action="note"]');
+      if (notes[id]) {
+        ta.value = notes[id];
+        if (noteBtn) {
+          noteBtn.classList.add('has-note');
+          noteBtn.textContent = '✓ Notas (' + notes[id].length + ')';
+        }
+      }
+    });
+    updateNotesCount();
+  }
+
+  // ============ Guardar nota ============
+  function saveNote(id, value) {
+    let notes = {};
+    try { notes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) {}
+    if (value.trim()) notes[id] = value;
+    else delete notes[id];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+    updateNotesCount();
+  }
+
+  function updateNotesCount() {
+    let notes = {};
+    try { notes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) {}
+    const count = Object.keys(notes).length;
+    document.getElementById('notes-count').textContent = count;
+  }
+
+  // ============ Toggle note box ============
+  document.querySelectorAll('[data-action="note"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.card');
+      card.classList.toggle('note-open');
+      if (card.classList.contains('note-open')) {
+        setTimeout(() => card.querySelector('textarea').focus(), 200);
+      }
+    });
+  });
+
+  // ============ Auto-save al typear ============
+  let saveTimers = {};
+  document.querySelectorAll('.card textarea').forEach(ta => {
+    const card = ta.closest('.card');
+    const id = card.dataset.id;
+    const indicator = card.querySelector('.saved-indicator');
+    const noteBtn = card.querySelector('[data-action="note"]');
+
+    ta.addEventListener('input', () => {
+      clearTimeout(saveTimers[id]);
+      saveTimers[id] = setTimeout(() => {
+        saveNote(id, ta.value);
+        indicator.classList.add('show');
+        if (ta.value.trim()) {
+          noteBtn.classList.add('has-note');
+          noteBtn.textContent = '✓ Notas (' + ta.value.trim().length + ')';
+        } else {
+          noteBtn.classList.remove('has-note');
+          noteBtn.textContent = '📝 Notas';
+        }
+        setTimeout(() => indicator.classList.remove('show'), 1500);
+      }, 400);
+    });
+  });
+
+  // ============ Filtros ============
+  document.querySelectorAll('.filter').forEach(f => {
+    f.addEventListener('click', () => {
+      document.querySelectorAll('.filter').forEach(x => x.classList.remove('is-active'));
+      f.classList.add('is-active');
+      const filter = f.dataset.filter;
+      document.querySelectorAll('.card').forEach(card => {
+        if (filter === 'all' || card.dataset.section === filter) {
+          card.classList.remove('is-hidden');
+        } else {
+          card.classList.add('is-hidden');
+        }
+      });
+    });
+  });
+
+  // ============ Export notas como .txt ============
+  document.getElementById('export-notes').addEventListener('click', () => {
+    let notes = {};
+    try { notes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) {}
+
+    if (Object.keys(notes).length === 0) {
+      alert('No hay notas guardadas todavía.');
+      return;
+    }
+
+    const titulos = {};
+    document.querySelectorAll('.card').forEach(card => {
+      titulos[card.dataset.id] = {
+        title: card.querySelector('h3').textContent.trim(),
+        url: card.querySelector('.url').textContent.trim(),
+        section: card.dataset.section,
+      };
+    });
+
+    const date = new Date().toISOString().split('T')[0];
+    let out = `TÄLU · Review Notes\n`;
+    out += `Fecha: ${date}\n`;
+    out += `Total páginas con notas: ${Object.keys(notes).length}\n`;
+    out += `${'='.repeat(60)}\n\n`;
+
+    Object.entries(notes).forEach(([id, note]) => {
+      const info = titulos[id] || { title: id, url: '?', section: '?' };
+      out += `▼ ${info.title}\n`;
+      out += `  Sección: ${info.section}\n`;
+      out += `  URL: https://naxox001.github.io/talu-landing/${info.url}\n`;
+      out += `  ${'─'.repeat(56)}\n`;
+      out += `  ${note.split('\n').join('\n  ')}\n\n`;
+    });
+
+    const blob = new Blob([out], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `talu-review-notes-${date}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  // ============ Clear notas ============
+  document.getElementById('clear-notes').addEventListener('click', () => {
+    if (confirm('¿Borrar TODAS las notas? No se puede deshacer.')) {
+      localStorage.removeItem(STORAGE_KEY);
+      document.querySelectorAll('.card textarea').forEach(ta => ta.value = '');
+      document.querySelectorAll('.card .btn-note').forEach(btn => {
+        btn.classList.remove('has-note');
+        btn.textContent = '📝 Notas';
+      });
+      updateNotesCount();
+    }
+  });
+
+  loadNotes();
+</script>
+
+</body>
+</html>
