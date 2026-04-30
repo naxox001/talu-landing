@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pack Rutina Skincare Completa · RÄW + CLEAR + PREMIUM | TÄLU Chile</title>
+<meta name="description" content="Pack Rutina Skincare Completa TÄLU — RÄW + CLEAR + PREMIUM. Rutina ancestral completa de día y noche. Ahorra 23%. $49.990 (compare $64.880)." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --w-base:        #f4efe8;
+    --w-soft:        #ece5db;
+    --w-ink:         #2a2420;
+    --w-ink-soft:    #5b524a;
+    --w-ink-mute:    #8a8076;
+
+    --gold:          #c9a35d;
+    --gold-bright:   #e8cf94;
+    --gold-deep:     #8a6a32;
+    --gold-light:    #f5dea0;
+
+    --serif: "Cormorant Garamond", "Times New Roman", serif;
+    --sans:  "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+    --maxw: 1240px;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family: var(--sans);
+    color: var(--w-ink);
+    background: var(--w-base);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse 70% 45% at 15% 20%, rgba(255,255,255,.95), transparent 65%),
+      radial-gradient(ellipse 60% 40% at 85% 60%, rgba(236,229,219,.9), transparent 70%);
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  button{ font-family: inherit; cursor:pointer; border:none; background:none; }
+  h1,h2,h3,h4{ font-family: var(--serif); font-weight: 400; letter-spacing: -.015em; line-height: 1.05; }
+  em, .italic{ font-style: italic; color: var(--gold-deep); font-weight: 500; }
+
+  .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 40px; }
+
+  /* NAV */
+  .nav{
+    position: fixed; top:0; left:0; right:0; z-index: 100;
+    padding: 16px 40px;
+    display:flex; align-items:center; justify-content:space-between;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    background: rgba(244,239,232,.78);
+    border-bottom: 1px solid rgba(201,163,93,.18);
+  }
+  .logo{ font-family: var(--serif); font-weight: 500; font-size: 26px; letter-spacing: .12em; display:flex; align-items:center; gap: 10px; }
+  .logo .dot{ width:7px; height:7px; border-radius:50%; background: var(--gold); box-shadow: 0 0 10px rgba(201,163,93,.6); }
+  .nav-links{ display:flex; gap: 30px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--w-ink-soft); }
+  .nav-links a:hover{ color: var(--gold-deep); }
+  .nav-cart{
+    width: 46px; height: 46px; border-radius: 999px;
+    background: linear-gradient(135deg, #f5dea0 0%, #e7c179 45%, #c9a35d 100%);
+    color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    box-shadow: 0 12px 26px -10px rgba(166,130,61,.55);
+    border: 1px solid rgba(255,255,255,.4);
+  }
+
+  .eyebrow{
+    font-size: 11px; letter-spacing: .32em; text-transform: uppercase;
+    color: var(--gold-deep); font-weight: 500;
+    display: inline-flex; align-items: center; gap: 14px;
+  }
+  .eyebrow::before{ content: ""; width: 30px; height: 1px; background: var(--gold); }
+
+  .section-eyebrow{
+    font-size: 11px; letter-spacing: .32em; text-transform: uppercase;
+    color: var(--gold-deep); font-weight: 500;
+    display: inline-flex; gap: 14px; align-items: center; justify-content: center;
+  }
+  .section-eyebrow::before, .section-eyebrow::after{
+    content: ""; width: 30px; height: 1px; background: var(--gold);
+  }
+  .section-header{ text-align: center; max-width: 760px; margin: 0 auto 70px; }
+  .section-header h2{ font-size: clamp(36px, 5vw, 60px); margin-top: 22px; color: var(--w-ink); }
+  .section-header .lead{
+    margin-top: 18px; font-family: var(--serif); font-style: italic;
+    font-size: 19px; color: var(--w-ink-soft);
+  }
+
+  /* Hero */
+  .hero{
+    min-height: 90vh;
+    padding: 130px 40px 80px;
+    display: grid; place-items: center;
+    position: relative;
+  }
+  .hero-content{
+    max-width: 1100px; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  .hero-img-wrap{
+    aspect-ratio: 1/1;
+    border-radius: 24px;
+    overflow: hidden;
+    background: radial-gradient(circle at 35% 30%, #fff, #ece5db 70%);
+    border: 1px solid rgba(201,163,93,.22);
+    box-shadow: 0 60px 100px -50px rgba(42,36,32,.3);
+    position: relative;
+  }
+  .hero-img-wrap img{
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 8s ease;
+  }
+  .hero-img-wrap:hover img{ transform: scale(1.04); }
+
+  .hero-text{ display: flex; flex-direction: column; gap: 24px; }
+  .hero-text h1{
+    font-size: clamp(48px, 6vw, 88px);
+    color: var(--w-ink);
+    line-height: .98;
+    letter-spacing: -.02em;
+  }
+  .hero-text h1 em{ display: block; }
+  .hero-lead{
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(20px, 1.7vw, 24px);
+    color: var(--w-ink-soft);
+    line-height: 1.5;
+  }
+  .hero-lead strong{ color: var(--gold-deep); font-weight: 500; font-style: normal; }
+
+  .hero-meta{
+    display: flex; gap: 22px; flex-wrap: wrap;
+    padding: 16px 0;
+    border-top: 1px solid rgba(201,163,93,.2);
+    border-bottom: 1px solid rgba(201,163,93,.2);
+    font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--w-ink-soft);
+  }
+  .hero-meta span{ display: inline-flex; align-items: center; gap: 8px; }
+  .hero-meta span::before{
+    content: ""; width: 5px; height: 5px; border-radius: 999px; background: var(--gold);
+  }
+
+  .save-ribbon{
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #f5dea0 0%, #c9a35d 100%);
+    color: #fff;
+    border-radius: 6px;
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 600;
+    box-shadow: 0 8px 18px -6px rgba(166,130,61,.45);
+  }
+
+  .urgency-strip{
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 18px; border-radius: 999px;
+    background: linear-gradient(135deg, rgba(46,139,87,.14), rgba(46,139,87,.04));
+    border: 1px solid rgba(46,139,87,.4);
+    font-size: 12px; letter-spacing: .14em; color: #2e6b4d;
+  }
+  .urgency-strip .dot{
+    width: 8px; height: 8px; border-radius: 999px; background: #4caf81;
+    box-shadow: 0 0 10px rgba(76,175,129,.7);
+    animation: pulse-d 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse-d{ 0%,100%{opacity:1} 50%{opacity:.4} }
+
+  .btn-primary{
+    position: relative; isolation: isolate;
+    padding: 22px 44px;
+    font-size: 12px; letter-spacing: .26em; text-transform: uppercase; font-weight: 600;
+    border-radius: 999px;
+    background:
+      linear-gradient(100deg, transparent 25%, rgba(255,255,255,.45) 45%, rgba(255,255,255,.45) 55%, transparent 75%) 0 0 / 250% 100% no-repeat,
+      linear-gradient(135deg, #f5dea0 0%, #e7c179 30%, #c9a35d 60%, #a6823d 100%);
+    background-position: -100% 0, 0 0;
+    color: #1a1410;
+    border: 1px solid rgba(255,255,255,.4);
+    box-shadow: 0 22px 44px -14px rgba(166,130,61,.6), inset 0 1px 0 rgba(255,255,255,.5);
+    animation: btn-shine 4s ease-in-out infinite;
+    transition: transform .35s ease, filter .35s ease;
+    cursor: pointer;
+    text-align: center;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  @keyframes btn-shine{
+    0%{ background-position: -150% 0, 0 0 } 60%{ background-position: 250% 0, 0 0 } 100%{ background-position: 250% 0, 0 0 }
+  }
+  .btn-primary:hover{ transform: translateY(-3px); filter: brightness(1.08); }
+
+  .hero-cta-row{ display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .hero-price-tease{
+    display: inline-flex; align-items: baseline; gap: 10px;
+    padding: 10px 18px;
+    background: rgba(201,163,93,.08);
+    border-radius: 999px;
+    border: 1px solid rgba(201,163,93,.25);
+  }
+  .hero-price-tease .was{
+    font-family: var(--serif); font-size: 17px; color: var(--w-ink-mute);
+    text-decoration: line-through;
+  }
+  .hero-price-tease .now{
+    font-family: var(--serif); font-size: 24px; color: var(--gold-deep); font-weight: 500;
+  }
+
+  /* Includes (3 productos del pack) */
+  .includes{ padding: 140px 40px; background: linear-gradient(180deg, transparent, rgba(255,255,255,.4) 50%, transparent); }
+  .includes-grid{
+    max-width: 1180px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+  .inc-card{
+    padding: 32px 28px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #fff 0%, #f9f3ea 100%);
+    border: 1px solid rgba(201,163,93,.22);
+    transition: transform .5s cubic-bezier(.2,.7,.3,1), border-color .5s ease, box-shadow .5s ease;
+    color: inherit; text-decoration: none; display: block;
+  }
+  .inc-card:hover{
+    transform: translateY(-5px);
+    border-color: rgba(201,163,93,.5);
+    box-shadow: 0 32px 60px -28px rgba(166,130,61,.3);
+  }
+  .inc-card .img-wrap{
+    aspect-ratio: 1/1;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 22px;
+    border: 1px solid rgba(201,163,93,.18);
+    background: #fff;
+  }
+  .inc-card .img-wrap img{ width: 100%; height: 100%; object-fit: cover; }
+  .inc-card h3{
+    font-family: var(--serif); font-size: 26px; font-weight: 500;
+    color: var(--w-ink); margin-bottom: 6px;
+  }
+  .inc-card .role{
+    font-family: var(--serif); font-style: italic;
+    font-size: 14px; color: var(--gold-deep);
+    margin-bottom: 10px;
+  }
+  .inc-card p{ font-size: 14px; line-height: 1.6; color: var(--w-ink-soft); }
+  .inc-card .price{
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(201,163,93,.15);
+    font-size: 13px; letter-spacing: .14em;
+    color: var(--w-ink-mute);
+  }
+  .inc-card .price strong{ color: var(--gold-deep); margin-right: 8px; }
+
+  /* Por qué */
+  .por-que{ padding: 120px 40px; }
+  .pq-grid{
+    max-width: 1180px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  .pq-card{
+    padding: 38px 32px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #fff 0%, #f9f3ea 100%);
+    border: 1px solid rgba(201,163,93,.22);
+    display: flex; gap: 22px; align-items: flex-start;
+    transition: transform .5s ease, border-color .5s ease, box-shadow .5s ease;
+  }
+  .pq-card:hover{
+    transform: translateY(-4px);
+    border-color: rgba(201,163,93,.5);
+    box-shadow: 0 28px 50px -28px rgba(166,130,61,.3);
+  }
+  .pq-icon{
+    width: 60px; height: 60px;
+    flex-shrink: 0;
+    display: grid; place-items: center;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(201,163,93,.18), rgba(138,106,50,.06));
+    border: 1px solid rgba(201,163,93,.3);
+    color: var(--gold-deep);
+  }
+  .pq-icon svg{ width: 30px; height: 30px; }
+  .pq-text h3{ font-family: var(--serif); font-size: 24px; color: var(--w-ink); margin-bottom: 6px; font-weight: 500; }
+  .pq-text p{ font-size: 14px; line-height: 1.6; color: var(--w-ink-soft); }
+
+  /* Reviews */
+  .reviews{ padding: 120px 40px; background: linear-gradient(180deg, transparent, rgba(255,255,255,.5) 50%, transparent); }
+  .rv-grid{
+    max-width: 1180px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 22px;
+  }
+  .rv-card{
+    padding: 28px 26px;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid rgba(201,163,93,.18);
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .rv-stars{ color: var(--gold); font-size: 16px; letter-spacing: 2px; }
+  .rv-body{
+    font-family: var(--serif); font-style: italic;
+    font-size: 16px; line-height: 1.55;
+    color: var(--w-ink);
+  }
+  .rv-author{
+    margin-top: auto; padding-top: 12px;
+    border-top: 1px solid rgba(201,163,93,.15);
+    font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--w-ink-soft);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .rv-author .badge{
+    padding: 3px 9px; border-radius: 999px;
+    background: rgba(201,163,93,.12);
+    border: 1px solid rgba(201,163,93,.3);
+    color: var(--gold-deep);
+    font-size: 10px;
+  }
+
+  /* CTA final */
+  .cta-final{ padding: 60px 40px 130px; text-align: center; }
+  .price-card{
+    max-width: 620px; margin: 0 auto;
+    padding: 52px 44px;
+    border-radius: 24px;
+    background:
+      radial-gradient(ellipse 100% 60% at 50% 0%, rgba(245,222,160,.4), transparent 70%),
+      linear-gradient(180deg, #fff 0%, #f4efe8 100%);
+    border: 1px solid rgba(201,163,93,.4);
+    box-shadow: 0 60px 100px -40px rgba(166,130,61,.3), inset 0 1px 0 rgba(255,255,255,.7);
+    position: relative;
+  }
+  .price-card::before{
+    content: ""; position: absolute; top: -2px; left: 50%; transform: translateX(-50%);
+    width: 140px; height: 4px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    border-radius: 0 0 4px 4px;
+  }
+  .price-card .label{
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--gold-deep); font-weight: 500;
+    margin-bottom: 22px;
+  }
+  .price-was{ font-family: var(--serif); font-size: 22px; color: var(--w-ink-mute); text-decoration: line-through; }
+  .price-now{ font-family: var(--serif); font-size: 76px; color: var(--gold-deep); font-weight: 500; line-height: 1; margin: 8px 0; }
+  .price-savings{ font-size: 14px; color: var(--w-ink-soft); margin-bottom: 28px; }
+  .price-savings strong{ color: var(--gold-deep); }
+  .cta-meta{
+    margin-top: 22px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--w-ink-soft);
+  }
+  .cta-meta span::before{ content: "✓ "; color: var(--gold-deep); font-weight: 700; }
+
+  /* Risk reverse */
+  .risk{ padding: 60px 40px; }
+  .risk-card{
+    max-width: 760px; margin: 0 auto;
+    text-align: center;
+    padding: 44px 40px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #fff 0%, #f4efe8 100%);
+    border: 1px dashed rgba(46,139,87,.4);
+  }
+  .risk-icon{
+    width: 60px; height: 60px;
+    margin: 0 auto 16px;
+    display: grid; place-items: center;
+    border-radius: 999px;
+    background: rgba(46,139,87,.1);
+    color: #2e6b4d;
+  }
+  .risk-card h3{ font-family: var(--serif); font-size: 28px; color: var(--w-ink); margin-bottom: 10px; }
+  .risk-card p{ font-size: 14px; color: var(--w-ink-soft); max-width: 540px; margin: 0 auto; }
+
+  /* Footer */
+  .footer{
+    padding: 60px 40px 50px;
+    border-top: 1px solid rgba(201,163,93,.2);
+    text-align: center;
+    font-size: 12px; letter-spacing: .14em;
+    color: var(--w-ink-mute);
+  }
+  .footer a{ color: var(--gold-deep); margin: 0 14px; }
+  .footer .top{
+    font-family: var(--serif); font-size: 22px;
+    color: var(--w-ink); margin-bottom: 18px; letter-spacing: .2em;
+  }
+
+  .reveal{
+    opacity: 0; transform: translateY(28px);
+    transition: opacity .9s cubic-bezier(.2,.7,.3,1), transform .9s cubic-bezier(.2,.7,.3,1);
+  }
+  .reveal.is-visible{ opacity: 1; transform: translateY(0); }
+  .reveal.delay-1{ transition-delay: .1s; }
+  .reveal.delay-2{ transition-delay: .2s; }
+
+  @media (max-width: 900px){
+    .nav-links{ display: none; }
+    .nav{ padding: 14px 20px; }
+    .hero-content{ grid-template-columns: 1fr; gap: 40px; }
+    .pq-grid{ grid-template-columns: 1fr; }
+    .includes-grid{ grid-template-columns: 1fr; }
+    .price-now{ font-size: 60px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../index.html" class="logo"><span class="dot"></span>TÄLU</a>
+  <div class="nav-links">
+    <a href="../index.html#cocina">Cocina</a>
+    <a href="../index.html#skincare">Skincare</a>
+    <a href="../index.html#packs">Packs</a>
+    <a href="../contacto.html">Contacto</a>
+  </div>
+  <a href="#comprar" class="nav-cart" aria-label="Carrito">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1.4 9.5a2 2 0 0 1-2 1.7H8.4a2 2 0 0 1-2-1.7L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+  </a>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-img-wrap reveal">
+      <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/pack_skincare_completa.png?v=1776378071" alt="Pack Rutina Skincare TÄLU">
+    </div>
+    <div class="hero-text">
+      <span class="eyebrow">Pack · Rutina Skincare</span>
+      <h1>
+        Toda tu rutina
+        <em>en 3 frascos</em>
+      </h1>
+      <p class="hero-lead">
+        RÄW de día. CLEAR para el descongestivo. PREMIUM antiedad de noche.
+        <strong>La piel ancestral completa, ahorra 23%.</strong>
+      </p>
+
+      <div class="hero-meta">
+        <span>3 cremas TÄLU</span>
+        <span>Sebo de ternero</span>
+        <span>Sin químicos</span>
+      </div>
+
+      <div class="urgency-strip">
+        <span class="dot"></span>
+        Despacho HOY si pides antes de las 16:00
+      </div>
+
+      <div>
+        <span class="save-ribbon">★ Ahorra $14.890</span>
+      </div>
+
+      <div class="hero-cta-row">
+        <a href="https://taluchile.cl/products/pack-rutina-skincare-completa" class="btn-primary">
+          Llevar la Rutina
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <div class="hero-price-tease">
+          <span class="was">$64.880</span>
+          <span class="now">$49.990</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="includes">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Lo que incluye</span>
+    <h2>3 cremas · 3 momentos del día</h2>
+    <p class="lead">Una rutina ancestral completa de día y noche.</p>
+  </div>
+  <div class="includes-grid">
+
+    <a href="raw.html" class="inc-card reveal">
+      <div class="img-wrap">
+        <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/talu_raw_60g_naranja.png" alt="TÄLU RÄW" onerror="this.src='https://cdn.shopify.com/s/files/1/0778/1679/1279/files/pack_skincare_completa.png'">
+      </div>
+      <div class="role">para el día</div>
+      <h3>TÄLU RÄW</h3>
+      <p>Sebo de ternero puro 100%. Hidrata sin grasa, da tono parejo, prepara la piel para el bloqueador. Una sola crema reemplaza 6 productos.</p>
+      <div class="price"><strong>$18.990</strong> precio individual</div>
+    </a>
+
+    <a href="clear.html" class="inc-card reveal delay-1">
+      <div class="img-wrap">
+        <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/talu_clear_60g.png" alt="TÄLU CLEAR" onerror="this.src='https://cdn.shopify.com/s/files/1/0778/1679/1279/files/pack_skincare_completa.png'">
+      </div>
+      <div class="role">para el descongestivo</div>
+      <h3>TÄLU CLEAR</h3>
+      <p>Sebo de ternero + activos para acné y rosácea. Calma, descongestiona, regula la oleosidad. Sin químicos agresivos.</p>
+      <div class="price"><strong>$20.900</strong> precio individual</div>
+    </a>
+
+    <a href="premium.html" class="inc-card reveal delay-2">
+      <div class="img-wrap">
+        <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/talu_premium_60g.png" alt="TÄLU PREMIUM" onerror="this.src='https://cdn.shopify.com/s/files/1/0778/1679/1279/files/pack_skincare_completa.png'">
+      </div>
+      <div class="role">para la noche</div>
+      <h3>TÄLU PREMIUM</h3>
+      <p>Crema antiedad de sebo de ternero con activos premium. Reparación profunda nocturna. La piel amanece otra.</p>
+      <div class="price"><strong>$24.990</strong> precio individual</div>
+    </a>
+
+  </div>
+</section>
+
+<section class="por-que">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Por qué este pack</span>
+    <h2>El skincare que realmente cambia la piel</h2>
+  </div>
+  <div class="pq-grid">
+    <div class="pq-card reveal">
+      <div class="pq-icon">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="16" cy="16" r="11"/>
+          <path d="M16 7v9l6 3"/>
+        </svg>
+      </div>
+      <div class="pq-text">
+        <h3>Rutina ancestral completa</h3>
+        <p>Una crema para cada momento del día. Día (RÄW), descongestivo (CLEAR), noche (PREMIUM). Tu piel reconoce el ritmo.</p>
+      </div>
+    </div>
+    <div class="pq-card reveal delay-1">
+      <div class="pq-icon">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M16 3l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6L7 10l6-1 3-6z"/>
+        </svg>
+      </div>
+      <div class="pq-text">
+        <h3>Ahorra $14.890</h3>
+        <p>23% menos que comprándolas por separado. Si las tres son parte de tu rutina, este pack es la opción obvia.</p>
+      </div>
+    </div>
+    <div class="pq-card reveal">
+      <div class="pq-icon">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M6 22a4 4 0 014-4h12a4 4 0 014 4v3H6v-3z"/>
+          <circle cx="16" cy="11" r="5"/>
+        </svg>
+      </div>
+      <div class="pq-text">
+        <h3>Sebo de ternero · grass-fed</h3>
+        <p>Las 3 cremas comparten la misma base ancestral: sebo de ternero chileno alimentado a pasto. Biocompatible con tu piel.</p>
+      </div>
+    </div>
+    <div class="pq-card reveal delay-1">
+      <div class="pq-icon">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M16 3l11 5v8c0 7-5 12-11 13C10 28 5 23 5 16V8l11-5z"/>
+          <path d="M11 16l4 4 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="pq-text">
+        <h3>Garantía 60 días</h3>
+        <p>Probás la rutina completa un mes. Si no notas la diferencia — devolvemos cada peso. Sin preguntas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Lo que dicen</span>
+    <h2>17 reseñas reales · promedio 4,82 / 5</h2>
+  </div>
+  <div class="rv-grid">
+    <div class="rv-card reveal">
+      <div class="rv-stars">★★★★★</div>
+      <p class="rv-body">"Muy buena experiencia, la estoy usando hace casi 1 mes ningún problema, la uso de día y noche aplicando otros productos como sérum o bloqueador, súper rendidora."</p>
+      <div class="rv-author">
+        <span>— Andrea</span>
+        <span class="badge">PREMIUM</span>
+      </div>
+    </div>
+    <div class="rv-card reveal delay-1">
+      <div class="rv-stars">★★★★★</div>
+      <p class="rv-body">"La uso todas las noches, mi piel por la mañana amanece bien linda. La quiero seguir usando, no quiero químicos en mi piel."</p>
+      <div class="rv-author">
+        <span>— Daniela Flores</span>
+        <span class="badge">RÄW</span>
+      </div>
+    </div>
+    <div class="rv-card reveal delay-2">
+      <div class="rv-stars">★★★★★</div>
+      <p class="rv-body">"La crema ha sido fantástica, llevo dos semanas utilizándola y se nota mucho la diferencia, sin duda volveré a comprar."</p>
+      <div class="rv-author">
+        <span>— Javiera Cárdenas</span>
+        <span class="badge">CLEAR</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="risk">
+  <div class="risk-card reveal">
+    <div class="risk-icon">
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7">
+        <path d="M16 3l11 5v8c0 7-5 12-11 13C10 28 5 23 5 16V8l11-5z"/>
+        <path d="M11 16l4 4 7-7" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h3>60 días de prueba · 0 riesgo</h3>
+    <p>Si no notas la diferencia en tu piel después de un mes de rutina completa — devolvemos cada peso. Tu piel pone los términos.</p>
+  </div>
+</section>
+
+<section class="cta-final" id="comprar">
+  <div class="price-card reveal">
+    <div class="label">Pack Rutina Skincare · 3 cremas</div>
+    <div class="price-was">$64.880</div>
+    <div class="price-now">$49.990</div>
+    <div class="price-savings">
+      Ahorra <strong>$14.890</strong> · Rutina completa día y noche · Despacho HOY si pides antes de las 16:00
+    </div>
+    <a href="https://taluchile.cl/products/pack-rutina-skincare-completa" class="btn-primary">
+      Llevar la Rutina
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <div class="cta-meta">
+      <span>Envío gratis sobre $40k</span>
+      <span>Garantía 60 días</span>
+      <span>Sebo de ternero</span>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="top">TÄLU</div>
+  <div class="links">
+    <a href="../index.html">Inicio</a>
+    <a href="../index.html#cocina">Cocina</a>
+    <a href="../index.html#skincare">Skincare</a>
+    <a href="../contacto.html">Contacto</a>
+  </div>
+  <div>© TÄLU Chile · contacto@taluchile.cl</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>

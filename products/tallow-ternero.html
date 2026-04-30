@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TALLOW Ternero TÄLU · Sebo de Ternero grass-fed para Cocinar | Chile</title>
+<meta name="description" content="Sebo de ternero grass-fed chileno para cocinar. La grasa más fina y delicada de la cocina ancestral. Punto de humo alto, biocompatible, sabor sutil. Frasco $12.990." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles/cocina-base.css">
+<style>
+  .hero-text h1{ font-size: clamp(50px, 7.5vw, 110px); }
+  .urgency-strip{
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 18px; border-radius: 999px;
+    background: linear-gradient(135deg, rgba(46,139,87,.16), rgba(46,139,87,.06));
+    border: 1px solid rgba(46,139,87,.4);
+    font-size: 12px; letter-spacing: .14em; color: #c8e6c9;
+    margin-bottom: 8px;
+  }
+  .urgency-strip .dot{
+    width: 8px; height: 8px; border-radius: 999px;
+    background: #4caf81;
+    box-shadow: 0 0 10px rgba(76,175,129,.7);
+    animation: pulse-d 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse-d{ 0%,100%{opacity:1} 50%{opacity:.4} }
+
+  /* Mini gallery thumbs */
+  .mini-thumbs{
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin-top: 14px;
+  }
+  .mini-thumb{
+    aspect-ratio: 1/1;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(224,144,64,.25);
+    cursor: pointer;
+    transition: border-color .3s ease, transform .3s ease;
+  }
+  .mini-thumb img{ width: 100%; height: 100%; object-fit: cover; }
+  .mini-thumb:hover{ border-color: var(--c-gold-bright); transform: translateY(-2px); }
+  .mini-thumb.is-active{ border-color: var(--c-gold-bright); box-shadow: 0 0 0 2px rgba(244,190,114,.3); }
+</style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<nav class="nav">
+  <a href="../index.html" class="logo"><span class="dot"></span>TÄLU</a>
+  <div class="nav-links">
+    <a href="../index.html#cocina">Cocina</a>
+    <a href="../index.html#skincare">Skincare</a>
+    <a href="../index.html#packs">Packs</a>
+    <a href="../contacto.html">Contacto</a>
+  </div>
+  <a href="#comprar" class="nav-cart" aria-label="Carrito">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1.4 9.5a2 2 0 0 1-2 1.7H8.4a2 2 0 0 1-2-1.7L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+  </a>
+</nav>
+
+<section class="hero-cinematic">
+  <div class="hero-content">
+    <div class="hero-product reveal">
+      <div class="hero-product-frame">
+        <img id="hero-img" src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/hf_20260421_225806_ddfd11bb-836b-4079-9bec-c47b123ed94f.png?v=1777068092" alt="TALLOW Ternero TÄLU">
+      </div>
+      <div class="hero-seal">
+        <svg width="140" height="140" viewBox="0 0 200 200">
+          <defs>
+            <radialGradient id="seal-grad-tern" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#170c06"/>
+              <stop offset="70%" stop-color="#0a0503"/>
+              <stop offset="100%" stop-color="#0a0503"/>
+            </radialGradient>
+            <linearGradient id="ring-grad-tern" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffd28a"/>
+              <stop offset="50%" stop-color="#f4be72"/>
+              <stop offset="100%" stop-color="#a86a2a"/>
+            </linearGradient>
+          </defs>
+          <circle cx="100" cy="100" r="92" fill="url(#seal-grad-tern)" stroke="url(#ring-grad-tern)" stroke-width="2"/>
+          <circle cx="100" cy="100" r="84" fill="none" stroke="rgba(244,190,114,.45)" stroke-width=".7"/>
+          <g style="transform-origin: 100px 100px; animation: seal-rot 50s linear infinite;">
+            <path id="circ-tern" d="M 100 100 m -76 0 a 76 76 0 1 1 152 0 a 76 76 0 1 1 -152 0" fill="none"/>
+            <text fill="#f4be72" font-family="Inter" font-size="9" letter-spacing="3" font-weight="500">
+              <textPath href="#circ-tern">★ GRASS-FED · CHILE · DELICADO · TERNERO ANCESTRAL · </textPath>
+            </text>
+          </g>
+          <g transform="translate(100,100)">
+            <!-- ternero estilizado -->
+            <path d="M -22,-10 Q -28,-2 -22,12 Q -10,22 6,18 Q 22,12 24,2 Q 26,-10 18,-18 Q 6,-26 -10,-22 Q -20,-18 -22,-10 Z"
+                  fill="rgba(244,190,114,.18)" stroke="#f4be72" stroke-width="1.4"/>
+            <circle cx="-12" cy="-8" r="1.5" fill="#f4be72"/>
+            <text x="0" y="14" text-anchor="middle" font-family="Cormorant Garamond" font-size="11"
+                  fill="#f4be72" font-style="italic" font-weight="500">tern.</text>
+          </g>
+        </svg>
+        <style>@keyframes seal-rot{from{transform:rotate(0)}to{transform:rotate(360deg)}}</style>
+      </div>
+    </div>
+
+    <div class="hero-text">
+      <span class="eyebrow">Cocina ancestral · Ternero</span>
+      <h1>
+        TALLOW
+        <em>de ternero · más fino</em>
+      </h1>
+      <p class="hero-lead">
+        El sebo más delicado y suave del campo chileno.
+        <strong>Para cuando la cocina pide elegancia, no fuerza.</strong>
+      </p>
+
+      <div class="hero-meta">
+        <span>Sebo de ternero</span>
+        <span>Grass-fed</span>
+        <span>Sabor sutil</span>
+      </div>
+
+      <div class="urgency-strip">
+        <span class="dot"></span>
+        Despacho HOY si pides antes de las 16:00
+      </div>
+
+      <!-- Mini galería thumbs -->
+      <div class="mini-thumbs">
+        <div class="mini-thumb is-active" data-img="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/hf_20260421_225806_ddfd11bb-836b-4079-9bec-c47b123ed94f.png?v=1777068092">
+          <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/hf_20260421_225806_ddfd11bb-836b-4079-9bec-c47b123ed94f.png?v=1777068092" alt="">
+        </div>
+        <div class="mini-thumb" data-img="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/hf_20260421_232530_06126f56-9039-4ec6-a832-258839108699_1.png?v=1777068092">
+          <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/hf_20260421_232530_06126f56-9039-4ec6-a832-258839108699_1.png?v=1777068092" alt="">
+        </div>
+        <div class="mini-thumb" data-img="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/hf_20260422_024204_1aaa1bf0-d8e5-41b2-8511-48a084568a9b.png?v=1777068092">
+          <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/hf_20260422_024204_1aaa1bf0-d8e5-41b2-8511-48a084568a9b.png?v=1777068092" alt="">
+        </div>
+      </div>
+
+      <div class="hero-cta-row">
+        <a href="https://taluchile.cl/products/tallow-grasa-de-ternero-talu" class="btn-primary">
+          Llevar Ternero
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <div class="hero-price-tease">
+          <span class="now">$12.990</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="intro-letter">
+  <div class="copy">
+    El ternero es la <strong>grasa más fina</strong> que ofrece una vaca.
+    Más liviana, más suave, perfecta para cuando no querés que la grasa
+    se imponga en el plato. Verduras al sartén, repostería ancestral,
+    salsas que no necesitan mantequilla industrial.
+  </div>
+  <div class="signature">— TÄLU · cocina ancestral premium</div>
+</section>
+
+<section class="por-que">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Por qué Ternero</span>
+    <h2>Más delicado que la res adulta</h2>
+  </div>
+  <div class="por-que-grid">
+    <div class="por-que-card reveal">
+      <div class="por-que-icon">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M16 4c-3 5-8 8-8 14a8 8 0 0016 0c0-6-5-9-8-14z"/>
+          <path d="M16 14c-1.5 2-3 4-3 7a3 3 0 006 0c0-3-1.5-5-3-7z" fill="currentColor" stroke="none" opacity=".55"/>
+        </svg>
+      </div>
+      <div class="por-que-text">
+        <h3>Punto de humo 230°C</h3>
+        <p>Soporta sartén, horno y wok. No se quema. Aroma sutil, no se impone — perfecto para cocina fina.</p>
+      </div>
+    </div>
+
+    <div class="por-que-card reveal delay-1">
+      <div class="por-que-icon">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M16 4l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6L7 11l6-1 3-6z"/>
+        </svg>
+      </div>
+      <div class="por-que-text">
+        <h3>Más liviano que la res</h3>
+        <p>Perfil graso más corto, se digiere más fácil. Para platos donde la res adulta es demasiado robusta.</p>
+      </div>
+    </div>
+
+    <div class="por-que-card reveal delay-2">
+      <div class="por-que-icon">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M6 26v-9c0-4 4-7 10-7s10 3 10 7v9"/>
+          <path d="M16 10V4M12 6h8"/>
+        </svg>
+      </div>
+      <div class="por-que-text">
+        <h3>Grass-fed chileno</h3>
+        <p>Terneros de campo chileno, alimentados a pasto, sin hormonas ni soja transgénica. Trazabilidad total.</p>
+      </div>
+    </div>
+
+    <div class="por-que-card reveal delay-3">
+      <div class="por-que-icon">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="16" cy="16" r="11"/>
+          <path d="M16 7v9l6 3"/>
+        </svg>
+      </div>
+      <div class="por-que-text">
+        <h3>Repostería ancestral</h3>
+        <p>Reemplaza la mantequilla industrial. Empanadas, masa de hojas, queques de campo — todo más liviano y nutricional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="big-icons">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Mejores usos</span>
+    <h2>Cuándo elegir ternero</h2>
+  </div>
+  <div class="big-icons-grid">
+    <div class="big-icon-card reveal">
+      <div class="big-icon-svg">
+        <svg viewBox="0 0 110 110" fill="none" stroke="currentColor" stroke-width="1.4">
+          <path d="M30 60h50v18H30z"/>
+          <path d="M35 60V35a20 20 0 0140 0v25"/>
+          <circle cx="55" cy="40" r="3" fill="currentColor"/>
+        </svg>
+      </div>
+      <h3>Verduras al sartén</h3>
+      <p>Espinacas, betarraga, zapallitos. Una cucharada de tallow ternero — la verdura sale dulce, sutil, sin grasa pesada.</p>
+    </div>
+
+    <div class="big-icon-card reveal delay-1">
+      <div class="big-icon-svg">
+        <svg viewBox="0 0 110 110" fill="none" stroke="currentColor" stroke-width="1.4">
+          <rect x="20" y="35" width="70" height="42" rx="3"/>
+          <path d="M20 50h70M30 50v27M55 50v27M80 50v27"/>
+          <circle cx="42" cy="63" r="2" fill="currentColor"/>
+          <circle cx="68" cy="63" r="2" fill="currentColor"/>
+        </svg>
+      </div>
+      <h3>Repostería</h3>
+      <p>Empanada, sopaipilla, masa de hoja. Reemplaza la mantequilla con ternero — queda crujiente sin gusto a químico.</p>
+    </div>
+
+    <div class="big-icon-card reveal delay-2">
+      <div class="big-icon-svg">
+        <svg viewBox="0 0 110 110" fill="none" stroke="currentColor" stroke-width="1.4">
+          <ellipse cx="55" cy="55" rx="32" ry="24"/>
+          <ellipse cx="55" cy="55" rx="22" ry="14" opacity=".5"/>
+          <path d="M28 55c10-3 24-3 54 0" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>Salsas finas</h3>
+      <p>Para reducciones, salsas blancas, fondos. Ternero da cuerpo sin opacar — la cocina chilena gourmet vuelve a casa.</p>
+    </div>
+  </div>
+</section>
+
+<section class="compare-table">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Res vs Ternero</span>
+    <h2>¿Cuándo cuál?</h2>
+    <p class="lead">Ambas son grass-fed chilenas. La diferencia está en el carácter.</p>
+  </div>
+  <div class="compare-wrap reveal">
+    <div class="compare-row is-header">
+      <div class="compare-cell">&nbsp;</div>
+      <div class="compare-cell talu-col">TALLOW Ternero</div>
+      <div class="compare-cell">TALLOW Res adulto</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell label">Cuerpo</div>
+      <div class="compare-cell talu-col"><span class="check">✓</span>Liviano, suave</div>
+      <div class="compare-cell">Robusto, profundo</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell label">Ideal para</div>
+      <div class="compare-cell talu-col"><span class="check">✓</span>Verduras, repostería, salsas finas</div>
+      <div class="compare-cell">Carnes rojas, papas fritas, sellado</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell label">Punto humo</div>
+      <div class="compare-cell talu-col"><span class="check">✓</span>230°C</div>
+      <div class="compare-cell">250°C</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell label">Aroma</div>
+      <div class="compare-cell talu-col"><span class="check">✓</span>Sutil, casi neutro</div>
+      <div class="compare-cell">Profundo, ancestral</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell label">Precio</div>
+      <div class="compare-cell talu-col"><span class="check">✓</span>$12.990 frasco</div>
+      <div class="compare-cell">$10.990 (410ml)</div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Lo que dicen</span>
+    <h2>Comprado por los que cocinan en serio</h2>
+    <p class="lead">El ternero TÄLU es nuevo en el catálogo — las primeras reseñas vienen de la familia y de los miembros del programa de Reprogramación Metabólica.</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body">"Lo uso para repostería ancestral — empanadas, queque de quinoa. La masa queda crujiente sin gusto a margarina. Es otro nivel."</p>
+      <div class="review-author">
+        <span>— Familia TÄLU</span>
+        <span class="badge">Lanzamiento</span>
+      </div>
+    </div>
+    <div class="review-card reveal delay-1">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body">"Después de 3 meses con TALLOW Ternero en el programa de reprogramación metabólica, los resultados hablan solos. Mi alimentación cambió por completo."</p>
+      <div class="review-author">
+        <span>— Programa RM</span>
+        <span class="badge">Miembro</span>
+      </div>
+    </div>
+    <div class="review-card reveal delay-2">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body">"Para verduras al sartén es perfecto. No invade el sabor — la espinaca sigue sabiendo a espinaca, pero más rica. Quedé feliz."</p>
+      <div class="review-author">
+        <span>— Cliente Reprogramación</span>
+        <span class="badge">Miembro</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Preguntas frecuentes</span>
+    <h2>Lo que querés saber</h2>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Cuál es la diferencia con el TALLOW de Res?<span class="arrow">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">
+        El de res adulta es más robusto — ideal para sellar carnes rojas y freír.
+        El de ternero es más fino, más sutil — ideal para verduras, repostería y salsas
+        donde no querés que la grasa se imponga en el plato.
+      </div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Cómo lo conservo?<span class="arrow">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Refrigerado dura 12 meses. A temperatura ambiente, hasta 6 meses.
+        Cierra bien después de usar. Si se solidifica, normal — calentás un poco la sartén
+        y derrite al instante.
+      </div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Sirve para repostería?<span class="arrow">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Sí, es excelente. Reemplaza la mantequilla industrial 1:1.
+        Ideal para empanadas, sopaipillas, masa de hojas, queques. Queda crujiente
+        y el sabor del trigo o quinoa no se opaca con químicos.
+      </div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Es cierto que es grass-fed chileno?<span class="arrow">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Sí. Trabajamos con productores locales certificados — terneros alimentados
+        a pasto chileno, sin hormonas ni soja transgénica. Trazabilidad por lote.
+      </div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Y si no me gusta?<span class="arrow">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Te devolvemos el dinero. 60 días de garantía sin preguntas.
+        Escribinos a contacto@taluchile.cl y resolvemos.
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="risk">
+  <div class="risk-card reveal">
+    <div class="risk-icon">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M16 3l11 5v8c0 7-5 12-11 13C10 28 5 23 5 16V8l11-5z"/>
+        <path d="M11 16l4 4 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h3>60 días para probarlo · si no te convence, devolvemos tu dinero</h3>
+    <p>
+      Probás un mes el ternero y si no notás la diferencia respecto a la mantequilla
+      industrial — devolvemos cada peso. Tu paladar pone los términos.
+    </p>
+  </div>
+</section>
+
+<section class="cta-final" id="comprar">
+  <div class="price-card reveal">
+    <div class="label">TALLOW Ternero · 1 frasco</div>
+    <div class="price-now">$12.990</div>
+    <div class="price-savings">
+      Cocina ancestral fina · Rinde <strong>30+ preparaciones</strong> · Despacho HOY si pides antes de las 16:00
+    </div>
+    <a href="https://taluchile.cl/products/tallow-grasa-de-ternero-talu" class="btn-primary">
+      Llevar Ternero
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <div class="cta-meta">
+      <span>Envío gratis sobre $40k</span>
+      <span>Garantía 60 días</span>
+      <span>Soporte WhatsApp</span>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="top">TÄLU</div>
+  <div class="links">
+    <a href="../index.html">Inicio</a>
+    <a href="../index.html#cocina">Cocina</a>
+    <a href="../index.html#skincare">Skincare</a>
+    <a href="../contacto.html">Contacto</a>
+  </div>
+  <div>© TÄLU Chile · contacto@taluchile.cl</div>
+</footer>
+
+<script>
+  const pc = document.getElementById('particles');
+  for(let i=0;i<28;i++){
+    const p = document.createElement('span');
+    p.className = 'particle';
+    p.style.left = (Math.random()*100) + '%';
+    p.style.animationDelay = (Math.random()*14) + 's';
+    p.style.animationDuration = (10 + Math.random()*10) + 's';
+    pc.appendChild(p);
+  }
+
+  // Mini gallery
+  document.querySelectorAll('.mini-thumb').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.mini-thumb').forEach(x => x.classList.remove('is-active'));
+      t.classList.add('is-active');
+      document.getElementById('hero-img').src = t.dataset.img;
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => btn.parentElement.classList.toggle('is-open'));
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>

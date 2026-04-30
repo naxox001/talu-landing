@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TÄLU — Cuidado por dentro y por fuera</title>
+<meta name="description" content="TÄLU · Skincare ancestral a base de sebo de ternero grass-fed sin hormonas y grasas nobles para cocinar. Cuidado por dentro y por fuera." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     TÄLU · tokens
+     ========================================================= */
+  :root{
+    --w-base:        #f4efe8;
+    --w-soft:        #ece5db;
+    --w-ink:         #2a2420;
+    --w-ink-soft:    #5b524a;
+
+    --k-base:        #14110e;
+    --k-soft:        #1c1814;
+    --k-ink:         #f0e6d2;
+    --k-ink-soft:    #b8ad98;
+
+    --gold:          #c9a35d;
+    --gold-bright:   #e8cf94;
+    --gold-deep:     #8a6a32;
+
+    --serif: "Cormorant Garamond", "Times New Roman", serif;
+    --sans:  "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+    --radius: 14px;
+    --max-w: 1240px;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family: var(--sans);
+    color: var(--w-ink);
+    background: var(--w-base);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  button{ font-family: inherit; cursor:pointer; border:none; background:none; }
+
+  /* NAV */
+  .nav{
+    position: fixed; top:0; left:0; right:0; z-index: 100;
+    padding: 18px 40px;
+    display:flex; align-items:center; justify-content:space-between;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    background: rgba(244,239,232,.72);
+    border-bottom: 1px solid rgba(201,163,93,.18);
+    transition: background .5s ease, color .5s ease, border-color .5s ease;
+  }
+  .nav.is-dark{
+    background: rgba(20,17,14,.72);
+    color: var(--k-ink);
+    border-bottom: 1px solid rgba(201,163,93,.28);
+  }
+  .logo{
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 28px;
+    letter-spacing: .12em;
+    display:flex; align-items:center; gap: 10px;
+  }
+  .logo .dot{
+    width:7px; height:7px; border-radius:50%;
+    background: var(--gold);
+    box-shadow: 0 0 10px rgba(201,163,93,.6);
+  }
+  .nav-links{ display:flex; gap: 34px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 400; }
+  .nav-links a{ position:relative; padding: 6px 0; }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:0;
+    height:1px; width:0; background: var(--gold); transition: width .3s ease;
+  }
+  .nav-links a:hover::after{ width:100%; }
+  /* Carrito del nav con badge animado */
+  .nav-cart{
+    position: relative;
+    width: 44px; height: 44px;
+    border-radius: 999px;
+    border: 1px solid var(--gold);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--gold-deep);
+    transition: background .3s ease, color .3s ease, border-color .3s ease;
+    flex-shrink: 0;
+  }
+  .nav.is-dark .nav-cart{ color: var(--gold-bright); }
+  .nav-cart:hover{ background: var(--gold); color: #fff; border-color: var(--gold-deep); }
+  .nav-cart .cart-icon{
+    display: block;
+    transition: transform .3s ease;
+  }
+  .nav-cart:hover .cart-icon{ transform: translateY(-1px); }
+  .nav-cart .cart-count{
+    position: absolute;
+    top: -5px; right: -5px;
+    min-width: 20px; height: 20px; padding: 0 6px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #f5dea0 0%, #e7c179 40%, #a6823d 100%);
+    color: #1a1410;
+    font-family: var(--sans);
+    font-size: 10.5px; font-weight: 700; line-height: 1;
+    letter-spacing: 0;
+    box-shadow: 0 4px 10px -2px rgba(0,0,0,.35), 0 0 0 2px rgba(244,239,232,.95);
+    transform: scale(0); opacity: 0;
+    transform-origin: center;
+    transition: transform .35s cubic-bezier(.2,.7,.3,1), opacity .25s ease;
+    pointer-events: none;
+  }
+  .nav.is-dark .nav-cart .cart-count{
+    box-shadow: 0 4px 10px -2px rgba(0,0,0,.55), 0 0 0 2px rgba(20,17,14,.95);
+  }
+  .nav-cart .cart-count.visible{ transform: scale(1); opacity: 1; }
+  /* Animación al agregar al carrito */
+  .nav-cart.is-animating .cart-icon{
+    animation: cart-bounce .9s cubic-bezier(.3,.9,.3,1);
+  }
+  .nav-cart.is-animating .cart-count{
+    animation: badge-pop .55s cubic-bezier(.2,.7,.3,1);
+  }
+  .nav-cart.is-animating::before{
+    content:""; position: absolute; inset: -3px;
+    border-radius: 999px;
+    border: 2px solid var(--gold);
+    opacity: .55;
+    animation: cart-ring .9s ease-out;
+    pointer-events: none;
+  }
+  @keyframes cart-bounce{
+    0%   { transform: translate(0,0) rotate(0); }
+    15%  { transform: translate(-2px,-8px) rotate(-14deg); }
+    35%  { transform: translate(1px,2px) rotate(10deg); }
+    55%  { transform: translate(0,-4px) rotate(-5deg); }
+    75%  { transform: translate(0,1px) rotate(3deg); }
+    100% { transform: translate(0,0) rotate(0); }
+  }
+  @keyframes badge-pop{
+    0%   { transform: scale(.6); }
+    45%  { transform: scale(1.45); }
+    100% { transform: scale(1); }
+  }
+  @keyframes cart-ring{
+    0%   { transform: scale(1);   opacity: .55; }
+    100% { transform: scale(1.7); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .nav-cart.is-animating .cart-icon,
+    .nav-cart.is-animating .cart-count,
+    .nav-cart.is-animating::before{ animation: none; }
+  }
+
+  .wrap{ max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+  .eyebrow{
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--gold-deep); font-weight: 500;
+    display:inline-flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:""; width:28px; height:1px; background: var(--gold); }
+  h1, h2, h3, h4{ font-family: var(--serif); font-weight: 400; letter-spacing: -.01em; }
+  h1{ font-size: clamp(52px, 8vw, 108px); line-height: .98; }
+  h2{ font-size: clamp(36px, 5vw, 68px); line-height: 1.04; }
+  h3{ font-size: clamp(20px, 2vw, 26px); line-height: 1.2; }
+
+  /* =========================================================
+     MÁRMOL · texturas veteadas realistas
+     ========================================================= */
+  .marble-white{
+    position: relative;
+    background-color: var(--w-base);
+    background-image:
+      radial-gradient(ellipse 70% 45% at 15% 20%, rgba(255,255,255,.95), transparent 65%),
+      radial-gradient(ellipse 60% 40% at 85% 60%, rgba(236,229,219,.9), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 50% 90%, rgba(220,208,190,.55), transparent 75%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1600' viewBox='0 0 1600 1600'><defs><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' seed='9'/><feColorMatrix values='0 0 0 0 0.72  0 0 0 0 0.66  0 0 0 0 0.56  0 0 0 0.14 0'/></filter><filter id='w' x='-5%25' y='-5%25' width='110%25' height='110%25'><feGaussianBlur stdDeviation='0.4'/></filter></defs><g filter='url(%23w)' fill='none'><g stroke='%23a89477' opacity='0.5'><path stroke-width='1.4' d='M-60 520 Q 260 440 580 560 T 1140 480 Q 1400 440 1660 540'/><path stroke-width='1.1' d='M230 -60 Q 280 320 200 640 T 310 1280 Q 340 1480 290 1660'/></g><g stroke='%23c9a35d' opacity='0.4'><path stroke-width='0.6' d='M-60 960 Q 300 930 600 1000 T 1160 960 Q 1400 950 1660 1000'/><path stroke-width='0.5' d='M1240 -60 Q 1280 500 1200 1000 T 1320 1660'/></g></g><rect width='100%25' height='100%25' filter='url(%23r)' opacity='0.7'/></svg>");
+    background-size: cover, cover, cover, 1100px 1100px;
+    background-blend-mode: normal, normal, normal, multiply;
+    color: var(--w-ink);
+  }
+  .marble-white::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1400' height='1400' viewBox='0 0 1400 1400'><defs><filter id='b'><feGaussianBlur stdDeviation='1.2'/></filter></defs><g stroke='%238a6a32' stroke-width='0.3' fill='none' opacity='0.25' filter='url(%23b)'><path d='M-40 340 Q 180 280 380 380 Q 600 470 820 360 T 1440 380'/><path d='M-40 720 Q 220 780 440 680 Q 680 580 900 700 T 1440 690'/><path d='M-40 1080 Q 260 1020 500 1140 T 1440 1060'/></g></svg>");
+    background-size: 1400px 1400px;
+    background-position: center;
+    mix-blend-mode: multiply;
+    opacity: .55;
+  }
+
+  .marble-black{
+    position: relative;
+    background-color: var(--k-base);
+    background-image:
+      radial-gradient(ellipse 70% 50% at 85% 15%, rgba(201,163,93,.22), transparent 65%),
+      radial-gradient(ellipse 60% 45% at 10% 85%, rgba(201,163,93,.12), transparent 70%),
+      radial-gradient(ellipse 40% 30% at 50% 50%, rgba(40,32,24,.6), transparent 75%);
+    background-size: cover, cover, cover;
+    color: var(--k-ink);
+  }
+  .marble-black::before{ display: none; }
+
+  /* HERO */
+  .hero{
+    position: relative;
+    min-height: 100vh;
+    padding: 140px 0 80px;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero .wrap{
+    display:grid; grid-template-columns: 1.05fr 1fr;
+    gap: 60px; align-items:center; width:100%;
+  }
+  .hero-copy .eyebrow{ margin-bottom: 28px; }
+  .hero-copy h1{ margin-bottom: 22px; }
+  .hero-copy h1 .italic{ font-style: italic; color: var(--gold-deep); }
+  .hero-copy .lead{
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    color: var(--w-ink-soft); font-style: italic;
+    max-width: 520px; margin-bottom: 40px;
+  }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    padding: 18px 34px; font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+    border-radius: 999px; transition: all .35s cubic-bezier(.2,.7,.3,1);
+    display:inline-flex; align-items:center; gap: 10px; font-weight: 500;
+  }
+  .btn-gold{
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold) 50%, var(--gold-deep));
+    color: #fff;
+    box-shadow: 0 10px 30px -10px rgba(138,106,50,.5);
+  }
+  .btn-gold:hover{ transform: translateY(-2px); box-shadow: 0 18px 40px -10px rgba(138,106,50,.55); }
+  .btn-ghost{ border: 1px solid var(--w-ink); color: var(--w-ink); }
+  .btn-ghost:hover{ background: var(--w-ink); color: var(--w-base); }
+
+  /* =========================================================
+     Hero 3D stage · jar SVG construido
+     ========================================================= */
+  .stage{
+    position: relative;
+    height: 640px;
+    perspective: 1600px;
+    transform-style: preserve-3d;
+  }
+  .halo{
+    position: absolute;
+    top: 45%; left: 50%; transform: translate(-50%, -50%);
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, rgba(232,207,148,.45), rgba(201,163,93,.18) 35%, rgba(201,163,93,.05) 55%, transparent 75%);
+    filter: blur(6px);
+    z-index: 0;
+    animation: pulse 5s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: .9; }
+    50%      { transform: translate(-50%, -50%) scale(1.08); opacity: 1; }
+  }
+  .ring{
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 460px; height: 460px;
+    border: 1px solid rgba(201,163,93,.35);
+    border-radius: 50%;
+    animation: spin 40s linear infinite;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .ring::before, .ring::after{
+    content: ""; position: absolute;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--gold-bright);
+    box-shadow: 0 0 18px var(--gold), 0 0 30px rgba(232,207,148,.6);
+  }
+  .ring::before{ top: -6px; left: 50%; transform: translateX(-50%); }
+  .ring::after{ bottom: -6px; left: 50%; transform: translateX(-50%); background: var(--gold); }
+  .ring.inner{
+    width: 340px; height: 340px;
+    animation-duration: 60s;
+    animation-direction: reverse;
+    border-style: dashed;
+    border-color: rgba(201,163,93,.2);
+  }
+  .ring.inner::before, .ring.inner::after{ width: 6px; height: 6px; }
+  @keyframes spin{ to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+  /* Bordes difuminados del frasco 3D — fade corto Y uniforme en los 4 lados
+     (no solo esquinas). Dos linear-gradients cruzados (horizontal + vertical) que
+     se intersectan: cada uno desvanece su par de lados, y el composite intersect
+     hace que las 4 esquinas también queden transparentes. */
+  .jar3d{
+    position: absolute;
+    top: 50%; left: 50%;
+    width: min(86%, 540px);
+    transform: translate(-50%, -52%);
+    animation: float 6s ease-in-out infinite;
+    z-index: 3;
+    will-change: transform;
+    overflow: visible;
+    -webkit-mask-image:
+      linear-gradient(to right,  transparent 0%, #000 8%, #000 92%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
+            mask-image:
+      linear-gradient(to right,  transparent 0%, #000 8%, #000 92%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    -webkit-mask-composite: source-in;  /* prefijo webkit */
+            mask-composite: intersect;  /* estándar */
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+  }
+  .jar3d svg{ width: 100%; height: auto; display: block; }
+  .jar3d model-viewer{
+    /* Sin drop-shadow CSS: la sombra de contacto la genera el propio WebGL
+       (shadow-intensity="1.1"). Antes el drop-shadow CSS causaba un "fantasma"
+       largo durante la carga y chocaba con la máscara. */
+    overflow: visible;
+    background: transparent !important;
+    /* CSS vars internos de model-viewer — quitan la barra de progreso y el
+       poster oscuro que aparecía al inicio mientras se descargaba el GLB */
+    --poster-color: transparent;
+    --progress-bar-color: transparent;
+    --progress-bar-height: 0;
+    --progress-mask: transparent;
+  }
+  @keyframes float{
+    0%   { transform: translate(-50%, -52%) translateY(0); }
+    50%  { transform: translate(-50%, -52%) translateY(-22px); }
+    100% { transform: translate(-50%, -52%) translateY(0); }
+  }
+
+  .pedestal{
+    position: absolute;
+    bottom: 10%; left: 50%; transform: translateX(-50%);
+    width: 380px; height: 32px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(42,36,32,.4), transparent 70%);
+    filter: blur(16px);
+    z-index: 2;
+    animation: shadowPulse 6s ease-in-out infinite;
+  }
+  @keyframes shadowPulse{
+    0%, 100% { width: 380px; opacity: .5; }
+    50%      { width: 340px; opacity: .35; }
+  }
+
+  /* Partículas doradas */
+  .sparks{
+    position: absolute; inset: 0;
+    pointer-events: none;
+    z-index: 4;
+  }
+  .spark{
+    position: absolute;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--gold-bright);
+    box-shadow: 0 0 8px var(--gold), 0 0 14px rgba(232,207,148,.6);
+    opacity: 0;
+    animation: sparkRise 6s ease-in-out infinite;
+  }
+  .spark:nth-child(1){ top: 80%; left: 20%; animation-delay: 0s;   animation-duration: 7s; }
+  .spark:nth-child(2){ top: 75%; left: 75%; animation-delay: 1.2s; animation-duration: 6s; }
+  .spark:nth-child(3){ top: 85%; left: 45%; animation-delay: 2.5s; animation-duration: 8s; }
+  .spark:nth-child(4){ top: 70%; left: 60%; animation-delay: 3.8s; animation-duration: 7s; --dx: 20px; }
+  .spark:nth-child(5){ top: 90%; left: 30%; animation-delay: 0.6s; animation-duration: 9s; --dx: -15px; }
+  .spark:nth-child(6){ top: 78%; left: 88%; animation-delay: 4.2s; animation-duration: 6s; --dx: -25px; }
+  .spark:nth-child(7){ top: 82%; left: 10%; animation-delay: 5.3s; animation-duration: 7s; --dx: 30px; }
+  @keyframes sparkRise{
+    0%   { transform: translate(0, 0) scale(.5); opacity: 0; }
+    15%  { opacity: 1; }
+    70%  { opacity: .8; }
+    100% { transform: translate(var(--dx, 10px), -340px) scale(1); opacity: 0; }
+  }
+
+  .stage .leaf{
+    position:absolute;
+    width: 100px; height: 100px;
+    opacity:.7;
+    animation: sway 7s ease-in-out infinite;
+    z-index: 2;
+  }
+  .stage .leaf.one{ top: 8%; left: 4%; animation-delay:-1.5s; --r:-18deg; }
+  .stage .leaf.two{ bottom: 10%; right: 4%; animation-delay:-3s; --r:22deg; }
+  @keyframes sway{
+    0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+    50%      { transform: translateY(-10px) rotate(calc(var(--r, 0deg) + 4deg)); }
+  }
+
+  /* Cinta dorada tornasol infinita */
+  .hero-strip{
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    width: 100%;
+    height: 46px;
+    overflow: hidden;
+    background: linear-gradient(90deg,
+      #7a5c27 0%,
+      #a6823d 10%,
+      #e7c179 22%,
+      #f5dea0 32%,
+      #e7c179 42%,
+      #c9a35d 50%,
+      #e7c179 58%,
+      #f5dea0 68%,
+      #e7c179 78%,
+      #a6823d 90%,
+      #7a5c27 100%);
+    background-size: 300% 100%;
+    animation: hero-strip-tornasol 16s linear infinite;
+    border-top: 1px solid rgba(232,207,148,.55);
+    border-bottom: 1px solid rgba(122,92,39,.55);
+    box-shadow:
+      0 -10px 24px -8px rgba(232,207,148,.25),
+      inset 0 1px 0 rgba(255,245,214,.35),
+      inset 0 -1px 0 rgba(80,58,22,.4);
+    z-index: 3;
+  }
+  /* Ediciones laterales con fade hacia oscuro para dar profundidad */
+  .hero-strip::before,
+  .hero-strip::after{
+    content:"";
+    position: absolute; top: 0; bottom: 0;
+    width: 90px; z-index: 2; pointer-events: none;
+  }
+  .hero-strip::before{ left: 0;  background: linear-gradient(90deg,  rgba(24,18,10,.35), transparent); }
+  .hero-strip::after { right: 0; background: linear-gradient(270deg, rgba(24,18,10,.35), transparent); }
+  .hero-strip-track{
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    width: max-content;
+    height: 100%;
+    padding: 0 32px;
+    animation: hero-strip-scroll 60s linear infinite;
+    will-change: transform;
+  }
+  .hero-strip-track span{
+    display: inline-flex; align-items: center;
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: .32em; text-transform: uppercase;
+    color: #1a1208;
+    white-space: nowrap;
+    text-shadow: 0 1px 0 rgba(255,245,214,.25);
+  }
+  .hero-strip-track .sep{
+    color: rgba(26,18,8,.55);
+    font-size: 10px;
+    letter-spacing: 0;
+    text-shadow: none;
+  }
+  @keyframes hero-strip-tornasol{
+    0%   { background-position:   0% 50%; }
+    100% { background-position: 300% 50%; }
+  }
+  @keyframes hero-strip-scroll{
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-strip{ animation: none; background-position: 50% 50%; }
+    .hero-strip-track{ animation: none; }
+  }
+
+  /* CATÁLOGO SPLIT */
+  .catalog{ position: relative; display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+  .panel{ padding: 120px 6vw; position: relative; }
+  .panel h2 .italic{ font-style: italic; color: var(--gold-deep); }
+  .panel.kitchen h2 .italic{ color: var(--gold-bright); }
+  .panel-header{ max-width: 520px; margin-bottom: 60px; }
+  .panel-header p{ margin-top: 18px; color: var(--w-ink-soft); max-width: 440px; }
+  .panel.kitchen .panel-header p{ color: var(--k-ink-soft); }
+
+  /* Grid: 1 columna apilada vertical, idéntica para skincare y kitchen */
+  .product-grid{
+    display:grid; gap: 24px;
+    grid-template-columns: 1fr;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .panel.kitchen .product-grid{ max-width: 1100px; }
+
+  /* Card horizontal: imagen IZQUIERDA (ocupa 2 filas) + meta arriba der + precio/CTAs abajo der */
+  .product{
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 22px;
+    row-gap: 16px;
+    align-items: stretch;
+    padding: 22px 24px;
+    border-radius: var(--radius);
+    background: rgba(255,255,255,.45);
+    border: 1px solid rgba(201,163,93,.22);
+    transition: transform .4s ease, box-shadow .4s ease, background .4s ease;
+    backdrop-filter: blur(6px);
+    text-decoration: none; color: inherit;
+  }
+  .product > .product-img{ grid-row: 1 / span 2; }
+  .product > .product-meta{ grid-column: 2; grid-row: 1; }
+  .product > .product-price{ grid-column: 2; grid-row: 2; }
+  .product:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 30px 50px -25px rgba(42,36,32,.2);
+  }
+  .kitchen .product{
+    background: rgba(28,24,20,.55);
+    border-color: rgba(201,163,93,.35);
+    color: var(--k-ink);
+  }
+  .kitchen .product:hover{
+    box-shadow: 0 30px 50px -20px rgba(0,0,0,.6);
+  }
+
+  /* Imagen: cuadrada fija 140x140 idéntica en ambas secciones */
+  .product-img{
+    width: 140px; height: 140px;
+    border-radius: 12px;
+    position: relative;
+    display: grid; place-items: center;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(244,239,232,.7) 70%);
+    border: 1px solid rgba(201,163,93,.2);
+    align-self: center;
+  }
+  .kitchen .product-img{
+    background:
+      radial-gradient(circle at 30% 30%, rgba(60,50,40,.6), rgba(20,17,14,.9) 70%);
+    border: 1px solid rgba(201,163,93,.25);
+  }
+  .product-img img{
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 16px rgba(42,36,32,.25));
+    transition: transform .5s cubic-bezier(.2,.7,.3,1);
+  }
+  .kitchen .product-img img{
+    filter: drop-shadow(0 12px 20px rgba(0,0,0,.6));
+  }
+  .product:hover .product-img img{ transform: scale(1.06) translateY(-3px); }
+
+  /* Meta: eyebrow + título + descripción al centro */
+  .product-meta{ display:flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .product-meta .tag{
+    font-size: 10px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .kitchen .product-meta .tag{ color: var(--gold-bright); }
+  .product-meta h3{ font-weight: 500; font-size: 22px; line-height: 1.2; }
+  .product-meta p{ font-size: 14px; color: var(--w-ink-soft); line-height: 1.55; max-width: 46ch; }
+  .kitchen .product-meta p{ color: var(--k-ink-soft); }
+
+  /* Precio + botones EN FILA HORIZONTAL al pie de la card */
+  .product-price{
+    font-family: var(--serif);
+    display:flex; flex-direction: row; align-items: center; gap: 16px;
+    margin-top: 8px; padding-top: 16px;
+    border-top: 1px solid rgba(201,163,93,.2);
+  }
+  .kitchen .product-price{ border-top-color: rgba(201,163,93,.3); }
+  .product-price > div:first-child{
+    display: flex; align-items: baseline; gap: 6px; flex-shrink: 0;
+  }
+  .product-price .num{ font-size: 24px; font-weight: 500; line-height:1; }
+  .product-price .cur{ font-size: 11px; letter-spacing: .2em; color: var(--gold-deep); }
+  .kitchen .product-price .cur{ color: var(--gold-bright); }
+
+  .cta-group{
+    display:flex; flex-direction: row; gap: 10px; flex: 1;
+    justify-content: flex-end;
+  }
+  .cta-group > *{ flex: 0 1 auto; }
+
+  /* Primary: Comprar ahora — llamativo */
+  .btn-now{
+    position: relative; overflow: hidden;
+    font-size: 11px; letter-spacing: .24em; text-transform: uppercase; font-weight: 600;
+    padding: 12px 20px; border-radius: 999px;
+    background: linear-gradient(135deg, #e7c179 0%, #c9a35d 45%, #a6823d 100%);
+    color: #fff; border: 1px solid rgba(255,255,255,.4);
+    box-shadow:
+      0 14px 30px -10px rgba(166,130,61,.55),
+      inset 0 1px 0 rgba(255,255,255,.35);
+    text-align: center; font-family: var(--sans);
+    cursor: pointer; text-decoration: none;
+    transition: transform .3s ease, box-shadow .3s ease, filter .3s ease;
+  }
+  .btn-now::before{
+    content:""; position:absolute; top:0; left:-60%; width: 50%; height: 100%;
+    background: linear-gradient(110deg, transparent, rgba(255,255,255,.55), transparent);
+    transform: skewX(-20deg);
+    animation: shimmer 3.2s ease-in-out infinite;
+  }
+  @keyframes shimmer{
+    0%   { left: -60%; }
+    60%  { left: 120%; }
+    100% { left: 120%; }
+  }
+  .btn-now:hover{
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow: 0 20px 40px -10px rgba(166,130,61,.75), inset 0 1px 0 rgba(255,255,255,.45);
+  }
+  .kitchen .btn-now{
+    background: linear-gradient(135deg, #f4d48a 0%, #d4a94f 50%, #8f6d2d 100%);
+    box-shadow: 0 14px 30px -10px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.35);
+  }
+
+  /* Secondary: Añadir al carrito */
+  .btn-add{
+    font-size: 10px; letter-spacing: .24em; text-transform: uppercase;
+    padding: 10px 18px; border-radius: 999px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold-deep);
+    text-align: center; font-family: var(--sans);
+    cursor: pointer; text-decoration: none;
+    transition: background .3s ease, color .3s ease, border-color .3s ease;
+  }
+  .kitchen .btn-add{ color: var(--gold-bright); border-color: rgba(201,163,93,.6); }
+  .btn-add:hover{ background: rgba(201,163,93,.1); }
+  .kitchen .btn-add:hover{ background: rgba(201,163,93,.15); }
+
+  /* PACKS · Rituales completos (bridge entre ambos mundos) */
+  .packs{
+    position: relative;
+    padding: 120px 6vw 140px;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(232,207,148,.22), transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(138,106,50,.25), transparent 55%),
+      linear-gradient(180deg, #2b241d 0%, #1c1814 50%, #221c16 100%);
+    color: var(--k-ink);
+    overflow: hidden;
+  }
+  .packs::before{
+    content:""; position:absolute; inset:0;
+    background:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000'><defs><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 .78  0 0 0 0 .64  0 0 0 0 .36  0 0 0 .06 0'/></filter></defs><rect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/></svg>");
+    mix-blend-mode: overlay; opacity: .35; pointer-events:none;
+  }
+  .packs-header{ max-width: 720px; margin: 0 auto 72px; text-align: center; }
+  .packs-header .eyebrow{ color: var(--gold-bright); justify-content:center; display:inline-flex; gap:10px; align-items:center; }
+  .packs-header h2{ font-size: clamp(40px, 5vw, 64px); line-height: 1.05; margin-top: 20px; color: var(--k-ink); }
+  .packs-header h2 .italic{ font-style: italic; color: var(--gold-bright); }
+  .packs-header p{ margin-top: 18px; color: var(--k-ink-soft); max-width: 540px; margin-left:auto; margin-right:auto; }
+
+  .packs-grid{
+    display:grid; gap: 32px;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1280px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+  .pack-card{
+    position: relative;
+    display:flex; flex-direction: column;
+    padding: 32px 28px 28px;
+    border-radius: 18px;
+    background:
+      radial-gradient(ellipse 140% 90% at 75% -10%, rgba(232,207,148,.09), transparent 55%),
+      linear-gradient(180deg, rgba(40,33,26,.75) 0%, rgba(20,17,14,.85) 100%);
+    border: 1px solid rgba(201,163,93,.3);
+    backdrop-filter: blur(8px);
+    transition: transform .4s ease, box-shadow .4s ease, border-color .4s ease;
+    overflow: visible;
+  }
+  /* Fase 4 · C3.3 cinta dorada vertical en borde izquierdo */
+  .pack-card::before{
+    content:"";
+    position: absolute;
+    top: 24px; bottom: 24px; left: 0;
+    width: 2px;
+    border-radius: 0 2px 2px 0;
+    background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(232,207,148,.15) 10%,
+      rgba(232,207,148,.55) 50%,
+      rgba(232,207,148,.15) 90%,
+      transparent 100%);
+    opacity: .8;
+    pointer-events: none;
+  }
+  .pack-card.featured::before{
+    width: 3px;
+    background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(232,207,148,.35) 8%,
+      rgba(245,222,160,.95) 50%,
+      rgba(232,207,148,.35) 92%,
+      transparent 100%);
+    opacity: 1;
+    box-shadow: 0 0 12px rgba(232,207,148,.35);
+  }
+  .pack-card:hover{
+    transform: translateY(-6px);
+    border-color: rgba(232,207,148,.55);
+    box-shadow:
+      0 40px 70px -25px rgba(0,0,0,.8),
+      0 20px 40px -18px rgba(232,207,148,.28),
+      0 0 0 1px rgba(232,207,148,.2);
+  }
+  .pack-card.featured{
+    transform: translateY(-10px);
+    border: 2px solid rgba(232,207,148,.72);
+    background:
+      radial-gradient(ellipse 140% 90% at 75% -10%, rgba(232,207,148,.16), transparent 55%),
+      linear-gradient(180deg, rgba(40,33,26,.75) 0%, rgba(20,17,14,.85) 100%);
+    box-shadow:
+      0 40px 70px -20px rgba(0,0,0,.8),
+      0 25px 50px -20px rgba(232,207,148,.32),
+      0 0 0 1px rgba(232,207,148,.25);
+  }
+  .pack-card.featured:hover{
+    transform: translateY(-14px);
+  }
+  .pack-card.featured::after{
+    content:"El más popular";
+    position:absolute; top:-14px; left:50%;
+    transform: translateX(-50%);
+    padding: 7px 22px;
+    background: linear-gradient(135deg, #a6823d 0%, #e7c179 30%, #f5dea0 50%, #e7c179 70%, #a6823d 100%);
+    background-size: 240% 100%;
+    animation: pack-shimmer 3.4s linear infinite;
+    color:#1a1410; font-size: 10px; letter-spacing: .28em; text-transform: uppercase;
+    font-weight: 600; font-family: var(--sans); border-radius: 999px;
+    box-shadow: 0 10px 22px -6px rgba(0,0,0,.6), 0 0 0 1px rgba(232,207,148,.4);
+    white-space: nowrap;
+  }
+  @keyframes pack-shimmer{
+    0%{ background-position: 0% 50%; }
+    100%{ background-position: 240% 50%; }
+  }
+  .pack-img{
+    height: 220px; display:grid; place-items:center;
+    background: radial-gradient(circle at 50% 40%, rgba(232,207,148,.2), rgba(20,17,14,0) 65%);
+    border-radius: 14px; margin-bottom: 22px;
+    position: relative;
+  }
+  .pack-img img{
+    max-width: 78%; max-height: 85%;
+    object-fit: contain;
+    filter: drop-shadow(0 18px 24px rgba(0,0,0,.6));
+    transition: transform .5s cubic-bezier(.2,.7,.3,1);
+  }
+  .pack-card:hover .pack-img img{ transform: scale(1.06) translateY(-4px); }
+
+  .pack-tag{
+    font-size: 10px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .pack-tag::before,
+  .pack-tag::after{
+    content:"";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(232,207,148,.55) 50%, transparent);
+  }
+  .pack-card h3{
+    font-size: 26px; line-height: 1.15; color: var(--k-ink);
+    margin-bottom: 12px; font-weight: 500;
+  }
+  /* Fase 4 · C7.2 ícono de categoría en h3 */
+  .pack-card h3.pack-title{
+    display: flex; align-items: center; gap: 10px;
+  }
+  .pack-card .cat-icon-wrap{
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px;
+    color: var(--gold-bright);
+    opacity: .9;
+    flex-shrink: 0;
+  }
+  .pack-card .cat-icon{ display: block; }
+  .pack-includes{
+    list-style: none; padding: 0; margin: 0 0 20px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .pack-includes li{
+    font-size: 12px; color: var(--k-ink-soft);
+    padding-left: 22px; position: relative;
+  }
+  .pack-includes li::before{
+    content:""; position:absolute; left: 0; top: 9px;
+    width: 14px; height: 1px;
+    background: linear-gradient(90deg, var(--gold-bright), rgba(232,207,148,0));
+  }
+  /* Fase 4 · C5.1 mini tabla Producto / Vol. / Para */
+  .pack-table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 20px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    color: var(--k-ink-soft);
+  }
+  .pack-table thead th{
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    opacity: .75;
+    text-align: left;
+    padding: 0 8px 8px 0;
+    border-bottom: 1px solid rgba(201,163,93,.22);
+  }
+  .pack-table thead th:last-child{ padding-right: 0; }
+  .pack-table tbody tr + tr td{
+    border-top: 1px solid rgba(201,163,93,.1);
+  }
+  .pack-table td{
+    padding: 8px 8px 8px 0;
+    vertical-align: middle;
+  }
+  .pack-table td:last-child{ padding-right: 0; }
+  .pack-table .pt-name{
+    color: var(--k-ink);
+    font-weight: 500;
+    font-family: var(--serif);
+    font-size: 13px;
+    letter-spacing: .02em;
+    white-space: nowrap;
+  }
+  .pack-table .pt-use{
+    color: var(--k-ink-soft);
+    text-align: right;
+    width: 1%;
+    white-space: nowrap;
+  }
+  .pack-foot{
+    margin-top: auto;
+    display:flex; flex-direction: column; gap: 14px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(201,163,93,.2);
+  }
+  .pack-price{
+    display:flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+    font-family: var(--serif);
+  }
+  .pack-price .price-group{ display:flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .pack-price .num{ font-size: 30px; font-weight: 500; line-height: 1; color: var(--gold-bright); }
+  .pack-price .cur{ font-size: 11px; letter-spacing: .24em; color: var(--gold-bright); }
+  .pack-price .was{
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
+    color: var(--k-ink-soft);
+    opacity: .55;
+  }
+  /* Fase 4 · C1.3 microcopy "antes" */
+  .pack-price .was-group{
+    display: inline-flex; align-items: baseline; gap: 6px;
+  }
+  .pack-price .was-label{
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--k-ink-soft);
+    opacity: .55;
+  }
+  .pack-card .cta-group{ flex-direction: column; gap: 10px; min-width: 0; align-items: center; }
+  /* Fase 4 · C6.1 text-link minimalista para "añadir al carrito" */
+  .link-add{
+    display: inline-block;
+    background: transparent;
+    border: 0;
+    padding: 4px 2px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    opacity: .7;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(232,207,148,.3);
+    transition: opacity .2s ease, border-color .2s ease, color .2s ease;
+  }
+  .link-add:hover{
+    opacity: 1;
+    border-bottom-color: rgba(232,207,148,.8);
+  }
+
+  /* Fase 2 · C2.1 píldora ahorro */
+  .savings-pill{
+    align-self: flex-start;
+    display: inline-flex; align-items: center;
+    padding: 5px 12px;
+    background: rgba(232,207,148,.12);
+    border: 1px solid rgba(232,207,148,.4);
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold-bright);
+    white-space: nowrap;
+    width: fit-content;
+  }
+  /* Fase 2 · C2.2 badge % descuento */
+  .discount-badge{
+    position: absolute;
+    top: -12px; left: 22px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #e7c179, #a6823d);
+    color: #1a1410;
+    font-family: var(--sans);
+    font-size: 11px; font-weight: 700; letter-spacing: .04em;
+    box-shadow: 0 8px 18px -6px rgba(0,0,0,.6), 0 0 0 1px rgba(232,207,148,.35);
+    white-space: nowrap;
+    z-index: 2;
+  }
+  /* Fase 2 · C5.2 nota de envío */
+  .shipping-note{
+    margin: 4px 0 0;
+    font-family: var(--sans);
+    font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+    color: rgba(232,207,148,.65);
+    text-align: center;
+  }
+  /* Fase 2 · C7.1 monograma Ä watermark */
+  .pack-monogram{
+    position: absolute;
+    bottom: 10px; right: 18px;
+    font-family: var(--serif);
+    font-size: 120px;
+    line-height: 1;
+    color: rgba(232,207,148,.055);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  /* BRIDGE · Gift Card */
+  .bridge{
+    position: relative;
+    background: linear-gradient(180deg, var(--w-soft), #1c1814);
+    padding: 90px 40px;
+    text-align: center; overflow: hidden;
+  }
+  .bridge::before, .bridge::after{
+    content:""; position: absolute; left:0; right:0; height: 80px;
+    background: linear-gradient(180deg, transparent, rgba(201,163,93,.2), transparent);
+    pointer-events:none;
+  }
+  .bridge::before{ top:0; }
+  .bridge::after{ bottom:0; }
+  .gift{
+    max-width: 780px; margin: 0 auto;
+    padding: 48px;
+    border-radius: var(--radius);
+    background:
+      linear-gradient(135deg, rgba(244,239,232,.95), rgba(244,239,232,.85)),
+      radial-gradient(circle at 30% 30%, rgba(201,163,93,.2), transparent 60%);
+    border: 1px solid rgba(201,163,93,.5);
+    box-shadow:
+      inset 0 0 80px rgba(201,163,93,.1),
+      0 40px 80px -40px rgba(0,0,0,.5);
+    position: relative;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 32px;
+    align-items: center;
+    text-align: left;
+  }
+  /* Cinta de regalo con lazo dorado */
+  .gift{ padding-top: 72px !important; }
+  .gift-ribbon-band{
+    position: absolute;
+    top: 38px; left: -6px; right: -6px;
+    height: 16px;
+    background: linear-gradient(180deg,
+      #f7e3aa 0%,
+      #efcf89 30%,
+      #c9a35d 70%,
+      #8b6a2f 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,245,214,.8),
+      inset 0 -1px 0 rgba(40,24,6,.45),
+      0 6px 14px -4px rgba(138,106,50,.55);
+    z-index: 1;
+    pointer-events: none;
+  }
+  /* Dobleces oscuros en los extremos donde la cinta "entra" en la caja */
+  .gift-ribbon-band::before,
+  .gift-ribbon-band::after{
+    content:""; position: absolute; top: 0; bottom: 0;
+    width: 8px;
+    background: linear-gradient(180deg, #6a4f1e 0%, #2a1d0b 100%);
+    box-shadow: inset 0 1px 0 rgba(255,245,214,.2);
+  }
+  .gift-ribbon-band::before{ left: 0; border-radius: 2px 0 0 2px; }
+  .gift-ribbon-band::after { right: 0; border-radius: 0 2px 2px 0; }
+  /* Etiqueta Gift card centrada sobre la cinta */
+  .gift-ribbon-label{
+    position: absolute;
+    top: 38px; left: 50%;
+    transform: translateX(-50%);
+    height: 16px;
+    display: flex; align-items: center;
+    padding: 0 8px;
+    font-family: var(--sans);
+    font-size: 9px; font-weight: 700;
+    letter-spacing: .32em; text-transform: uppercase;
+    color: #3a2710;
+    text-shadow: 0 1px 0 rgba(255,245,214,.55);
+    z-index: 2;
+    pointer-events: none;
+  }
+  /* Lazo dorado sobre la cinta */
+  .gift-bow{
+    position: absolute;
+    top: -40px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    filter: drop-shadow(0 12px 18px rgba(138,106,50,.5));
+    animation: bow-sway 5.5s ease-in-out infinite;
+    transform-origin: 50% 90%;
+    pointer-events: none;
+  }
+  @keyframes bow-sway{
+    0%,100% { transform: translateX(-50%) rotate(-2deg); }
+    50%     { transform: translateX(-50%) rotate(2deg); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .gift-bow{ animation: none; }
+  }
+  .gift-img{
+    width: 220px; height: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(244,239,232,.7) 70%);
+    display: grid; place-items: center;
+    border: 1px solid rgba(201,163,93,.3);
+  }
+  .gift-img img{ width: 92%; height: 92%; object-fit: contain; filter: drop-shadow(0 12px 20px rgba(138,106,50,.3)); transition: opacity .3s ease; }
+  .gift h3{ margin: 0 0 12px; font-size: 40px; line-height: 1; }
+  .gift p{ color: var(--w-ink-soft); max-width: 48ch; margin: 0 0 24px; }
+  .gift-values{ display:flex; gap: 10px; margin-bottom: 22px; flex-wrap:wrap; }
+  .gift-values button{
+    padding: 10px 18px;
+    border: 1px solid var(--gold);
+    border-radius: 999px;
+    font-size: 13px; letter-spacing: .1em;
+    color: var(--w-ink);
+    background: rgba(255,255,255,.5);
+    transition: all .3s ease;
+    font-family: var(--serif);
+  }
+  .gift-values button.active,
+  .gift-values button:hover{
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold), var(--gold-deep));
+    color: #fff; border-color: transparent;
+  }
+
+  /* HISTORIA */
+  .story{
+    background: var(--w-base);
+    padding: 140px 0;
+    position: relative; overflow: hidden;
+  }
+  .story .wrap{
+    display: grid; grid-template-columns: 1fr 1.1fr;
+    gap: 80px; align-items: center;
+  }
+  .story-art{
+    position: relative;
+    height: 560px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.9), transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(201,163,93,.2), transparent 70%),
+      linear-gradient(135deg, #ece5db, #d8cdbb);
+    box-shadow:
+      inset 0 0 80px rgba(138,106,50,.1),
+      0 40px 80px -40px rgba(0,0,0,.2);
+  }
+  .story-art svg{ position: absolute; inset: 0; width:100%; height:100%; }
+  .story-quote{
+    position: absolute;
+    bottom: 32px; left: 32px; right: 32px;
+    font-family: var(--serif); font-style: italic; font-size: 22px;
+    color: var(--w-ink);
+    background: rgba(255,255,255,.7);
+    padding: 20px 24px;
+    border-left: 2px solid var(--gold);
+    backdrop-filter: blur(6px);
+  }
+  .story-copy .eyebrow{ margin-bottom: 24px; }
+  .story-copy h2{ margin-bottom: 28px; }
+  .story-copy p{ color: var(--w-ink-soft); margin-bottom: 18px; max-width: 54ch; }
+  .story-pillars{
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 18px; margin-top: 36px;
+  }
+  .pillar{
+    padding: 22px 18px;
+    border-top: 1px solid var(--gold);
+    background: rgba(255,255,255,.4);
+    border-radius: 0 0 10px 10px;
+  }
+  .pillar h4{ font-size: 20px; margin-bottom: 6px; font-weight: 500; }
+  .pillar p{ font-size: 13px; color: var(--w-ink-soft); margin: 0; }
+
+  /* TESTIMONIOS + NEWSLETTER */
+  .testimonials{
+    background: var(--k-base);
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(201,163,93,.15), transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(201,163,93,.1), transparent 70%);
+    color: var(--k-ink);
+    padding: 140px 0 0;
+    position: relative;
+  }
+  .testimonials-header{ text-align: center; max-width: 640px; margin: 0 auto 80px; }
+  .testimonials-header h2{ margin: 18px 0 16px; }
+  .testimonials-header p{ color: var(--k-ink-soft); }
+  .t-grid{
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 28px; margin-bottom: 120px;
+  }
+  .t-card{
+    padding: 36px 32px;
+    border-radius: var(--radius);
+    background: rgba(28,24,20,.6);
+    border: 1px solid rgba(201,163,93,.25);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .t-card .t-author{ margin-top: auto; }
+  .t-card::before{
+    content:"“";
+    position: absolute; top: -10px; left: 22px;
+    font-family: var(--serif); font-size: 90px; line-height: 1;
+    color: var(--gold); opacity: .6;
+  }
+  .t-card p{
+    font-family: var(--serif); font-style: italic;
+    font-size: 19px; line-height: 1.5;
+    margin: 12px 0 24px; color: var(--k-ink);
+  }
+  .t-author{ display:flex; align-items:center; gap: 14px; }
+  .t-avatar{
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep));
+    display: grid; place-items: center;
+    color: #14110e; font-family: var(--serif); font-weight: 600;
+  }
+  .t-name{ font-size: 14px; color: var(--k-ink); font-weight: 500; }
+  .t-role{ font-size: 12px; color: var(--k-ink-soft); letter-spacing: .1em; }
+  .t-stars{ margin-left: auto; color: var(--gold); letter-spacing: 2px; }
+
+  .newsletter{
+    background: linear-gradient(180deg, rgba(201,163,93,.08), transparent);
+    padding: 80px 40px 120px;
+    text-align: center;
+    border-top: 1px solid rgba(201,163,93,.25);
+  }
+  .newsletter .eyebrow{ color: var(--gold-bright); }
+  .newsletter .eyebrow::before{ background: var(--gold-bright); }
+  .newsletter h2{ margin: 20px auto 14px; max-width: 18ch; }
+  .newsletter p{ color: var(--k-ink-soft); max-width: 52ch; margin: 0 auto 34px; }
+  .news-form{
+    display: flex; max-width: 520px; margin: 0 auto;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(201,163,93,.4);
+    border-radius: 999px; padding: 6px;
+    backdrop-filter: blur(8px);
+  }
+  .news-form input{
+    flex: 1; background: transparent; border: none; outline: none;
+    padding: 14px 22px; color: var(--k-ink);
+    font-family: var(--sans); font-size: 14px;
+  }
+  .news-form input::placeholder{ color: rgba(240,230,210,.5); }
+  .news-form button{
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold), var(--gold-deep));
+    color: #14110e; border-radius: 999px;
+    font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 500; transition: transform .3s ease;
+  }
+  .news-form button:hover{ transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer{
+    background: var(--k-soft); color: var(--k-ink-soft);
+    padding: 60px 40px 30px;
+    border-top: 1px solid rgba(201,163,93,.15);
+  }
+  .foot-grid{
+    max-width: var(--max-w); margin: 0 auto;
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px; padding-bottom: 40px;
+    border-bottom: 1px solid rgba(201,163,93,.2);
+  }
+  .foot-brand .logo{ color: var(--k-ink); margin-bottom: 14px; font-size: 32px; }
+  .foot-brand p{ font-size: 14px; max-width: 38ch; }
+  .foot-col h5{
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--gold-bright); margin-bottom: 16px; font-weight: 500;
+  }
+  .foot-col a{ display: block; font-size: 14px; margin-bottom: 10px; transition: color .3s ease; }
+  .foot-col a:hover{ color: var(--gold-bright); }
+  .foot-bottom{
+    max-width: var(--max-w); margin: 20px auto 0;
+    display: flex; justify-content: space-between;
+    font-size: 12px; letter-spacing: .1em;
+  }
+
+  /* Skeleton loader */
+  .skeleton{
+    background: linear-gradient(90deg, rgba(201,163,93,.05), rgba(201,163,93,.15), rgba(201,163,93,.05));
+    background-size: 200% 100%;
+    animation: sk 1.4s ease-in-out infinite;
+    border-radius: 8px;
+  }
+  @keyframes sk{ 0%{ background-position: 200% 0; } 100%{ background-position: -200% 0; } }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px){
+    .nav{ padding: 14px 20px; }
+    .nav-links{ display: none; }
+    .wrap{ padding: 0 24px; }
+    .hero .wrap{ grid-template-columns: 1fr; gap: 40px; }
+    .stage{ height: 440px; }
+    .hero-strip{ display:none; }
+    .catalog{ grid-template-columns: 1fr; }
+    .panel{ padding: 80px 24px; }
+    .story .wrap{ grid-template-columns: 1fr; gap: 40px; }
+    .story-art{ height: 400px; }
+    .story-pillars{ grid-template-columns: 1fr; }
+    .t-grid{ grid-template-columns: 1fr; }
+    .foot-grid{ grid-template-columns: 1fr 1fr; }
+    .product-grid,
+    .panel.kitchen .product-grid{ grid-template-columns: 1fr; max-width: 100%; }
+    .product{
+      padding: 16px 16px 18px;
+      grid-template-columns: 108px 1fr;
+      column-gap: 14px;
+    }
+    .product-img{ width: 108px; height: 108px; }
+    .product-meta{ gap: 6px; }
+    .product-meta h3{ font-size: 18px; line-height: 1.2; }
+    .product-meta p{ font-size: 13px; line-height: 1.45; }
+    /* Stack vertical del pie de card: precio arriba, botones abajo en fila —
+       evita que CTAs y precio se desborden hacia la derecha en pantallas chicas */
+    .product-price{
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      padding-top: 12px;
+      margin-top: 6px;
+    }
+    .product-price > div:first-child{ justify-content: flex-start; }
+    .cta-group{
+      flex-direction: row; gap: 8px; justify-content: stretch;
+    }
+    .cta-group > *{ flex: 1; min-width: 0; }
+    .btn-now{ font-size: 10px; padding: 11px 12px; letter-spacing: .18em; }
+    .btn-add{ font-size: 9px; padding: 10px 8px; letter-spacing: .14em; }
+    .packs{ padding: 80px 5vw 100px; }
+    .packs-grid{ grid-template-columns: 1fr; }
+    .pack-card{ padding: 24px 22px; }
+    .gift{ grid-template-columns: 1fr; text-align: center; }
+    .gift-img{ margin: 0 auto; }
+    .gift-values{ justify-content: center; }
+  }
+</style>
+
+<!-- model-viewer (Google web component) para el frasco 3D del hero -->
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+</head>
+<body>
+
+<!-- ============================================================
+     BANNER TEMPORAL · DÍA DE LA MADRE 2026 (quitar después del 31 may)
+     ============================================================ -->
+<style>
+  .banner-mom{
+    position: relative; z-index: 101;
+    background: linear-gradient(90deg, #2a1a1a 0%, #4a2a28 25%, #6b3838 50%, #4a2a28 75%, #2a1a1a 100%);
+    color: #f5e0db;
+    padding: 11px 40px;
+    text-align: center;
+    font-size: 13px; letter-spacing: .04em;
+    border-bottom: 1px solid rgba(240,201,194,.3);
+    overflow: hidden;
+  }
+  .banner-mom::before{
+    content: ""; position: absolute; top: 0; left: -60%;
+    width: 50%; height: 100%;
+    background: linear-gradient(110deg, transparent, rgba(240,201,194,.2), transparent);
+    transform: skewX(-20deg);
+    animation: bm-shine 4s ease-in-out infinite;
+  }
+  @keyframes bm-shine{ 0%{left:-60%} 60%{left:130%} 100%{left:130%} }
+  .banner-mom a{
+    color: #f4be72; font-weight: 600;
+    margin-left: 14px;
+    border-bottom: 1px solid #f4be72;
+    padding-bottom: 1px;
+    transition: color .3s ease, border-color .3s ease;
+  }
+  .banner-mom a:hover{ color: #ffd28a; border-color: #ffd28a; }
+  .banner-mom .pill{
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #f0c9c2, #d4a59f);
+    color: #2a1a1a;
+    font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 600;
+    margin-right: 12px;
+    box-shadow: 0 4px 8px -2px rgba(0,0,0,.3);
+  }
+  .banner-mom strong{ color: #f4be72; font-weight: 600; }
+  .banner-mom .close{
+    position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1px solid rgba(240,201,194,.4);
+    color: rgba(240,201,194,.7);
+    font-size: 14px; line-height: 1;
+    cursor: pointer;
+    background: transparent;
+    transition: background .3s ease, color .3s ease;
+  }
+  .banner-mom .close:hover{ background: rgba(240,201,194,.1); color: #f5e0db; }
+  body.bm-hidden .banner-mom{ display: none; }
+  @media (max-width: 700px){
+    .banner-mom{ font-size: 11px; padding: 10px 36px 10px 16px; }
+    .banner-mom .pill{ display: none; }
+    .banner-mom a{ display: block; margin: 4px auto 0; max-width: max-content; }
+  }
+</style>
+<div class="banner-mom" id="banner-mom">
+  <span class="pill">★ Edición Limitada</span>
+  <strong>Pack Día de la Madre</strong> — 25% OFF + Envío GRATIS
+  <a href="products/pack-dia-madre.html">Ver pack →</a>
+  <button class="close" onclick="document.body.classList.add('bm-hidden'); try{localStorage.setItem('bm-closed','1');}catch(e){}" aria-label="Cerrar">×</button>
+</div>
+<script>
+  try{ if(localStorage.getItem('bm-closed')==='1'){ document.body.classList.add('bm-hidden'); } }catch(e){}
+</script>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a class="logo" href="#top">
+    <span class="dot"></span>
+    TÄLU
+  </a>
+  <div class="nav-links">
+    <a href="#skincare">Skincare</a>
+    <a href="#kitchen">Cocina</a>
+    <a href="#historia">Historia</a>
+    <a href="#testimonios">Reseñas</a>
+  </div>
+  <a class="nav-cart" href="https://www.taluchile.cl/cart" target="_blank" rel="noopener" aria-label="Ver carrito">
+    <svg class="cart-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3 4 h2 l1 4 M6 8 l1.8 8.2 a1.2 1.2 0 0 0 1.2 .95 h8.5 a1.2 1.2 0 0 0 1.18 -.95 L21 8 Z"/>
+      <circle cx="9.5" cy="20" r="1.15" fill="currentColor" stroke="none"/>
+      <circle cx="17.5" cy="20" r="1.15" fill="currentColor" stroke="none"/>
+    </svg>
+    <span class="cart-count" aria-hidden="true">0</span>
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero marble-white" id="top">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Skincare + Cocina ancestral</span>
+      <h1>
+        Cuidado <span class="italic">por dentro</span><br>
+        y por <span class="italic">fuera</span>.
+      </h1>
+      <p class="lead">
+        Sebo de ternero crudo, herencia de cocina lenta y rituales que pasan de mano en mano.
+        Dos mundos, una sola raíz.
+      </p>
+      <div class="hero-ctas">
+        <a href="#skincare" class="btn btn-gold">
+          Descubrir la piel ✦
+        </a>
+        <a href="#kitchen" class="btn btn-ghost">
+          Explorar la mesa
+        </a>
+      </div>
+    </div>
+
+    <div class="stage" aria-hidden="true">
+      <div class="halo"></div>
+      <div class="ring"></div>
+      <div class="ring inner"></div>
+      <div class="pedestal"></div>
+
+      <svg class="leaf one" viewBox="0 0 100 100">
+        <path d="M20 80 Q 10 40 50 20 Q 90 30 80 70 Q 60 90 20 80 Z" fill="none" stroke="#8a6a32" stroke-width="1.2" opacity=".7"/>
+        <path d="M25 75 Q 50 55 75 35" stroke="#8a6a32" stroke-width=".8" fill="none" opacity=".6"/>
+      </svg>
+      <svg class="leaf two" viewBox="0 0 100 100">
+        <path d="M20 80 Q 10 40 50 20 Q 90 30 80 70 Q 60 90 20 80 Z" fill="none" stroke="#c9a35d" stroke-width="1.2" opacity=".7"/>
+        <path d="M25 75 Q 50 55 75 35" stroke="#c9a35d" stroke-width=".8" fill="none" opacity=".6"/>
+      </svg>
+
+      <div class="jar3d" id="heroJar">
+        <model-viewer
+          id="taluJar"
+          src="assets/3d/talu-jar.glb"
+          alt="TÄLU RAW · frasco de crema en base a sebo de res, vista 3D interactiva"
+          camera-controls
+          disable-tap
+          interaction-prompt="none"
+          environment-image="neutral"
+          shadow-intensity="1.1"
+          shadow-softness="0.85"
+          exposure="1.05"
+          camera-orbit="30deg 60deg 6.5m"
+          field-of-view="26deg"
+          min-camera-orbit="auto 25deg 3.5m"
+          max-camera-orbit="auto 95deg 12m"
+          touch-action="pan-y"
+          style="width:100%;height:460px;background:transparent;">
+        </model-viewer>
+      </div>
+
+      <div class="sparks">
+        <span class="spark"></span>
+        <span class="spark"></span>
+        <span class="spark"></span>
+        <span class="spark"></span>
+        <span class="spark"></span>
+        <span class="spark"></span>
+        <span class="spark"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-strip" aria-label="Promesas TÄLU">
+    <div class="hero-strip-track">
+      <span>Cuidamos tus hormonas</span><span class="sep">✦</span>
+      <span>Sin parabenos ni conservantes</span><span class="sep">✦</span>
+      <span>Productos 100% naturales</span><span class="sep">✦</span>
+      <span>Grasas biomiméticas</span><span class="sep">✦</span>
+      <span>Cuidamos tus hormonas</span><span class="sep">✦</span>
+      <span>Sin parabenos ni conservantes</span><span class="sep">✦</span>
+      <span>Productos 100% naturales</span><span class="sep">✦</span>
+      <span>Grasas biomiméticas</span><span class="sep">✦</span>
+      <span aria-hidden="true">Cuidamos tus hormonas</span><span class="sep" aria-hidden="true">✦</span>
+      <span aria-hidden="true">Sin parabenos ni conservantes</span><span class="sep" aria-hidden="true">✦</span>
+      <span aria-hidden="true">Productos 100% naturales</span><span class="sep" aria-hidden="true">✦</span>
+      <span aria-hidden="true">Grasas biomiméticas</span><span class="sep" aria-hidden="true">✦</span>
+      <span aria-hidden="true">Cuidamos tus hormonas</span><span class="sep" aria-hidden="true">✦</span>
+      <span aria-hidden="true">Sin parabenos ni conservantes</span><span class="sep" aria-hidden="true">✦</span>
+      <span aria-hidden="true">Productos 100% naturales</span><span class="sep" aria-hidden="true">✦</span>
+      <span aria-hidden="true">Grasas biomiméticas</span><span class="sep" aria-hidden="true">✦</span>
+    </div>
+  </div>
+</section>
+
+<!-- CATÁLOGO SPLIT -->
+<section class="catalog">
+
+  <!-- SKINCARE · Mármol blanco -->
+  <div class="panel skincare marble-white" id="skincare">
+    <div class="panel-header">
+      <span class="eyebrow">La piel</span>
+      <h2>Por <span class="italic">fuera</span>.<br>Tres cremas, un mismo origen.</h2>
+      <p>Formuladas con sebo de ternero puro grass-fed sin hormonas, lotes pequeños y paciencia. Así lo hacían las abuelas; así lo seguimos haciendo nosotros.</p>
+    </div>
+
+    <div class="product-grid" id="skincareGrid" data-skeleton>
+      <!-- Populated by JS from Shopify /products.json -->
+    </div>
+  </div>
+
+  <!-- COCINA · Mármol negro -->
+  <div class="panel kitchen marble-black" id="kitchen">
+    <div class="panel-header">
+      <span class="eyebrow">La mesa</span>
+      <h2>Por <span class="italic">dentro</span>.<br>Grasas nobles para cocinar.</h2>
+      <p>Sebo rendido lentamente, como antes de las industrias. Punto de humo alto, sabor profundo, nutrición real.</p>
+    </div>
+
+    <div class="product-grid" id="kitchenGrid" data-skeleton>
+      <!-- Populated by JS from Shopify /products.json -->
+    </div>
+  </div>
+</section>
+
+<!-- PACKS · Rituales completos -->
+<section class="packs" id="packs">
+  <div class="packs-header">
+    <span class="eyebrow">Packs · Rituales completos</span>
+    <h2>El <span class="italic">ritual</span> entero,<br>en un solo gesto.</h2>
+    <p>Cuando quieres llevarlo todo — piel, mesa o ambos. Lotes curados para empezar desde el día uno, con un ahorro que agradece la billetera.</p>
+  </div>
+
+  <div class="packs-grid" id="packsGrid" data-skeleton>
+    <!-- Populated by JS from Shopify /products.json -->
+  </div>
+</section>
+
+<!-- BRIDGE · Gift Card -->
+<section class="bridge">
+  <div class="gift">
+    <span class="gift-ribbon-band" aria-hidden="true"></span>
+    <svg class="gift-bow" viewBox="0 0 200 140" width="160" height="112" role="img" aria-label="Lazo de regalo">
+      <defs>
+        <linearGradient id="bowGold" x1="0" y1="0" x2="0.4" y2="1">
+          <stop offset="0%" stop-color="#fbeac0"/>
+          <stop offset="30%" stop-color="#f0d089"/>
+          <stop offset="65%" stop-color="#b88c46"/>
+          <stop offset="100%" stop-color="#6a4f1e"/>
+        </linearGradient>
+        <linearGradient id="bowGoldDark" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#a6823d"/>
+          <stop offset="100%" stop-color="#3a2710"/>
+        </linearGradient>
+        <linearGradient id="bowHighlight" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#fff5d6" stop-opacity=".75"/>
+          <stop offset="100%" stop-color="#fff5d6" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- Tails (behind the loops) -->
+      <path d="M 92 88 C 78 102, 62 118, 50 138 L 78 138 C 88 120, 96 108, 104 96 Z"
+            fill="url(#bowGoldDark)"/>
+      <path d="M 108 88 C 122 102, 138 118, 150 138 L 122 138 C 112 120, 104 108, 96 96 Z"
+            fill="url(#bowGoldDark)"/>
+      <!-- Tail highlights -->
+      <path d="M 90 92 C 78 106, 64 122, 56 134"
+            stroke="#fbeac0" stroke-opacity=".4" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <path d="M 110 92 C 122 106, 136 122, 144 134"
+            stroke="#fbeac0" stroke-opacity=".4" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <!-- Left loop -->
+      <g transform="translate(74 70) rotate(-14)">
+        <ellipse cx="0" cy="0" rx="42" ry="28" fill="url(#bowGold)"/>
+        <ellipse cx="0" cy="2" rx="20" ry="11" fill="#3a2710" fill-opacity=".55"/>
+        <path d="M -38 -8 C -22 -22, 16 -22, 36 -10"
+              stroke="url(#bowHighlight)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      </g>
+      <!-- Right loop -->
+      <g transform="translate(126 70) rotate(14)">
+        <ellipse cx="0" cy="0" rx="42" ry="28" fill="url(#bowGold)"/>
+        <ellipse cx="0" cy="2" rx="20" ry="11" fill="#3a2710" fill-opacity=".55"/>
+        <path d="M -36 -10 C -16 -22, 22 -22, 38 -8"
+              stroke="url(#bowHighlight)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      </g>
+      <!-- Central knot -->
+      <rect x="86" y="54" width="28" height="34" rx="5"
+            fill="url(#bowGold)" stroke="#3a2710" stroke-opacity=".4" stroke-width="0.8"/>
+      <rect x="89" y="58" width="22" height="4" rx="2"
+            fill="#fbeac0" fill-opacity=".55"/>
+      <rect x="89" y="80" width="22" height="3" rx="1.5"
+            fill="#3a2710" fill-opacity=".35"/>
+    </svg>
+    <div class="gift-img">
+      <img id="giftImg" src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/gift_card_50000.png?v=1776375771" alt="Tarjeta de regalo TÄLU">
+    </div>
+    <div class="gift-body">
+      <h3>Un ritual para regalar.</h3>
+      <p>Entrega una puerta — no una caja. Piel o mesa, lo elige quien la recibe.</p>
+      <div class="gift-values" id="giftValues">
+        <!-- Populated by JS from gift card variants -->
+      </div>
+      <a id="giftBuy" href="https://www.taluchile.cl/products/tarjeta-de-regalo-talu" target="_blank" rel="noopener" class="btn btn-gold">Comprar gift card ✦</a>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORIA -->
+<section class="story" id="historia">
+  <div class="wrap">
+    <div class="story-art">
+      <svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <radialGradient id="sun" cx="50%" cy="35%" r="40%">
+            <stop offset="0%" stop-color="#e8cf94" stop-opacity=".9"/>
+            <stop offset="100%" stop-color="#c9a35d" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="300" cy="230" r="150" fill="url(#sun)"/>
+        <path d="M0 420 L 120 320 L 200 380 L 320 280 L 420 360 L 540 300 L 600 350 L 600 600 L 0 600 Z"
+              fill="#c9b79a" opacity=".5"/>
+        <path d="M0 470 L 160 400 L 260 440 L 380 380 L 500 430 L 600 400 L 600 600 L 0 600 Z"
+              fill="#8a6a32" opacity=".35"/>
+        <path d="M0 480 Q 150 460 300 490 T 600 470" stroke="#c9a35d" stroke-width="1.2" fill="none" opacity=".7"/>
+        <path d="M0 510 Q 200 500 400 520 T 600 505" stroke="#e8cf94" stroke-width=".8" fill="none" opacity=".6"/>
+        <g transform="translate(80 500)" opacity=".75">
+          <path d="M0 50 Q -5 20 0 0 Q 5 20 0 50" stroke="#8a6a32" stroke-width="1.4" fill="none"/>
+          <path d="M-10 40 Q -6 25 0 20" stroke="#8a6a32" stroke-width="1" fill="none"/>
+          <path d="M10 40 Q 6 25 0 20" stroke="#8a6a32" stroke-width="1" fill="none"/>
+        </g>
+        <g transform="translate(520 510)" opacity=".75">
+          <path d="M0 50 Q -5 20 0 0 Q 5 20 0 50" stroke="#8a6a32" stroke-width="1.4" fill="none"/>
+          <path d="M-10 40 Q -6 25 0 20" stroke="#8a6a32" stroke-width="1" fill="none"/>
+          <path d="M10 40 Q 6 25 0 20" stroke="#8a6a32" stroke-width="1" fill="none"/>
+        </g>
+      </svg>
+      <div class="story-quote">
+        "La abuela rendía el sebo en cobre, de madrugada. Olía a abrigo."
+      </div>
+    </div>
+
+    <div class="story-copy">
+      <span class="eyebrow">La raíz</span>
+      <h2>Lo que la industria olvidó, <span style="font-style:italic;color:var(--gold-deep);">nosotros lo recordamos</span>.</h2>
+      <p>
+        Durante siglos, el sebo de ternero fue el ingrediente más honrado de la cocina y la farmacia doméstica.
+        Untaba las manos de las abuelas, sellaba cacerolas, protegía la piel del frío de cordillera.
+      </p>
+      <p>
+        Lo recuperamos de pastoreos grass-fed en Chile, rendido lento y sin solventes.
+        Una sola materia prima para dos rituales — porque la piel y el estómago se nutren de la misma tierra.
+      </p>
+      <div class="story-pillars">
+        <div class="pillar"><h4>Regenerativo</h4><p>Res grass-fed chilena, de productores con nombre y cara.</p></div>
+        <div class="pillar"><h4>Lento</h4><p>Rendido a fuego bajo, sin blanqueadores ni extracciones químicas.</p></div>
+        <div class="pillar"><h4>Honesto</h4><p>Sin fragancias sintéticas, sin promesas vacías. Un ingrediente, mil usos.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS + NEWSLETTER -->
+<section class="testimonials" id="testimonios">
+  <div class="wrap">
+    <div class="testimonials-header">
+      <span class="eyebrow" style="color: var(--gold-bright);">Voces</span>
+      <h2>La tribu <span style="font-style:italic;color:var(--gold-bright);">TÄLU</span>.</h2>
+      <p>Clientes, chefs y madres que volvieron a lo que nunca se debió olvidar.</p>
+    </div>
+
+    <div class="t-grid">
+      <article class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <p>Mi piel dejó de reaccionar a todo. Llevaba años gastando fortunas en cremas "clean" y era esto — una sola crema. Un milagro silencioso.</p>
+        <div class="t-author">
+          <div class="t-avatar">MF</div>
+          <div>
+            <div class="t-name">María Fernanda</div>
+            <div class="t-role">Cliente desde 2025</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <p>Cocinar con el tallow de TÄLU le devolvió el sabor a mis guisos. Es la grasa que mi abuela usaba y yo había olvidado cómo se sentía.</p>
+        <div class="t-author">
+          <div class="t-avatar">CR</div>
+          <div>
+            <div class="t-name">Camila Rojas</div>
+            <div class="t-role">Cliente desde 2025</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <p>Compré la gift card para mi madre en su cumpleaños. Eligió PREMIUM y el tallow de ternero. Ahora las dos lo usamos.</p>
+        <div class="t-author">
+          <div class="t-avatar">AS</div>
+          <div>
+            <div class="t-name">Ana Sofía</div>
+            <div class="t-role">Cliente fiel</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="newsletter" id="newsletter">
+    <span class="eyebrow">Carta mensual</span>
+    <h2>Rituales, recetas y lotes nuevos.</h2>
+    <p>Una sola carta al mes. Sin ruido, sin descuentos agresivos — solo lo que sí vale la pena leer.</p>
+    <form class="news-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Bienvenida ✦';">
+      <input type="email" placeholder="tu@correo.com" required />
+      <button type="submit">Suscribirme</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="logo"><span class="dot"></span> TÄLU</div>
+      <p>Sebo de ternero grass-fed sin hormonas, cocina lenta y rituales ancestrales. Cuidado por dentro y por fuera.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Tienda</h5>
+      <a href="https://www.taluchile.cl/collections/skincare">Skincare</a>
+      <a href="https://www.taluchile.cl/collections/cocina">Cocina</a>
+      <a href="https://www.taluchile.cl/products/tarjeta-de-regalo-talu">Gift card</a>
+      <a href="https://www.taluchile.cl/collections/all">Todos los productos</a>
+    </div>
+    <div class="foot-col">
+      <h5>Marca</h5>
+      <a href="#historia">Historia</a>
+      <a href="#">Productores</a>
+      <a href="#">Ingredientes</a>
+      <a href="#">Prensa</a>
+    </div>
+    <div class="foot-col">
+      <h5>Ayuda</h5>
+      <a href="#">Envíos</a>
+      <a href="#">Devoluciones</a>
+      <a href="#">Contacto</a>
+      <a href="#">FAQ</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 TÄLU · Todos los derechos reservados · Chile</span>
+    <span>Hecho con mármol, cobre y paciencia.</span>
+  </div>
+</footer>
+
+<script>
+// =========================================================
+// SHOPIFY STOREFRONT FETCH
+// =========================================================
+const SHOPIFY_HOST = 'https://www.taluchile.cl';
+const PRODUCTS_URL = SHOPIFY_HOST + '/products.json?limit=50';
+
+// Short copy overrides per handle (keeps hero/catálogo punchy)
+const COPY = {
+  'talu-raw':     { tag: 'Ritual puro',     short: 'Sebo de ternero 100% puro. Sin agua, sin conservantes. El origen en estado crudo.' },
+  'talu-clear':   { tag: 'Acné & piel grasa', short: 'Equilibrio sebáceo con lípidos biomiméticos. Para brotes hormonales y piel inflamada.' },
+  'talu-premium': { tag: 'Antiedad',        short: 'Vitamina A natural + retinol ancestral. Firmeza, luz y restauración profunda.' },
+  'sebo-de-res-talu':             { tag: 'Res · grass-fed', short: 'Para saltear, freír, sellar. El umami ancestral que la industria olvidó.' },
+  'tallow-grasa-de-ternero-talu': { tag: 'Ternero · suave', short: 'Más delicada. Ideal para repostería salada y caldos claros.' },
+  'pack-rutina-skincare-completa': {
+    tag: 'Piel',
+    short: 'La rutina completa — tres cremas para los tres momentos.',
+    includes: ['TÄLU RÄW · Sebo puro', 'TÄLU CLEAR · Para acné', 'TÄLU PREMIUM · Antiedad'],
+    table: [
+      { name: 'TÄLU RÄW',     ml: '50 ml', use: 'Sebo puro' },
+      { name: 'TÄLU CLEAR',   ml: '50 ml', use: 'Acné' },
+      { name: 'TÄLU PREMIUM', ml: '50 ml', use: 'Antiedad' },
+    ],
+    was: 64880,
+  },
+  'pack-familia-talu-completo': {
+    tag: 'Piel + Mesa',
+    short: 'Todo TÄLU en una caja: rituales y grasas nobles unidos.',
+    includes: ['3 cremas faciales TÄLU', 'Tallow de Res grass-fed', 'Tallow de Ternero suave'],
+    table: [
+      { name: 'TÄLU RÄW',      ml: '50 ml',  use: 'Sebo puro' },
+      { name: 'TÄLU CLEAR',    ml: '50 ml',  use: 'Acné' },
+      { name: 'TÄLU PREMIUM',  ml: '50 ml',  use: 'Antiedad' },
+      { name: 'TALLOW Res',    ml: '330 g',  use: 'Umami' },
+      { name: 'TALLOW Ternero', ml: '330 g', use: 'Repostería' },
+    ],
+    was: 88850,
+  },
+  'pack-cocina-ancestral': {
+    tag: 'Mesa',
+    short: 'Las dos grasas que transforman tu cocina.',
+    includes: ['TALLOW Res · umami profundo', 'TALLOW Ternero · sabor delicado'],
+    table: [
+      { name: 'TALLOW Res',     ml: '330 g', use: 'Umami profundo' },
+      { name: 'TALLOW Ternero', ml: '330 g', use: 'Sabor delicado' },
+    ],
+    was: 23980,
+  },
+};
+
+const SKINCARE_HANDLES = ['talu-raw', 'talu-clear', 'talu-premium'];
+const KITCHEN_HANDLES  = ['sebo-de-res-talu', 'tallow-grasa-de-ternero-talu'];
+const PACK_HANDLES     = ['pack-rutina-skincare-completa', 'pack-familia-talu-completo', 'pack-cocina-ancestral'];
+const FEATURED_PACK    = 'pack-familia-talu-completo';
+const GIFT_HANDLE      = 'tarjeta-de-regalo-talu';
+
+// Fallback data (used if fetch fails, e.g. opening the file locally)
+const FALLBACK = {
+  'talu-raw':     { title: 'TÄLU RÄW', price: 18990, image: 'https://cdn.shopify.com/s/files/1/0778/1679/1279/files/RAW1.png?v=1764100575' },
+  'talu-clear':   { title: 'TÄLU CLEAR', price: 20900, image: 'https://cdn.shopify.com/s/files/1/0778/1679/1279/files/image_6b1d8b8b-014d-425b-a8c0-150b73b1b87e.png?v=1772602568' },
+  'talu-premium': { title: 'TÄLU PREMIUM', price: 24990, image: 'https://cdn.shopify.com/s/files/1/0778/1679/1279/files/PREMIUM11.png?v=1764100648' },
+  'sebo-de-res-talu': { title: 'TALLOW TÄLU — Grasa de Res', price: 10990, image: 'https://cdn.shopify.com/s/files/1/0778/1679/1279/files/image_a232df3a-fcd2-4a82-8e4a-64ffbcab3c94.png?v=1776195409' },
+  'tallow-grasa-de-ternero-talu': { title: 'TALLOW Ternero TÄLU', price: 12990, image: 'https://cdn.shopify.com/s/files/1/0778/1679/1279/files/Tablaqueso2.png?v=1773966271' },
+  'pack-rutina-skincare-completa': { title: 'Pack Rutina Skincare Completa', price: 49990, variantId: 48734639915247, image: 'https://cdn.shopify.com/s/files/1/0778/1679/1279/files/pack_skincare_completa.png?v=1776378071' },
+  'pack-familia-talu-completo':    { title: 'Pack Familia TÄLU Completo',    price: 68990, variantId: 48734639980783, image: 'https://cdn.shopify.com/s/files/1/0778/1679/1279/files/pack_familia_completo.png?v=1776378074' },
+  'pack-cocina-ancestral':         { title: 'Pack Cocina Ancestral',         price: 19990, variantId: 48734639948015, image: 'https://cdn.shopify.com/s/files/1/0778/1679/1279/files/pack_cocina_ancestral.png?v=1776378068' },
+  'tarjeta-de-regalo-talu': {
+    title: 'Tarjeta de Regalo TÄLU',
+    variants: [
+      { title: '20.000 $', price: 20000, image: 'https://cdn.shopify.com/s/files/1/0778/1679/1279/files/gift_card_20000.png?v=1776375766' },
+      { title: '30.000 $', price: 30000, image: 'https://cdn.shopify.com/s/files/1/0778/1679/1279/files/gift_card_30000.png?v=1776375768' },
+      { title: '50.000 $', price: 50000, image: 'https://cdn.shopify.com/s/files/1/0778/1679/1279/files/gift_card_50000.png?v=1776375771' },
+    ]
+  }
+};
+
+const clp = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 });
+const formatPrice = n => clp.format(+n);
+
+function cleanTitle(t){
+  // "TÄLU PREMIUM — Crema Antiedad de Sebo de Ternero | Chile" → "TÄLU PREMIUM · Crema Antiedad"
+  // Las cremas son de SEBO DE TERNERO (regla dura). Si Shopify aún devuelve "Sebo de Res", lo corregimos en el front.
+  return t
+    .replace(/\s*\|\s*.*$/, '')                    // drop everything after |
+    .replace(/\s*—\s*/, ' · ')                     // em-dash → middle dot
+    .replace(/[Ss]ebo de [Rr]es/g, m => m[0]==='S' ? 'Sebo de Ternero' : 'sebo de ternero')  // fallback fix
+    .trim();
+}
+
+function productUrl(handle){ return `${SHOPIFY_HOST}/products/${handle}`; }
+function cartUrl(variantId){ return `${SHOPIFY_HOST}/cart/${variantId}:1`; }
+function addToCartUrl(variantId, handle){
+  // agrega al carrito y regresa a la página del producto (seguir comprando)
+  return `${SHOPIFY_HOST}/cart/add?id=${variantId}&quantity=1&return_to=/products/${handle}`;
+}
+
+function renderProduct(product, panel){
+  const copy = COPY[product.handle] || { tag: '', short: '' };
+  const title = cleanTitle(product.title);
+  const price = product.price;
+  const img   = product.image;
+  const url   = productUrl(product.handle);
+  const vid   = product.variantId;
+  const buyNowHref = vid ? cartUrl(vid) : url;
+  const addHref    = vid ? addToCartUrl(vid, product.handle) : url;
+  return `
+    <div class="product" aria-label="${title}">
+      <a class="product-img" href="${url}" target="_blank" rel="noopener" aria-label="Ver ${title}">
+        <img src="${img}" alt="${title}" loading="lazy" />
+      </a>
+      <div class="product-meta">
+        <span class="tag">${copy.tag}</span>
+        <h3><a href="${url}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">${title}</a></h3>
+        <p>${copy.short}</p>
+      </div>
+      <div class="product-price">
+        <div>
+          <span class="num">${formatPrice(price)}</span>
+          <span class="cur">CLP</span>
+        </div>
+        <div class="cta-group">
+          <a class="btn-now" href="${buyNowHref}" target="_blank" rel="noopener">Comprar ahora ✦</a>
+          <a class="btn-add" href="${addHref}" target="_blank" rel="noopener">Añadir al carrito</a>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function populateGrid(gridEl, handles, productsByHandle){
+  gridEl.removeAttribute('data-skeleton');
+  gridEl.innerHTML = handles
+    .map(h => productsByHandle[h])
+    .filter(Boolean)
+    .map(p => renderProduct(p, gridEl))
+    .join('');
+}
+
+const CATEGORY_ICONS = {
+  'Piel': `<svg class="cat-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 2 C 5 5 3 8 3 10.5 a 5 5 0 0 0 10 0 C 13 8 11 5 8 2 z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>`,
+  'Mesa': `<svg class="cat-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 2 C 9.5 4.5 11 6 11 9 a 3 3 0 0 1 -6 0 C 5 7 6 5.5 8 2 z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 7 C 9 8.5 9 10 8 10.5" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>`,
+  'Piel + Mesa': `<svg class="cat-icon" viewBox="0 0 20 16" width="20" height="16" aria-hidden="true"><circle cx="7" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="13" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>`,
+};
+function getCategoryIcon(tag){ return CATEGORY_ICONS[tag] || ''; }
+
+function renderPack(product){
+  const copy  = COPY[product.handle] || { tag: '', short: '', includes: [], was: null };
+  const title = product.title.replace(/\s*—.*$/, '').replace(/\s*\|\s*.*$/, '').trim();
+  const catIcon = getCategoryIcon(copy.tag);
+  const price = product.price;
+  const img   = product.image;
+  const url   = productUrl(product.handle);
+  const vid   = product.variantId;
+  const buyNowHref = vid ? cartUrl(vid) : url;
+  const addHref    = vid ? addToCartUrl(vid, product.handle) : url;
+  const featured = product.handle === FEATURED_PACK ? ' featured' : '';
+  const includes = (copy.includes || []).map(i => `<li>${i}</li>`).join('');
+  const tableRows = (copy.table || []).map(r => `
+        <tr>
+          <td class="pt-name">${r.name}</td>
+          <td class="pt-use">${r.use}</td>
+        </tr>`).join('');
+  const includesBlock = copy.table
+    ? `<table class="pack-table" aria-label="Qué incluye este pack">
+        <thead><tr><th>Producto</th><th>Para</th></tr></thead>
+        <tbody>${tableRows}</tbody>
+      </table>`
+    : `<ul class="pack-includes">${includes}</ul>`;
+  const hasDiscount = copy.was && copy.was > price;
+  const savingsAmount = hasDiscount ? (copy.was - price) : 0;
+  const discountPct = hasDiscount ? Math.round((copy.was - price) / copy.was * 100) : 0;
+  const wasPrice = hasDiscount ? `<span class="was-group"><span class="was-label">antes</span><span class="was">${formatPrice(copy.was)}</span></span>` : '';
+  const discountBadge = hasDiscount ? `<span class="discount-badge">-${discountPct}%</span>` : '';
+  const savingsPill = hasDiscount ? `<span class="savings-pill">Ahorras ${formatPrice(savingsAmount)}</span>` : '';
+  return `
+    <div class="pack-card${featured}" aria-label="${title}">
+      <span class="pack-monogram" aria-hidden="true">Ä</span>
+      ${discountBadge}
+      <a class="pack-img" href="${url}" target="_blank" rel="noopener" aria-label="Ver ${title}">
+        <img src="${img}" alt="${title}" loading="lazy" />
+      </a>
+      <span class="pack-tag">${copy.tag}</span>
+      <h3 class="pack-title"><span class="cat-icon-wrap" aria-hidden="true">${catIcon}</span><a href="${url}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">${title}</a></h3>
+      ${includesBlock}
+      <div class="pack-foot">
+        <div class="pack-price">
+          <div class="price-group">
+            <span class="num">${formatPrice(price)}</span>
+            ${wasPrice}
+          </div>
+          <span class="cur">CLP</span>
+        </div>
+        ${savingsPill}
+        <div class="cta-group">
+          <a class="btn-now" href="${buyNowHref}" target="_blank" rel="noopener">Llevo este ritual ✦</a>
+          <a class="link-add" href="${addHref}" target="_blank" rel="noopener">o añadir al carrito</a>
+        </div>
+        <p class="shipping-note">Envío gratis desde $25.000</p>
+      </div>
+    </div>
+  `;
+}
+
+function populatePacks(gridEl, productsByHandle){
+  gridEl.removeAttribute('data-skeleton');
+  gridEl.innerHTML = PACK_HANDLES
+    .map(h => productsByHandle[h])
+    .filter(Boolean)
+    .map(p => renderPack(p))
+    .join('');
+  setupPriceCountUp(gridEl);
+}
+
+// Fase 3 · C8.3 count-up del precio al entrar en viewport
+function setupPriceCountUp(gridEl){
+  const nums = gridEl.querySelectorAll('.pack-price .num');
+  if (!nums.length) return;
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced || !('IntersectionObserver' in window)) return; // leave final text as-is
+  const obs = new IntersectionObserver((entries, o) => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const el = en.target;
+      o.unobserve(el);
+      const target = parseInt(el.textContent.replace(/\D/g, ''), 10);
+      if (!Number.isFinite(target) || target <= 0) return;
+      const duration = 1100;
+      const start = performance.now();
+      const ease = t => 1 - Math.pow(1 - t, 3);
+      // Safety: force final value after 2.5s in case rAF is throttled
+      const safety = setTimeout(() => { el.textContent = clp.format(target); }, 2500);
+      (function tick(now){
+        const t = Math.min(1, ((now || performance.now()) - start) / duration);
+        el.textContent = clp.format(Math.round(target * ease(t)));
+        if (t < 1) requestAnimationFrame(tick);
+        else { el.textContent = clp.format(target); clearTimeout(safety); }
+      })(performance.now());
+    });
+  }, { threshold: 0.5 });
+  nums.forEach(n => obs.observe(n));
+}
+
+function populateGift(productsByHandle){
+  const gift = productsByHandle[GIFT_HANDLE];
+  if (!gift) return;
+  const valuesEl = document.getElementById('giftValues');
+  const imgEl    = document.getElementById('giftImg');
+  const buyEl    = document.getElementById('giftBuy');
+
+  valuesEl.innerHTML = gift.variants.map((v, i) => {
+    const label = v.title.replace(/\s*\$\s*$/, ''); // "20.000 $" → "20.000"
+    return `<button data-price="${v.price}" data-img="${v.image || gift.image}" class="${i === gift.variants.length - 1 ? 'active' : ''}">$${label}</button>`;
+  }).join('');
+
+  if (imgEl && gift.variants.length){
+    const active = valuesEl.querySelector('.active');
+    if (active && active.dataset.img) imgEl.src = active.dataset.img;
+  }
+  if (buyEl) buyEl.href = productUrl(GIFT_HANDLE);
+
+  valuesEl.querySelectorAll('button').forEach(b => {
+    b.addEventListener('click', () => {
+      valuesEl.querySelectorAll('button').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      if (b.dataset.img) imgEl.src = b.dataset.img;
+    });
+  });
+}
+
+function setHeroJar(productsByHandle){
+  const hero = productsByHandle['talu-premium'] || productsByHandle['talu-raw'];
+  if (!hero) return;
+  const img = document.getElementById('heroJarImg');
+  if (img) img.src = hero.image;
+}
+
+function skeleton(count){
+  return Array(count).fill(0).map(() => `
+    <div class="product">
+      <div class="product-img skeleton" style="height:140px;"></div>
+      <div class="product-meta">
+        <span class="skeleton" style="display:block;height:10px;width:30%;margin-bottom:10px;"></span>
+        <span class="skeleton" style="display:block;height:22px;width:70%;margin-bottom:10px;"></span>
+        <span class="skeleton" style="display:block;height:14px;width:90%;"></span>
+      </div>
+      <div class="product-price">
+        <span class="skeleton" style="display:block;height:24px;width:80px;"></span>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function boot(){
+  const skinGrid = document.getElementById('skincareGrid');
+  const kitGrid  = document.getElementById('kitchenGrid');
+  const packGrid = document.getElementById('packsGrid');
+  skinGrid.innerHTML = skeleton(3);
+  kitGrid.innerHTML  = skeleton(2);
+  if (packGrid) packGrid.innerHTML = skeleton(3);
+
+  // Default: build productsByHandle from fallback
+  const byHandle = {};
+  for (const h of [...SKINCARE_HANDLES, ...KITCHEN_HANDLES, ...PACK_HANDLES]){
+    const f = FALLBACK[h];
+    if (f) byHandle[h] = { handle: h, title: f.title, price: f.price, image: f.image, variantId: f.variantId };
+  }
+  byHandle[GIFT_HANDLE] = FALLBACK[GIFT_HANDLE];
+
+  // Try to hydrate from Shopify
+  try {
+    const res = await fetch(PRODUCTS_URL, { headers: { 'Accept': 'application/json' } });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    (data.products || []).forEach(p => {
+      const variant = (p.variants || [])[0] || {};
+      const image   = (p.images || [])[0]?.src || null;
+      if ([...SKINCARE_HANDLES, ...KITCHEN_HANDLES, ...PACK_HANDLES].includes(p.handle)){
+        byHandle[p.handle] = {
+          handle: p.handle,
+          title: p.title,
+          price: variant.price,
+          variantId: variant.id,
+          image
+        };
+      }
+      if (p.handle === GIFT_HANDLE){
+        byHandle[GIFT_HANDLE] = {
+          title: p.title,
+          image,
+          variants: (p.variants || []).map((v, i) => ({
+            title: v.title,
+            price: v.price,
+            image: (p.images[i] && p.images[i].src) || image
+          }))
+        };
+      }
+    });
+  } catch(err){
+    console.warn('[TÄLU] Fetch fallback:', err.message);
+  }
+
+  populateGrid(skinGrid, SKINCARE_HANDLES, byHandle);
+  populateGrid(kitGrid,  KITCHEN_HANDLES,  byHandle);
+  if (packGrid) populatePacks(packGrid, byHandle);
+  populateGift(byHandle);
+  setHeroJar(byHandle);
+}
+
+boot();
+
+// =========================================================
+// NAV · modo oscuro cuando entra a zonas negras
+// =========================================================
+const nav = document.getElementById('nav');
+const darkZones = document.querySelectorAll('#kitchen, .packs, .testimonials, footer, .bridge');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting){
+      nav.classList.add('is-dark');
+    } else {
+      const stillDark = [...darkZones].some(z => {
+        const r = z.getBoundingClientRect();
+        return r.top < window.innerHeight * 0.3 && r.bottom > window.innerHeight * 0.3;
+      });
+      if (!stillDark) nav.classList.remove('is-dark');
+    }
+  });
+}, { threshold: 0.3 });
+darkZones.forEach(z => observer.observe(z));
+
+// =========================================================
+// CART ICON ANIMATION + BADGE
+// =========================================================
+(function(){
+  const cart  = document.querySelector('.nav-cart');
+  if (!cart) return;
+  const badge = cart.querySelector('.cart-count');
+  let count = 0;
+  let animTimer = null;
+
+  function setCount(n){
+    count = Math.max(0, n|0);
+    badge.textContent = count > 99 ? '99+' : String(count);
+    badge.classList.toggle('visible', count > 0);
+  }
+  function triggerAnim(){
+    cart.classList.remove('is-animating');
+    // force reflow so the animation restarts
+    void cart.offsetWidth;
+    cart.classList.add('is-animating');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(() => cart.classList.remove('is-animating'), 950);
+  }
+
+  // Listen for clicks on any add-to-cart link in the page
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('.btn-add, .link-add');
+    if (!link) return;
+    const href = link.getAttribute('href') || '';
+    // Only count if it's actually a Shopify cart/add URL
+    if (!/\/cart\/add\b/.test(href)) return;
+    setCount(count + 1);
+    triggerAnim();
+  }, true);
+
+  // Try to read the real cart count from Shopify on load (works when served
+  // from the same origin as the store). Falls back silently otherwise.
+  try {
+    fetch('https://www.taluchile.cl/cart.js', { credentials: 'include', mode: 'cors' })
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data && typeof data.item_count === 'number'){
+          setCount(data.item_count);
+        }
+      })
+      .catch(() => {});
+  } catch(_){}
+
+  // Expose small API for future use (e.g. from other scripts)
+  window.TaluCart = { setCount, triggerAnim, get count(){ return count; } };
+})();
+</script>
+
+<!-- Vaivén suave + retorno automático del frasco 3D
+     - Oscila ±7° cada 5s
+     - Al arrastrar/zoom se pausa
+     - 2.5s después: lerp suave de regreso a la pose inicial (azimut 0°, polar 50°, radius 6.5m)
+     - Al terminar el lerp, reanuda el vaivén -->
+<script>
+(() => {
+  const mv = document.getElementById('taluJar');
+  if (!mv) return;
+  const POLAR_DEG = 60, RADIUS = 6.5;
+  const BASE_AZ_DEG = 30;    // rotación base del jar (positivo = jar girado a la izquierda → TÄLU de frente)
+  const POLAR_RAD = POLAR_DEG * Math.PI / 180;
+  const BASE_AZ_RAD = BASE_AZ_DEG * Math.PI / 180;
+  const AMPLITUDE = 7;       // ±7° de oscilación alrededor de BASE_AZ
+  const PERIOD_MS = 5000;    // 5s por ciclo
+  const PAUSE_MS  = 2500;    // tiempo de inactividad antes de volver
+  const RETURN_MS = 900;     // duración del lerp de regreso
+
+  let userPaused = false;
+  let returning  = false;
+  let returnFrom = null;     // { theta, phi, radius } en momento de iniciar el lerp
+  let returnT0   = 0;
+  let pauseTimer = null;
+  let t0 = null;
+
+  const easeOutCubic = k => 1 - Math.pow(1 - k, 3);
+
+  function tick(now) {
+    if (returning) {
+      const k = Math.min(1, (now - returnT0) / RETURN_MS);
+      const e = easeOutCubic(k);
+      const theta  = returnFrom.theta  + (BASE_AZ_RAD - returnFrom.theta)  * e;
+      const phi    = returnFrom.phi    + (POLAR_RAD   - returnFrom.phi)    * e;
+      const radius = returnFrom.radius + (RADIUS      - returnFrom.radius) * e;
+      mv.cameraOrbit = `${theta}rad ${phi}rad ${radius}m`;
+      if (k >= 1) {
+        returning = false;
+        userPaused = false;
+        t0 = now;
+      }
+    } else if (!userPaused) {
+      if (!t0) t0 = now;
+      const phase = ((now - t0) / PERIOD_MS) * 2 * Math.PI;
+      const az = BASE_AZ_DEG + AMPLITUDE * Math.sin(phase);
+      mv.cameraOrbit = `${az}deg ${POLAR_DEG}deg ${RADIUS}m`;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  mv.addEventListener('load', () => {
+    mv.cameraOrbit = `${BASE_AZ_DEG}deg ${POLAR_DEG}deg ${RADIUS}m`;
+    requestAnimationFrame(tick);
+  });
+
+  mv.addEventListener('camera-change', e => {
+    if (e.detail.source === 'user-interaction') {
+      userPaused = true;
+      returning = false;
+      clearTimeout(pauseTimer);
+      pauseTimer = setTimeout(() => {
+        const o = mv.getCameraOrbit();
+        returnFrom = { theta: o.theta, phi: o.phi, radius: o.radius };
+        returnT0 = performance.now();
+        returning = true;
+      }, PAUSE_MS);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

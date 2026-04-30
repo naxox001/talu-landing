@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tarjeta de Regalo TÄLU · El Regalo Perfecto | Chile</title>
+<meta name="description" content="Tarjeta de Regalo TÄLU. Por $20.000, $30.000 o $50.000. Quien la recibe elige sus productos TÄLU favoritos. Llega por email, sin envío físico." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/cocina-base.css">
+<style>
+  /* GiftCard usa cocina-base.css con overrides menores */
+  .hero-text h1{ font-size: clamp(48px, 6.5vw, 92px); }
+
+  /* Selector de montos */
+  .amount-picker{
+    display: flex; gap: 14px; flex-wrap: wrap;
+    margin: 8px 0 4px;
+  }
+  .amount-pill{
+    flex: 1; min-width: 130px;
+    padding: 22px 18px;
+    border-radius: 16px;
+    border: 1.5px solid rgba(224,144,64,.4);
+    background: linear-gradient(180deg, rgba(40,28,20,.5) 0%, rgba(20,17,14,.85) 100%);
+    cursor: pointer;
+    transition: all .3s ease;
+    text-align: center;
+    color: var(--c-ivory);
+  }
+  .amount-pill:hover{
+    border-color: var(--c-gold-bright);
+    background: linear-gradient(180deg, rgba(50,32,20,.6) 0%, rgba(20,17,14,.9) 100%);
+    transform: translateY(-2px);
+  }
+  .amount-pill.is-active{
+    border-color: var(--c-gold-bright);
+    background: linear-gradient(180deg, rgba(80,50,28,.7) 0%, rgba(40,24,12,.95) 100%);
+    box-shadow: 0 0 0 2px rgba(244,190,114,.3), 0 14px 30px -10px rgba(168,106,42,.4);
+  }
+  .amount-pill .amount-num{
+    font-family: var(--serif); font-size: 36px; font-weight: 500;
+    color: var(--c-gold-bright);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .amount-pill .amount-sub{
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--c-ivory-soft);
+  }
+  .amount-pill.is-active .amount-num{
+    background: linear-gradient(135deg, #ffd28a 0%, #f4be72 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Card preview de la tarjeta */
+  .gc-preview{
+    aspect-ratio: 1.6 / 1;
+    border-radius: 20px;
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 30%, rgba(244,190,114,.18), transparent 65%),
+      linear-gradient(135deg, #221a14 0%, #0a0503 100%);
+    border: 1px solid rgba(224,144,64,.4);
+    box-shadow:
+      0 60px 100px -50px rgba(0,0,0,.85),
+      0 30px 50px -20px rgba(168,106,42,.3),
+      inset 0 1px 0 rgba(255,255,255,.06);
+    padding: 36px 38px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: transform .8s cubic-bezier(.2,.7,.3,1);
+  }
+  .gc-preview::before{
+    content: ""; position: absolute; top: -40%; right: -20%;
+    width: 60%; height: 180%;
+    background: radial-gradient(circle, rgba(244,190,114,.15), transparent 60%);
+    transform: rotate(20deg);
+  }
+  .gc-preview .gc-top{
+    display: flex; justify-content: space-between; align-items: flex-start;
+    position: relative; z-index: 2;
+  }
+  .gc-preview .gc-logo{
+    font-family: var(--serif); font-size: 32px;
+    color: var(--c-ivory); letter-spacing: .15em; font-weight: 500;
+  }
+  .gc-preview .gc-stars{
+    color: var(--c-gold-bright); letter-spacing: 4px;
+    font-size: 14px;
+  }
+  .gc-preview .gc-mid{
+    position: relative; z-index: 2;
+    font-family: var(--serif); font-style: italic;
+    color: var(--c-gold-bright);
+    font-size: 16px;
+  }
+  .gc-preview .gc-amount-display{
+    font-family: var(--serif);
+    font-size: 70px;
+    line-height: 1;
+    font-weight: 500;
+    color: var(--c-ivory);
+    letter-spacing: -.02em;
+    background: linear-gradient(135deg, #ffd28a 0%, #f4be72 50%, #e09040 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 4px;
+  }
+  .gc-preview .gc-bottom{
+    display: flex; justify-content: space-between; align-items: flex-end;
+    position: relative; z-index: 2;
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--c-ivory-soft);
+  }
+  .gc-preview .gc-bottom strong{
+    color: var(--c-gold-bright);
+  }
+  .gc-preview .gc-seal{
+    position: absolute; bottom: 18px; right: 28px;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(244,190,114,.25), rgba(168,106,42,.05));
+    border: 1px solid rgba(244,190,114,.4);
+    display: grid; place-items: center;
+    color: var(--c-gold-bright);
+    z-index: 2;
+  }
+
+  /* Big amount display rotation slight */
+  @keyframes gc-tilt{
+    0%, 100%{ transform: perspective(1000px) rotateY(-2deg); }
+    50%     { transform: perspective(1000px) rotateY(2deg); }
+  }
+  .gc-preview{ animation: gc-tilt 6s ease-in-out infinite; }
+
+  /* Steps cómo funciona */
+  .steps{
+    padding: 130px 40px;
+  }
+  .steps-grid{
+    max-width: 1080px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+  .step-card{
+    padding: 38px 30px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(40,28,20,.55), rgba(20,17,14,.85));
+    border: 1px solid rgba(224,144,64,.22);
+    text-align: center;
+    transition: transform .5s ease, border-color .5s ease;
+  }
+  .step-card:hover{ transform: translateY(-4px); border-color: rgba(224,144,64,.5); }
+  .step-num{
+    width: 48px; height: 48px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffd28a 0%, #e09040 100%);
+    color: #1a0a02;
+    display: grid; place-items: center;
+    font-family: var(--serif); font-size: 24px; font-weight: 500;
+  }
+  .step-card h4{
+    font-family: var(--serif); font-size: 22px; font-weight: 500;
+    color: var(--c-ivory); margin-bottom: 10px;
+  }
+  .step-card p{
+    font-size: 13px; line-height: 1.6;
+    color: var(--c-ivory-soft);
+  }
+</style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<nav class="nav">
+  <a href="index.html" class="logo"><span class="dot"></span>TÄLU</a>
+  <div class="nav-links">
+    <a href="index.html#cocina">Cocina</a>
+    <a href="index.html#skincare">Skincare</a>
+    <a href="index.html#packs">Packs</a>
+    <a href="contacto.html">Contacto</a>
+  </div>
+  <a href="#comprar" class="nav-cart" aria-label="Carrito">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1.4 9.5a2 2 0 0 1-2 1.7H8.4a2 2 0 0 1-2-1.7L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+  </a>
+</nav>
+
+<section class="hero-cinematic">
+  <div class="hero-content">
+
+    <!-- Tarjeta visual -->
+    <div class="reveal">
+      <div class="gc-preview" id="gc-preview">
+        <div class="gc-top">
+          <div class="gc-logo"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#f4be72;box-shadow:0 0 10px #f4be72;margin-right:10px;"></span>TÄLU</div>
+          <div class="gc-stars">★★★★★</div>
+        </div>
+        <div class="gc-mid">
+          <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:6px;">Tarjeta de Regalo</div>
+          <div class="gc-amount-display" id="gc-amount">$30.000</div>
+        </div>
+        <div class="gc-bottom">
+          <div>Para <strong>quien tú elijas</strong></div>
+          <div>Válida 1 año</div>
+        </div>
+        <div class="gc-seal">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M14 4l3 6 6 .8-4.5 4.4 1 6.3-5.5-3.2-5.5 3.2 1-6.3L4 10.8 10 10z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Texto + selector -->
+    <div class="hero-text">
+      <span class="eyebrow">Regalo · Tarjeta TÄLU</span>
+      <h1>
+        El regalo
+        <em>que ella elige</em>
+      </h1>
+      <p class="hero-lead">
+        Llega por email al instante. Sin envío físico, sin tallas, sin equivocarte.
+        <strong>Vale por 1 año en cualquier producto TÄLU.</strong>
+      </p>
+
+      <div style="margin-top:8px;">
+        <div style="font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--c-gold);margin-bottom:14px;">Elige el monto</div>
+
+        <div class="amount-picker">
+          <button class="amount-pill" data-amount="20000">
+            <div class="amount-num">$20.000</div>
+            <div class="amount-sub">1 crema o 1 grasa</div>
+          </button>
+          <button class="amount-pill is-active" data-amount="30000">
+            <div class="amount-num">$30.000</div>
+            <div class="amount-sub">popular · pack pequeño</div>
+          </button>
+          <button class="amount-pill" data-amount="50000">
+            <div class="amount-num">$50.000</div>
+            <div class="amount-sub">pack rutina completa</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-cta-row">
+        <a href="https://taluchile.cl/products/tarjeta-de-regalo-talu" class="btn-primary" id="cta-btn">
+          Regalar $30.000
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="intro-letter">
+  <div class="copy">
+    No sabés su talla, no sabés si prefiere RÄW o PREMIUM, no sabés si va a usar
+    la grasa para cocinar. <strong>La tarjeta TÄLU resuelve esto.</strong> Ella
+    entra al sitio, elige lo que quiere, y vos quedás como genio.
+  </div>
+  <div class="signature">— TÄLU · regalo sin equivocaciones</div>
+</section>
+
+<!-- ============================ STEPS ============================ -->
+<section class="steps">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Cómo funciona</span>
+    <h2>3 pasos · sin envío físico</h2>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <div class="step-num">1</div>
+      <h4>Elegís el monto</h4>
+      <p>$20.000, $30.000 o $50.000. Pagas como cualquier producto TÄLU.</p>
+    </div>
+    <div class="step-card reveal delay-1">
+      <div class="step-num">2</div>
+      <h4>Pones el email destinatario</h4>
+      <p>El email de quien va a recibir la tarjeta. Podés agregar mensaje personalizado.</p>
+    </div>
+    <div class="step-card reveal delay-2">
+      <div class="step-num">3</div>
+      <h4>Llega al instante</h4>
+      <p>Email con código + diseño de tarjeta TÄLU. Ella lo aplica al carrito y elige sus productos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FAQ ============================ -->
+<section class="faq">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Preguntas frecuentes</span>
+    <h2>Lo que querés saber</h2>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Cuánto dura la tarjeta?<span class="arrow">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Vence a 1 año desde la fecha de compra. El destinatario tiene tiempo de sobra
+        para elegir cuándo y qué quiere de TÄLU.
+      </div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Se puede usar en cualquier producto?<span class="arrow">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Sí. Cualquier producto del catálogo TÄLU — cremas (RÄW, CLEAR, PREMIUM),
+        grasas (TALLOW Res, Ternero), packs, ediciones limitadas. Lo único que NO se puede
+        comprar con tarjeta de regalo es otra tarjeta de regalo.
+      </div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Y si la compra es menor al monto?<span class="arrow">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">
+        El saldo restante queda en la tarjeta para usarse en una compra futura.
+        Si la compra supera el monto, paga la diferencia con tarjeta de crédito o débito.
+      </div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Llega por correo postal?<span class="arrow">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">
+        No. Es 100% digital — llega al email del destinatario al instante después de tu pago.
+        Esto significa cero costo de envío y cero riesgo de retraso.
+      </div></div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Puedo elegir cuándo se envía?<span class="arrow">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">
+        Sí. En el checkout podés agendar el envío para una fecha específica
+        (cumpleaños, aniversario, etc). Llegamos justo el día que vos elijas.
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CTA FINAL ============================ -->
+<section class="cta-final" id="comprar">
+  <div class="price-card reveal">
+    <div class="label">Tarjeta de Regalo TÄLU</div>
+    <div class="price-now" id="cta-price">$30.000</div>
+    <div class="price-savings">
+      Llega por email al instante · Vence en 1 año · Sin envío físico
+    </div>
+    <a href="https://taluchile.cl/products/tarjeta-de-regalo-talu" class="btn-primary" id="cta-btn-bottom">
+      Regalar $30.000
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <div class="cta-meta">
+      <span>Sin envío físico</span>
+      <span>Mensaje personalizado</span>
+      <span>Vence en 1 año</span>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="top">TÄLU</div>
+  <div class="links">
+    <a href="index.html">Inicio</a>
+    <a href="index.html#cocina">Cocina</a>
+    <a href="index.html#skincare">Skincare</a>
+    <a href="contacto.html">Contacto</a>
+  </div>
+  <div>© TÄLU Chile · contacto@taluchile.cl</div>
+</footer>
+
+<script>
+  const pc = document.getElementById('particles');
+  for(let i=0;i<28;i++){
+    const p = document.createElement('span');
+    p.className = 'particle';
+    p.style.left = (Math.random()*100) + '%';
+    p.style.animationDelay = (Math.random()*14) + 's';
+    p.style.animationDuration = (10 + Math.random()*10) + 's';
+    pc.appendChild(p);
+  }
+
+  // Amount selector
+  const formatMoney = n => '$' + Number(n).toLocaleString('es-CL');
+  document.querySelectorAll('.amount-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.amount-pill').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      const amt = btn.dataset.amount;
+      const formatted = formatMoney(amt);
+      document.getElementById('gc-amount').textContent = formatted;
+      document.getElementById('cta-price').textContent = formatted;
+      document.getElementById('cta-btn').innerHTML = 'Regalar ' + formatted + ' <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>';
+      document.getElementById('cta-btn-bottom').innerHTML = 'Regalar ' + formatted + ' <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>';
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => btn.parentElement.classList.toggle('is-open'));
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>

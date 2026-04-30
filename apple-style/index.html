@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TÄLU — Skincare & Gastronomía Ancestral</title>
+<meta name="description" content="Sebo de res 100% puro. La crema más efectiva que puedes hacer con un solo ingrediente real. El único skincare chileno que también puedes comer.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          // Apple-adapted to TÄLU brand
+          'cacao':       '#1a1a1a',  // Dark chapter canvas (Apple #000)
+          'cacao-soft':  '#2d2520',  // Dark gradient end
+          'cream':       '#f5f0e8',  // Light chapter canvas (Apple #f5f5f7)
+          'bone':        '#f0ead8',  // Text on dark (Apple white)
+          'gold':        '#c4a06b',  // Single accent — CTAs (Apple blue)
+          'gold-pale':   '#e8d5a3',  // Highlights, hover
+          'gold-deep':   '#a8884f',  // Active/pressed
+          'border-gold': '#d4c4a0',  // Soft border
+          'text-warm':   '#6b6560',  // Secondary text (Apple #6e6e73)
+          'ink':         '#1a1a1a',  // Primary text (Apple #1d1d1f)
+        },
+        fontFamily: {
+          'display': ['"Cormorant Garamond"', 'Georgia', 'serif'],
+          'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        },
+        letterSpacing: {
+          'apple-tight': '-0.022em',
+          'apple-display': '-0.015em',
+        },
+        boxShadow: {
+          'card': '0 4px 24px rgba(196, 160, 107, 0.12)',
+          'card-hover': '0 8px 40px rgba(196, 160, 107, 0.22)',
+          'btn': '0 2px 12px rgba(196, 160, 107, 0.3)',
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #f5f0e8;
+    color: #1a1a1a;
+  }
+  .font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+  /* Apple-style hero typography compression */
+  .hero-headline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  /* Capsule CTA — Apple's pill geometry */
+  .pill-cta {
+    border-radius: 980px;
+    padding: 14px 32px;
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+  }
+  .pill-cta-primary {
+    background: #c4a06b;
+    color: #1a1a1a;
+  }
+  .pill-cta-primary:hover {
+    background: #d4b079;
+    transform: scale(1.02);
+  }
+  .pill-cta-ghost {
+    background: transparent;
+    color: #f0ead8;
+    border: 1px solid rgba(240, 234, 216, 0.3);
+  }
+  .pill-cta-ghost:hover {
+    background: rgba(240, 234, 216, 0.08);
+    border-color: rgba(240, 234, 216, 0.5);
+  }
+  .pill-cta-dark {
+    background: #1a1a1a;
+    color: #f0ead8;
+  }
+  .pill-cta-dark:hover {
+    background: #2d2520;
+  }
+
+  /* Sticky nav with glassmorphism */
+  .nav-blur {
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+  }
+
+  /* Scroll fade-in */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Apple-style chapter rhythm: dark/light alternation */
+  .chapter-dark {
+    background: linear-gradient(180deg, #1a1a1a 0%, #2d2520 100%);
+    color: #f0ead8;
+  }
+  .chapter-light {
+    background: #f5f0e8;
+    color: #1a1a1a;
+  }
+  .chapter-white {
+    background: #ffffff;
+    color: #1a1a1a;
+  }
+
+  /* Product card hover (Apple-style restraint) */
+  .product-card {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Eyebrow label (small caps tracking) */
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Image float for hero */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .hero-product {
+    animation: float 6s ease-in-out infinite;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-cacao/85 border-b border-bone/10">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 h-12 flex items-center justify-between">
+    <a href="#" class="font-display text-xl tracking-apple-tight text-bone">TÄLU</a>
+    <ul class="hidden md:flex items-center gap-8 text-[13px] text-bone/85">
+      <li><a href="#raw" class="hover:text-gold transition">RÄW</a></li>
+      <li><a href="#premium" class="hover:text-gold transition">Premium</a></li>
+      <li><a href="#clear" class="hover:text-gold transition">Clear</a></li>
+      <li><a href="#packs" class="hover:text-gold transition">Packs</a></li>
+      <li><a href="#origen" class="hover:text-gold transition">Origen</a></li>
+      <li><a href="#cocina" class="hover:text-gold transition">Cocina</a></li>
+    </ul>
+    <a href="#shop" class="text-[13px] text-bone/85 hover:text-gold transition">Comprar</a>
+  </div>
+</nav>
+
+
+<!-- ============ HERO — RAW (dark chapter) ============ -->
+<section id="raw" class="chapter-dark pt-24 pb-12 lg:pt-32 lg:pb-20 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-10 lg:mb-16">
+      <p class="eyebrow text-gold mb-5">TÄLU RÄW · Bestseller</p>
+      <h1 class="hero-headline text-5xl sm:text-6xl lg:text-8xl text-bone mb-6">
+        Un solo<br>ingrediente.<br>
+        <span class="italic font-light text-gold-pale">Cero excusas.</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-bone/70 font-light max-w-2xl mx-auto leading-relaxed mb-10">
+        Sebo de res 100% puro. La fórmula más pura que existe.
+        Sin químicos, sin parabenos, sin preservantes artificiales.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="#shop" class="pill-cta pill-cta-primary">Comprar TÄLU RÄW</a>
+        <a href="#origen" class="pill-cta pill-cta-ghost">Conocer más →</a>
+      </div>
+      <p class="text-[13px] text-bone/50 mt-6">Envío gratis sobre $25.000 · 60 días de garantía</p>
+    </div>
+
+    <div class="relative max-w-3xl mx-auto">
+      <img
+        src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/raw_imagen2_optimizada.png?v=1776200576"
+        alt="TÄLU RÄW — frasco de sebo de res puro"
+        class="hero-product w-full h-auto drop-shadow-2xl"
+        loading="eager">
+      <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-cacao to-transparent pointer-events-none"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ CHAPTER BREAK — Sebo de res (light) ============ -->
+<section class="chapter-light py-24 lg:py-32">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
+    <p class="eyebrow text-gold-deep mb-6 reveal">El secreto ancestral</p>
+    <h2 class="hero-headline text-4xl sm:text-5xl lg:text-7xl mb-8 reveal">
+      Sebo de res.<br>
+      <span class="italic font-light text-gold-deep">Lo que tus abuelas conocían.</span>
+    </h2>
+    <p class="text-lg sm:text-xl text-text-warm font-light max-w-2xl mx-auto leading-relaxed reveal">
+      El mismo ingrediente que nutre tu cuerpo por dentro,
+      ahora nutre tu piel por fuera. Sin invenciones de laboratorio.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-20">
+      <div class="reveal">
+        <div class="font-display text-5xl text-gold-deep mb-3">100%</div>
+        <p class="text-sm font-medium tracking-wide uppercase text-text-warm mb-2">Natural</p>
+        <p class="text-[15px] text-text-warm/80 font-light">Cero químicos, cero parabenos, cero preservantes.</p>
+      </div>
+      <div class="reveal">
+        <div class="font-display text-5xl text-gold-deep mb-3">1</div>
+        <p class="text-sm font-medium tracking-wide uppercase text-text-warm mb-2">Ingrediente</p>
+        <p class="text-[15px] text-text-warm/80 font-light">Solo sebo de res. Lo que ves es lo que hay.</p>
+      </div>
+      <div class="reveal">
+        <div class="font-display text-5xl text-gold-deep mb-3">60</div>
+        <p class="text-sm font-medium tracking-wide uppercase text-text-warm mb-2">Días</p>
+        <p class="text-[15px] text-text-warm/80 font-light">Garantía completa. Si no te gusta, devuelves la plata.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ SHOWCASE — Premium (dark) ============ -->
+<section id="premium" class="chapter-dark py-24 lg:py-32 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="order-2 lg:order-1 reveal">
+        <p class="eyebrow text-gold mb-5">TÄLU PREMIUM</p>
+        <h2 class="hero-headline text-4xl sm:text-5xl lg:text-6xl text-bone mb-6">
+          Máximo resultado.<br>
+          <span class="italic font-light text-gold-pale">Sin compromiso.</span>
+        </h2>
+        <p class="text-lg text-bone/70 font-light leading-relaxed mb-8">
+          La fórmula completa. Sebo de res enriquecido con activos
+          que potencian luminosidad, firmeza y reparación celular.
+          Resultado visible en semanas.
+        </p>
+        <ul class="space-y-3 mb-10 text-[15px] text-bone/85">
+          <li class="flex items-start gap-3">
+            <span class="text-gold mt-1">·</span>
+            <span>Anti-envejecimiento profundo</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-gold mt-1">·</span>
+            <span>Luminosidad y elasticidad</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-gold mt-1">·</span>
+            <span>Reduce líneas finas y manchas</span>
+          </li>
+        </ul>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="#shop" class="pill-cta pill-cta-primary">Comprar Premium</a>
+          <a href="#" class="text-gold text-[15px] font-medium hover:text-gold-pale transition">Ver detalles →</a>
+        </div>
+      </div>
+
+      <div class="order-1 lg:order-2 relative reveal">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/premium_imagen3_optimizada.png?v=1776200584"
+          alt="TÄLU PREMIUM — crema antiedad de sebo de res"
+          class="w-full h-auto max-w-md mx-auto drop-shadow-2xl"
+          loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ PRODUCT GRID — Skincare line (light) ============ -->
+<section id="clear" class="chapter-light py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-16 lg:mb-24 reveal">
+      <p class="eyebrow text-gold-deep mb-5">La línea Skincare</p>
+      <h2 class="hero-headline text-4xl sm:text-5xl lg:text-6xl mb-5">
+        Un sistema. <span class="italic font-light text-gold-deep">Tres pieles.</span>
+      </h2>
+      <p class="text-lg text-text-warm max-w-2xl mx-auto font-light">
+        Distintas necesidades, mismo principio: sebo de res como base, lo que tu piel necesita encima.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+      <!-- RÄW -->
+      <a href="https://taluchile.cl/products/talu-raw" class="product-card bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover">
+        <div class="aspect-[4/5] bg-cream overflow-hidden flex items-center justify-center">
+          <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/RAW1111.png?v=1761269784"
+               alt="TÄLU RÄW" class="w-full h-full object-contain p-8" loading="lazy">
+        </div>
+        <div class="p-7">
+          <p class="eyebrow text-gold-deep mb-3">Bestseller</p>
+          <h3 class="font-display text-3xl mb-2">TÄLU RÄW</h3>
+          <p class="text-[15px] text-text-warm mb-5 font-light leading-relaxed">
+            La fórmula más pura. Sebo de res 100%, sin añadidos. Para todo tipo de piel.
+          </p>
+          <div class="flex items-center justify-between">
+            <span class="font-display text-2xl">$14.990</span>
+            <span class="text-gold-deep text-[14px] font-medium">Comprar →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- PREMIUM -->
+      <a href="https://taluchile.cl/products/talu-premium" class="product-card bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover">
+        <div class="aspect-[4/5] bg-cream overflow-hidden flex items-center justify-center">
+          <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/PREMIUM11.png?v=1764100648"
+               alt="TÄLU PREMIUM" class="w-full h-full object-contain p-8" loading="lazy">
+        </div>
+        <div class="p-7">
+          <p class="eyebrow text-gold-deep mb-3">Premium</p>
+          <h3 class="font-display text-3xl mb-2">TÄLU PREMIUM</h3>
+          <p class="text-[15px] text-text-warm mb-5 font-light leading-relaxed">
+            Antiedad y luminosidad. Sebo + activos premium para resultado visible.
+          </p>
+          <div class="flex items-center justify-between">
+            <span class="font-display text-2xl">$24.990</span>
+            <span class="text-gold-deep text-[14px] font-medium">Comprar →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- CLEAR -->
+      <a href="https://taluchile.cl/products/talu-clear" class="product-card bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover">
+        <div class="aspect-[4/5] bg-cream overflow-hidden flex items-center justify-center">
+          <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/image_6b1d8b8b-014d-425b-a8c0-150b73b1b87e.png?v=1772602568"
+               alt="TÄLU CLEAR" class="w-full h-full object-contain p-8" loading="lazy">
+        </div>
+        <div class="p-7">
+          <p class="eyebrow text-gold-deep mb-3">Piel grasa</p>
+          <h3 class="font-display text-3xl mb-2">TÄLU CLEAR</h3>
+          <p class="text-[15px] text-text-warm mb-5 font-light leading-relaxed">
+            Sebo + activos limpiadores. Para piel grasa, acné y poros dilatados.
+          </p>
+          <div class="flex items-center justify-between">
+            <span class="font-display text-2xl">$17.990</span>
+            <span class="text-gold-deep text-[14px] font-medium">Comprar →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="text-center mt-16 reveal">
+      <a href="#packs" class="pill-cta pill-cta-dark">Ver todos los packs y combos</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ ENVIRONMENT STORY — Origen ancestral (dark) ============ -->
+<section id="origen" class="chapter-dark py-24 lg:py-40 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
+    <p class="eyebrow text-gold mb-6 reveal">Origen</p>
+    <h2 class="hero-headline text-4xl sm:text-5xl lg:text-7xl text-bone mb-10 reveal">
+      Hecho en Chile.<br>
+      <span class="italic font-light text-gold-pale">Como siempre debió hacerse.</span>
+    </h2>
+    <p class="text-lg sm:text-xl text-bone/70 font-light max-w-3xl mx-auto leading-relaxed mb-16 reveal">
+      Sebo de res chileno, procesado a mano, sin atajos industriales.
+      La misma técnica que usaban tus abuelas — solo que ahora la guardamos en un frasco bonito.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+      <div class="aspect-[4/3] rounded-3xl overflow-hidden reveal">
+        <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/Rio_cordillera_banner.png?v=1773966306"
+             alt="Cordillera chilena" class="w-full h-full object-cover" loading="lazy">
+      </div>
+      <div class="aspect-[4/3] rounded-3xl overflow-hidden reveal">
+        <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/cocina_premium.png?v=1773966306"
+             alt="Cocina ancestral chilena" class="w-full h-full object-cover" loading="lazy">
+      </div>
+    </div>
+
+    <p class="mt-12 text-[15px] text-bone/55 italic font-display text-2xl reveal">
+      "Lo que nutre tu cuerpo por dentro, nutre tu piel por fuera."
+    </p>
+  </div>
+</section>
+
+
+<!-- ============ COCINA — Línea gastronómica (white) ============ -->
+<section id="cocina" class="chapter-white py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="reveal">
+        <p class="eyebrow text-gold-deep mb-5">Cocina Ancestral</p>
+        <h2 class="hero-headline text-4xl sm:text-5xl lg:text-6xl mb-6">
+          La grasa que tus<br>
+          <span class="italic font-light text-gold-deep">abuelos cocinaban.</span>
+        </h2>
+        <p class="text-lg text-text-warm font-light leading-relaxed mb-8">
+          Tallow puro para tu cocina. Punto de humo alto, sabor profundo,
+          la base de todos los sabores que importan. La misma TÄLU que usas en tu piel,
+          ahora en tu sartén.
+        </p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="#shop" class="pill-cta pill-cta-primary">Ver línea cocina</a>
+          <a href="#" class="text-gold-deep text-[15px] font-medium hover:text-gold transition">Recetas →</a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 reveal">
+        <div class="aspect-square rounded-2xl overflow-hidden bg-cream">
+          <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/grasa_res_principal_optimizada.png?v=1776195357"
+               alt="TALLOW TÄLU Grasa de Res" class="w-full h-full object-contain p-4" loading="lazy">
+        </div>
+        <div class="aspect-square rounded-2xl overflow-hidden bg-cream">
+          <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/Tablaqueso2.png?v=1773966271"
+               alt="TALLOW Ternero TÄLU" class="w-full h-full object-cover" loading="lazy">
+        </div>
+        <div class="aspect-square rounded-2xl overflow-hidden col-span-2">
+          <img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/closeup_superior_banner.png?v=1773966306"
+               alt="Cocina con tallow" class="w-full h-full object-cover" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ TRUST / METRICS (light) ============ -->
+<section class="chapter-light py-24">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <p class="eyebrow text-gold-deep mb-5">Lo dicen ellos, no nosotros</p>
+      <h2 class="hero-headline text-3xl sm:text-4xl lg:text-5xl">
+        <span class="italic font-light">Más de</span> 2.400 clientes<br>
+        ya cambiaron su rutina.
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <blockquote class="bg-white rounded-3xl p-8 shadow-card reveal">
+        <p class="text-gold text-3xl font-display mb-3">"</p>
+        <p class="text-[15px] text-ink leading-relaxed mb-5 font-light">
+          Tenía la piel reactiva, probé mil cremas. Esta fue la única que no me irritó.
+          Y al mes ya se notaba diferencia. Volví a comprar dos veces.
+        </p>
+        <p class="text-[13px] text-text-warm">— Constanza M. · Cliente verificado</p>
+      </blockquote>
+
+      <blockquote class="bg-white rounded-3xl p-8 shadow-card reveal">
+        <p class="text-gold text-3xl font-display mb-3">"</p>
+        <p class="text-[15px] text-ink leading-relaxed mb-5 font-light">
+          Compré por curiosidad. Ahora la uso yo, mi señora, y mis hijos.
+          Es lo más simple que he probado y lo único que les funciona a todos.
+        </p>
+        <p class="text-[13px] text-text-warm">— Felipe S. · Cliente verificado</p>
+      </blockquote>
+
+      <blockquote class="bg-white rounded-3xl p-8 shadow-card reveal">
+        <p class="text-gold text-3xl font-display mb-3">"</p>
+        <p class="text-[15px] text-ink leading-relaxed mb-5 font-light">
+          La textura es densa, eso intimida al principio. Pero rinde una eternidad
+          y la piel queda como nueva. Vale cada peso.
+        </p>
+        <p class="text-[13px] text-text-warm">— Javiera R. · Cliente verificado</p>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ CTA FINAL (dark) ============ -->
+<section id="shop" class="chapter-dark py-24 lg:py-32">
+  <div class="max-w-3xl mx-auto px-6 lg:px-8 text-center">
+    <p class="eyebrow text-gold mb-6 reveal">Garantía 60 días</p>
+    <h2 class="hero-headline text-4xl sm:text-5xl lg:text-6xl text-bone mb-6 reveal">
+      Pruébalo. <span class="italic font-light text-gold-pale">Sin riesgo.</span>
+    </h2>
+    <p class="text-lg text-bone/70 font-light mb-10 leading-relaxed reveal">
+      Si en 60 días no notas la diferencia, te devolvemos cada peso.
+      Sin preguntas, sin formularios molestos.
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-4 reveal">
+      <a href="https://taluchile.cl" class="pill-cta pill-cta-primary">Empezar ahora</a>
+      <a href="#origen" class="pill-cta pill-cta-ghost">Conocer la marca</a>
+    </div>
+    <p class="text-[13px] text-bone/45 mt-8">Envío en todo Chile · Despacho 24-48h en Santiago</p>
+  </div>
+</section>
+
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-cacao text-bone/70 py-16 border-t border-bone/10">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-12 mb-12">
+      <div>
+        <p class="font-display text-2xl text-bone mb-3">TÄLU</p>
+        <p class="text-[13px] text-bone/55 leading-relaxed">
+          Skincare & gastronomía ancestral. Sebo de res 100% natural, hecho en Chile.
+        </p>
+      </div>
+      <div>
+        <p class="text-[13px] text-bone uppercase tracking-wider mb-4">Skincare</p>
+        <ul class="space-y-2 text-[14px]">
+          <li><a href="#" class="hover:text-gold transition">TÄLU RÄW</a></li>
+          <li><a href="#" class="hover:text-gold transition">TÄLU PREMIUM</a></li>
+          <li><a href="#" class="hover:text-gold transition">TÄLU CLEAR</a></li>
+          <li><a href="#" class="hover:text-gold transition">Pack Rutina</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-[13px] text-bone uppercase tracking-wider mb-4">Cocina</p>
+        <ul class="space-y-2 text-[14px]">
+          <li><a href="#" class="hover:text-gold transition">TALLOW Res</a></li>
+          <li><a href="#" class="hover:text-gold transition">TALLOW Ternero</a></li>
+          <li><a href="#" class="hover:text-gold transition">Pack Cocina</a></li>
+          <li><a href="#" class="hover:text-gold transition">Recetario</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-[13px] text-bone uppercase tracking-wider mb-4">Marca</p>
+        <ul class="space-y-2 text-[14px]">
+          <li><a href="#" class="hover:text-gold transition">Origen</a></li>
+          <li><a href="#" class="hover:text-gold transition">Blog Ancestral</a></li>
+          <li><a href="#" class="hover:text-gold transition">Contacto</a></li>
+          <li><a href="#" class="hover:text-gold transition">@talu.cl</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pt-8 border-t border-bone/10 flex flex-wrap items-center justify-between gap-4 text-[12px] text-bone/45">
+      <p>© 2026 TÄLU Chile · contacto@taluchile.cl</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-gold transition">Términos</a>
+        <a href="#" class="hover:text-gold transition">Privacidad</a>
+        <a href="#" class="hover:text-gold transition">Envíos</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // Reveal-on-scroll (Apple-style fade up)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

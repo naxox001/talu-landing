@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contacto · TÄLU Chile</title>
+<meta name="description" content="Contacta TÄLU Chile · contacto@taluchile.cl. Te respondemos en menos de 24 horas hábiles." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/cocina-base.css">
+<style>
+  /* Hero contacto compacto */
+  .hero-contact{
+    min-height: 100vh;
+    padding: 130px 40px 100px;
+    display: grid; place-items: center;
+    text-align: center;
+    position: relative;
+  }
+  .hero-contact::before{
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 50%, rgba(224,144,64,.10), transparent 70%);
+    pointer-events: none;
+  }
+  .contact-wrap{
+    max-width: 720px;
+    position: relative;
+    width: 100%;
+  }
+  .contact-eyebrow{
+    font-size: 11px; letter-spacing: .32em; text-transform: uppercase;
+    color: var(--c-gold); font-weight: 500;
+    display: inline-flex; gap: 14px; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+  }
+  .contact-eyebrow::before, .contact-eyebrow::after{
+    content: ""; width: 30px; height: 1px; background: var(--c-gold);
+  }
+  .contact-wrap h1{
+    font-size: clamp(48px, 7vw, 100px);
+    color: var(--c-ivory);
+    line-height: .98;
+    letter-spacing: -.02em;
+    margin-bottom: 22px;
+  }
+  .contact-wrap h1 em{
+    display: block; font-style: italic;
+    color: var(--c-gold-bright); font-weight: 400;
+  }
+  .contact-lead{
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(20px, 1.8vw, 26px);
+    color: var(--c-ivory-soft);
+    max-width: 600px;
+    margin: 0 auto 50px;
+    line-height: 1.55;
+  }
+
+  /* Email card grande con copy */
+  .email-card{
+    padding: 48px 44px;
+    border-radius: 24px;
+    background:
+      radial-gradient(ellipse 100% 60% at 50% 0%, rgba(244,190,114,.16), transparent 70%),
+      linear-gradient(180deg, rgba(40,28,20,.7), rgba(14,10,6,.95));
+    border: 1px solid rgba(224,144,64,.4);
+    box-shadow:
+      0 60px 100px -40px rgba(0,0,0,.85),
+      0 30px 50px -20px rgba(168,106,42,.3),
+      inset 0 1px 0 rgba(244,190,114,.2);
+    position: relative;
+    margin-bottom: 32px;
+  }
+  .email-card::before{
+    content: ""; position: absolute; top: -2px; left: 50%; transform: translateX(-50%);
+    width: 140px; height: 4px;
+    background: linear-gradient(90deg, transparent, var(--c-gold-bright), transparent);
+    border-radius: 0 0 4px 4px;
+  }
+  .email-icon{
+    width: 80px; height: 80px;
+    margin: 0 auto 22px;
+    display: grid; place-items: center;
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(244,190,114,.18), rgba(168,106,42,.06));
+    border: 1px solid rgba(244,190,114,.4);
+    color: var(--c-gold-bright);
+  }
+  .email-card .email-label{
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--c-gold); font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .email-card .email-addr{
+    font-family: var(--serif); font-size: clamp(28px, 4vw, 42px);
+    color: var(--c-ivory); font-weight: 500;
+    word-break: break-all;
+    margin-bottom: 32px;
+    transition: color .3s ease;
+    display: inline-block;
+  }
+  .email-card .email-addr:hover{
+    color: var(--c-gold-bright);
+    background: linear-gradient(135deg, #ffd28a 0%, #f4be72 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .email-card .response-time{
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: rgba(46,139,87,.14);
+    border: 1px solid rgba(46,139,87,.4);
+    font-size: 12px; letter-spacing: .14em;
+    color: #c8e6c9;
+  }
+  .response-time .dot{
+    width: 8px; height: 8px; border-radius: 999px;
+    background: #4caf81;
+    box-shadow: 0 0 10px rgba(76,175,129,.7);
+    animation: pulse-d 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse-d{ 0%,100%{opacity:1} 50%{opacity:.4} }
+
+  /* Quick FAQ inline */
+  .quick-faq{
+    margin-top: 44px;
+    text-align: left;
+    padding: 38px 36px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgba(40,28,20,.5), rgba(20,17,14,.8));
+    border: 1px solid rgba(224,144,64,.2);
+  }
+  .quick-faq h3{
+    font-family: var(--serif); font-size: 22px;
+    color: var(--c-ivory); font-weight: 500;
+    margin-bottom: 18px; text-align: center;
+  }
+  .qf-item{
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(224,144,64,.12);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .qf-item:last-child{ border-bottom: none; }
+  .qf-q{
+    font-size: 14px; font-weight: 500;
+    color: var(--c-ivory);
+  }
+  .qf-a{
+    font-size: 13px;
+    color: var(--c-ivory-soft);
+    line-height: 1.55;
+  }
+  .qf-a strong{ color: var(--c-gold-bright); }
+  .qf-a a{ color: var(--c-gold-bright); }
+  .qf-a a:hover{ text-decoration: underline; }
+
+  /* Method cards (alternativos) */
+  .methods{
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 30px;
+  }
+  .method{
+    padding: 22px 20px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(40,28,20,.4), rgba(20,17,14,.7));
+    border: 1px solid rgba(224,144,64,.18);
+    text-align: left;
+    transition: transform .4s ease, border-color .4s ease;
+  }
+  .method:hover{ transform: translateY(-3px); border-color: rgba(224,144,64,.4); }
+  .method .m-label{
+    font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--c-gold); margin-bottom: 8px;
+  }
+  .method .m-value{
+    font-family: var(--serif); font-size: 18px; font-weight: 500;
+    color: var(--c-ivory);
+    word-break: break-all;
+  }
+  .method .m-meta{
+    font-size: 11px; color: var(--c-ivory-mute);
+    margin-top: 4px;
+  }
+
+  @media (max-width: 700px){
+    .methods{ grid-template-columns: 1fr; }
+    .email-card{ padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<nav class="nav">
+  <a href="index.html" class="logo"><span class="dot"></span>TÄLU</a>
+  <div class="nav-links">
+    <a href="index.html#cocina">Cocina</a>
+    <a href="index.html#skincare">Skincare</a>
+    <a href="index.html#packs">Packs</a>
+    <a href="contacto.html">Contacto</a>
+  </div>
+  <a href="index.html" class="nav-cart" aria-label="Inicio">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1.4 9.5a2 2 0 0 1-2 1.7H8.4a2 2 0 0 1-2-1.7L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+  </a>
+</nav>
+
+<section class="hero-contact">
+  <div class="contact-wrap">
+    <span class="contact-eyebrow">Contacto · TÄLU</span>
+    <h1>
+      Hablemos
+      <em>cuando quieras</em>
+    </h1>
+    <p class="contact-lead">
+      Cualquier duda — sobre productos, pedidos, devoluciones, ingredientes —
+      respondemos rápido y como humanos. No tenemos formularios largos.
+    </p>
+
+    <a href="mailto:contacto@taluchile.cl?subject=Consulta%20TÄLU" class="email-card" style="display:block;text-decoration:none;color:inherit;">
+      <div class="email-icon">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="5" y="9" width="30" height="22" rx="2"/>
+          <path d="M5 12l15 11 15-11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="email-label">Escribinos a</div>
+      <div class="email-addr">contacto@taluchile.cl</div>
+      <div class="response-time">
+        <span class="dot"></span>
+        Respondemos en menos de 24 horas hábiles
+      </div>
+    </a>
+
+    <div class="methods">
+      <div class="method">
+        <div class="m-label">📦 Envíos y pedidos</div>
+        <div class="m-value">contacto@taluchile.cl</div>
+        <div class="m-meta">Despacho HOY si pides antes de 16:00</div>
+      </div>
+      <div class="method">
+        <div class="m-label">💼 B2B / mayorista</div>
+        <div class="m-value">contacto@taluchile.cl</div>
+        <div class="m-meta">Asunto: B2B</div>
+      </div>
+    </div>
+
+    <div class="quick-faq">
+      <h3>Lo que más nos preguntan</h3>
+
+      <div class="qf-item">
+        <div class="qf-q">¿Cómo hago seguimiento de mi pedido?</div>
+        <div class="qf-a">El número de seguimiento llega por email cuando se despacha el pedido. Si no lo recibiste, escribinos con tu número de orden Shopify.</div>
+      </div>
+
+      <div class="qf-item">
+        <div class="qf-q">¿Hago una devolución?</div>
+        <div class="qf-a">Tenés <strong>60 días</strong> de garantía. Escribinos a <a href="mailto:contacto@taluchile.cl">contacto@taluchile.cl</a> con asunto "Devolución" y tu número de orden — coordinamos.</div>
+      </div>
+
+      <div class="qf-item">
+        <div class="qf-q">¿La crema sirve para mi piel?</div>
+        <div class="qf-a">Probablemente sí — el sebo de ternero TÄLU es biocompatible con cualquier tipo de piel. Si tenés condición específica (rosácea severa, alergia a animales), escribinos antes de comprar.</div>
+      </div>
+
+      <div class="qf-item">
+        <div class="qf-q">¿Tienen tienda física?</div>
+        <div class="qf-a">No. TÄLU es 100% online — despachamos a todo Chile. Esto nos permite mantener precios bajos y enviar producto siempre fresco.</div>
+      </div>
+
+      <div class="qf-item">
+        <div class="qf-q">¿Hacen envío internacional?</div>
+        <div class="qf-a">Por ahora <strong>solo Chile continental</strong>. Si estás en el extranjero y querés TÄLU, escribinos — coordinamos casos puntuales.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="top">TÄLU</div>
+  <div class="links">
+    <a href="index.html">Inicio</a>
+    <a href="index.html#cocina">Cocina</a>
+    <a href="index.html#skincare">Skincare</a>
+    <a href="contacto.html">Contacto</a>
+  </div>
+  <div>© TÄLU Chile · contacto@taluchile.cl</div>
+</footer>
+
+<script>
+  const pc = document.getElementById('particles');
+  for(let i=0;i<24;i++){
+    const p = document.createElement('span');
+    p.className = 'particle';
+    p.style.left = (Math.random()*100) + '%';
+    p.style.animationDelay = (Math.random()*14) + 's';
+    p.style.animationDuration = (10 + Math.random()*10) + 's';
+    pc.appendChild(p);
+  }
+</script>
+
+</body>
+</html>

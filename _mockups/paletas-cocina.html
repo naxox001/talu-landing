@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TÄLU · Paleta Cocina — Brasa &amp; Hueso (original vs premium)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Inter",system-ui,sans-serif;
+    background:#0a0503;
+    color:#f0e6d2;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    min-height:100vh;
+    gap:0;
+  }
+  .col{
+    padding:48px 36px;
+    position:relative;
+    overflow:hidden;
+    min-height:100vh;
+    display:flex; flex-direction:column;
+  }
+  .col-inner{flex:1}
+  .col + .col{border-left:1px solid rgba(232,207,148,.18)}
+  .col > *{position:relative; z-index:1}
+
+  /* ========= A ORIGINAL — BRASA & HUESO (versión 1) ========= */
+  .col-a-orig{
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(217,122,60,.10), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(217,122,60,.06), transparent 70%),
+      #1a0e08;
+    color:#e8dcc4;
+  }
+  .col-a-orig .accent{color:#d97a3c}
+  .col-a-orig .accent-bright{color:#f4a05f}
+
+  /* ========= A PREMIUM — BRASA & HUESO (más profundo + acentos al oro) ========= */
+  .col-a-prem{
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(244,190,114,.12), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(224,144,64,.08), transparent 70%),
+      #0a0503;
+    color:#e8dcc4;
+  }
+  .col-a-prem .accent{color:#e09040}
+  .col-a-prem .accent-bright{color:#f4be72}
+  .col-a-prem .badge-pick{
+    position:absolute; top:14px; right:14px;
+    padding:5px 12px; font-size:9px; letter-spacing:.18em; text-transform:uppercase;
+    background:rgba(244,190,114,.15); border:1px solid rgba(244,190,114,.5);
+    color:#f4be72; border-radius:999px; z-index:2;
+    font-weight:500;
+  }
+
+  h1.palette-name{
+    font-family:"Cormorant Garamond",serif;
+    font-weight:500;
+    font-size:46px;
+    line-height:1;
+    letter-spacing:-.02em;
+    margin-bottom:8px;
+  }
+  .palette-tag{
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    margin-bottom:6px;
+    opacity:.65;
+  }
+  .palette-sub{
+    font-size:13px; opacity:.7; margin-bottom:28px;
+    font-style:italic; font-family:Cormorant Garamond,serif;
+  }
+
+  /* swatches */
+  .swatches{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+    margin-bottom:36px;
+  }
+  .swatch{
+    padding:14px 16px;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,.06);
+    display:flex; flex-direction:column; gap:4px;
+    font-size:11px;
+  }
+  .swatch .hex{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.04em;opacity:.7}
+  .swatch .name{font-size:12px;font-weight:500}
+  .swatch.changed{
+    position:relative;
+    box-shadow:0 0 0 2px rgba(244,190,114,.5);
+  }
+  .swatch.changed::after{
+    content:"NUEVO"; position:absolute; top:-7px; right:8px;
+    background:#f4be72; color:#0a0503;
+    font-size:8px; letter-spacing:.15em; font-weight:600;
+    padding:2px 6px; border-radius:3px;
+  }
+
+  /* Hero mock */
+  .hero-mock{
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    padding:32px 28px;
+    margin-bottom:28px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-mock::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(ellipse at top right, rgba(255,255,255,.03), transparent 60%);
+    pointer-events:none;
+  }
+  .pill{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:6px 14px;
+    border-radius:999px;
+    font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+    border:1px solid currentColor;
+    margin-bottom:14px;
+  }
+  .pill .dot{
+    width:5px; height:5px; border-radius:50%;
+    background:currentColor;
+    box-shadow:0 0 8px currentColor;
+  }
+  .hero-title{
+    font-family:"Cormorant Garamond",serif;
+    font-weight:400;
+    font-size:38px;
+    line-height:1.05;
+    letter-spacing:-.015em;
+    margin-bottom:10px;
+  }
+  .hero-title em{font-style:italic;font-weight:500}
+  .hero-sub{font-size:13px;line-height:1.55;opacity:.75;margin-bottom:18px}
+
+  .icons-row{
+    display:flex; gap:18px; align-items:center;
+    margin-top:18px;
+    padding-top:18px;
+    border-top:1px solid rgba(255,255,255,.07);
+  }
+  .icon-box{
+    flex:1;
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    text-align:center;
+  }
+  .icon-box svg{width:42px;height:42px}
+  .icon-label{font-size:9px;letter-spacing:.15em;text-transform:uppercase;opacity:.6}
+
+  .price-row{
+    display:flex; align-items:baseline; gap:14px;
+    margin-top:18px;
+    padding-top:14px;
+    border-top:1px solid rgba(255,255,255,.07);
+  }
+  .price-now{
+    font-family:"Cormorant Garamond",serif;
+    font-size:34px;
+    font-weight:500;
+  }
+  .price-was{
+    font-size:13px;
+    text-decoration:line-through;
+    opacity:.4;
+  }
+  .save-badge{
+    margin-left:auto;
+    padding:5px 11px;
+    border-radius:4px;
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-weight:500;
+  }
+
+  .note{
+    margin-top:auto;
+    padding-top:24px;
+    font-size:11px;
+    letter-spacing:.04em;
+    opacity:.65;
+    line-height:1.55;
+    border-top:1px solid rgba(255,255,255,.06);
+  }
+  .note strong{color:#f4be72; font-weight:500}
+
+  /* Mobile */
+  @media (max-width: 1000px){
+    .wrap{grid-template-columns:1fr}
+    .col + .col{border-left:none; border-top:1px solid rgba(232,207,148,.18)}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ============================ A ORIGINAL ============================ -->
+  <div class="col col-a-orig">
+    <div class="col-inner">
+      <div class="palette-tag">Versión · 1 (original)</div>
+      <h1 class="palette-name">Brasa &amp; Hueso</h1>
+      <p class="palette-sub">marrón cálido, ámbar naranja</p>
+
+      <div class="swatches">
+        <div class="swatch" style="background:#1a0e08;color:#e8dcc4;border-color:rgba(232,220,196,.15)">
+          <div class="name">Marrón profundo</div>
+          <div class="hex">#1a0e08</div>
+        </div>
+        <div class="swatch" style="background:#2b1a10;color:#e8dcc4;border-color:rgba(232,220,196,.12)">
+          <div class="name">Marrón tostado</div>
+          <div class="hex">#2b1a10</div>
+        </div>
+        <div class="swatch" style="background:#d97a3c;color:#1a0e08;border-color:transparent">
+          <div class="name">Ámbar fuego</div>
+          <div class="hex">#d97a3c</div>
+        </div>
+        <div class="swatch" style="background:#f4a05f;color:#1a0e08;border-color:transparent">
+          <div class="name">Brasa viva</div>
+          <div class="hex">#f4a05f</div>
+        </div>
+        <div class="swatch" style="background:#e8dcc4;color:#1a0e08;border-color:transparent">
+          <div class="name">Crema hueso</div>
+          <div class="hex">#e8dcc4</div>
+        </div>
+        <div class="swatch" style="background:#9b8568;color:#1a0e08;border-color:transparent">
+          <div class="name">Hueso muted</div>
+          <div class="hex">#9b8568</div>
+        </div>
+      </div>
+
+      <div class="hero-mock">
+        <div class="pill accent"><span class="dot"></span>Cocina ancestral</div>
+        <h2 class="hero-title">
+          Sebo de res<br>
+          <em class="accent-bright">grass-fed</em> chileno
+        </h2>
+        <p class="hero-sub">
+          La grasa noble que las abuelas usaban antes del aceite vegetal.
+          Punto de humo alto, sabor profundo, biocompatible.
+        </p>
+
+        <div class="icons-row">
+          <div class="icon-box">
+            <svg viewBox="0 0 40 40" fill="none">
+              <path d="M20 4c-3 5-8 8-8 14a8 8 0 0016 0c0-6-5-9-8-14z" stroke="currentColor" stroke-width="1.5" fill="rgba(217,122,60,.12)"/>
+              <path d="M20 16c-1.5 2-3 4-3 7a3 3 0 006 0c0-3-1.5-5-3-7z" fill="currentColor" opacity=".7"/>
+            </svg>
+            <div class="icon-label">Fuego</div>
+          </div>
+          <div class="icon-box">
+            <svg viewBox="0 0 40 40" fill="none">
+              <path d="M8 20c0-6 5-12 12-12s12 6 12 12-5 12-12 12" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="20" cy="20" r="4" fill="currentColor" opacity=".7"/>
+              <path d="M20 8v24" stroke="currentColor" stroke-width="1" opacity=".4"/>
+            </svg>
+            <div class="icon-label">Sartén</div>
+          </div>
+          <div class="icon-box">
+            <svg viewBox="0 0 40 40" fill="none">
+              <rect x="8" y="14" width="24" height="14" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 14V8M28 14V8" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M14 21h12M14 24h8" stroke="currentColor" stroke-width="1" opacity=".5"/>
+            </svg>
+            <div class="icon-label">Tabla</div>
+          </div>
+        </div>
+
+        <div class="price-row">
+          <span class="price-now accent-bright">$10.990</span>
+          <span class="price-was">$13.990</span>
+          <span class="save-badge" style="background:#d97a3c;color:#1a0e08">Ahorra 21%</span>
+        </div>
+      </div>
+
+      <div class="note">Versión inicial. Cálida pero el ámbar tiraba al naranja, sentía menos premium.</div>
+    </div>
+  </div>
+
+  <!-- ============================ A PREMIUM ============================ -->
+  <div class="col col-a-prem">
+    <span class="badge-pick">★ Premium</span>
+    <div class="col-inner">
+      <div class="palette-tag">Versión · 2 (premium)</div>
+      <h1 class="palette-name">Brasa &amp; Hueso</h1>
+      <p class="palette-sub">carbón cálido, oro brasa</p>
+
+      <div class="swatches">
+        <div class="swatch changed" style="background:#0a0503;color:#e8dcc4;border-color:rgba(232,220,196,.15)">
+          <div class="name">Marrón profundo</div>
+          <div class="hex">#0a0503</div>
+        </div>
+        <div class="swatch changed" style="background:#170c06;color:#e8dcc4;border-color:rgba(232,220,196,.12)">
+          <div class="name">Marrón tostado</div>
+          <div class="hex">#170c06</div>
+        </div>
+        <div class="swatch changed" style="background:#e09040;color:#0a0503;border-color:transparent">
+          <div class="name">Ámbar oro</div>
+          <div class="hex">#e09040</div>
+        </div>
+        <div class="swatch changed" style="background:#f4be72;color:#0a0503;border-color:transparent">
+          <div class="name">Brasa oro</div>
+          <div class="hex">#f4be72</div>
+        </div>
+        <div class="swatch" style="background:#e8dcc4;color:#0a0503;border-color:transparent">
+          <div class="name">Crema hueso</div>
+          <div class="hex">#e8dcc4</div>
+        </div>
+        <div class="swatch" style="background:#9b8568;color:#0a0503;border-color:transparent">
+          <div class="name">Hueso muted</div>
+          <div class="hex">#9b8568</div>
+        </div>
+      </div>
+
+      <div class="hero-mock">
+        <div class="pill accent"><span class="dot"></span>Cocina ancestral</div>
+        <h2 class="hero-title">
+          Sebo de res<br>
+          <em class="accent-bright">grass-fed</em> chileno
+        </h2>
+        <p class="hero-sub">
+          La grasa noble que las abuelas usaban antes del aceite vegetal.
+          Punto de humo alto, sabor profundo, biocompatible.
+        </p>
+
+        <div class="icons-row">
+          <div class="icon-box">
+            <svg viewBox="0 0 40 40" fill="none">
+              <path d="M20 4c-3 5-8 8-8 14a8 8 0 0016 0c0-6-5-9-8-14z" stroke="currentColor" stroke-width="1.5" fill="rgba(244,190,114,.14)"/>
+              <path d="M20 16c-1.5 2-3 4-3 7a3 3 0 006 0c0-3-1.5-5-3-7z" fill="currentColor" opacity=".75"/>
+            </svg>
+            <div class="icon-label">Fuego</div>
+          </div>
+          <div class="icon-box">
+            <svg viewBox="0 0 40 40" fill="none">
+              <path d="M8 20c0-6 5-12 12-12s12 6 12 12-5 12-12 12" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="20" cy="20" r="4" fill="currentColor" opacity=".75"/>
+              <path d="M20 8v24" stroke="currentColor" stroke-width="1" opacity=".4"/>
+            </svg>
+            <div class="icon-label">Sartén</div>
+          </div>
+          <div class="icon-box">
+            <svg viewBox="0 0 40 40" fill="none">
+              <rect x="8" y="14" width="24" height="14" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 14V8M28 14V8" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M14 21h12M14 24h8" stroke="currentColor" stroke-width="1" opacity=".5"/>
+            </svg>
+            <div class="icon-label">Tabla</div>
+          </div>
+        </div>
+
+        <div class="price-row">
+          <span class="price-now accent-bright">$10.990</span>
+          <span class="price-was">$13.990</span>
+          <span class="save-badge" style="background:#e09040;color:#0a0503">Ahorra 21%</span>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>Cambios:</strong> fondo casi negro carbón cálido (#0a0503), acentos virados al oro brasa (#e09040 / #f4be72).
+        Más profundo y premium, sin perder el calor de cocina.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

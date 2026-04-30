@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pack Familia TÄLU · Skincare + Gastronomía Completa | Chile</title>
+<meta name="description" content="Pack Familia TÄLU — 3 cremas (RÄW + CLEAR + PREMIUM) + 2 grasas (TALLOW Res + TALLOW Ternero). La piel y la cocina ancestral en un solo regalo. Ahorra 30%. $68.990 (compare $97.850)." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* skincare warm */
+    --w-base:        #f4efe8;
+    --w-soft:        #ece5db;
+    --w-ink:         #2a2420;
+    --w-ink-soft:    #5b524a;
+    --w-ink-mute:    #8a8076;
+
+    /* cocina dark V2 */
+    --c-deep:        #0a0503;
+    --c-base:        #14110e;
+    --c-soft:        #1c1814;
+    --c-ivory:       #f0e6d2;
+    --c-ivory-soft:  #b8ad98;
+    --c-ivory-mute:  #7d7363;
+
+    /* oro compartido */
+    --gold:          #c9a35d;
+    --gold-bright:   #e8cf94;
+    --gold-deep:     #8a6a32;
+    --gold-amber:    #e09040;
+    --gold-amber-bright: #f4be72;
+
+    --serif: "Cormorant Garamond", "Times New Roman", serif;
+    --sans:  "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+    --maxw: 1240px;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    background: #1c1814;
+    color: var(--c-ivory);
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  button{ font-family: inherit; cursor:pointer; border:none; background:none; }
+  h1,h2,h3,h4{ font-family: var(--serif); font-weight: 400; letter-spacing: -.015em; line-height: 1.05; }
+  em{ font-style: italic; }
+
+  /* ============================================================
+     HERO DUAL · split vertical 50/50 con sello central dorado
+     ============================================================ */
+  .nav{
+    position: fixed; top:0; left:0; right:0; z-index: 100;
+    padding: 16px 40px;
+    display:flex; align-items:center; justify-content:space-between;
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    background: linear-gradient(90deg, rgba(244,239,232,.78) 0%, rgba(244,239,232,.78) 50%, rgba(10,5,3,.78) 50%, rgba(10,5,3,.78) 100%);
+    border-bottom: 1px solid rgba(201,163,93,.3);
+  }
+  .logo{ font-family: var(--serif); font-weight: 500; font-size: 26px; letter-spacing: .12em; display:flex; align-items:center; gap: 10px; mix-blend-mode: difference; color: #fff; }
+  .logo .dot{ width:7px; height:7px; border-radius:50%; background: var(--gold); box-shadow: 0 0 12px rgba(201,163,93,.7); }
+  .nav-links{ display:flex; gap: 30px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; mix-blend-mode: difference; color: #fff; }
+  .nav-links a:hover{ color: var(--gold); }
+  .nav-cart{
+    width: 46px; height: 46px; border-radius: 999px;
+    background: linear-gradient(135deg, #f5dea0 0%, #e7c179 45%, #c9a35d 100%);
+    color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    box-shadow: 0 12px 26px -10px rgba(166,130,61,.55);
+    border: 1px solid rgba(255,255,255,.4);
+  }
+
+  /* DUAL HERO */
+  .hero-dual{
+    min-height: 100vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+
+  .half{
+    padding: 130px 60px 80px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative;
+  }
+
+  .half-skincare{
+    background:
+      radial-gradient(ellipse 70% 45% at 30% 30%, rgba(255,255,255,.85), transparent 65%),
+      radial-gradient(ellipse 60% 40% at 80% 70%, rgba(245,222,160,.4), transparent 70%),
+      var(--w-base);
+    color: var(--w-ink);
+  }
+  .half-skincare::after{
+    content: ""; position: absolute; right: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(201,163,93,.5), transparent);
+  }
+
+  .half-cocina{
+    background:
+      radial-gradient(ellipse 70% 45% at 30% 30%, rgba(244,190,114,.18), transparent 65%),
+      radial-gradient(ellipse 60% 40% at 80% 70%, rgba(168,106,42,.12), transparent 70%),
+      var(--c-deep);
+    color: var(--c-ivory);
+  }
+
+  /* SELLO TÄLU CENTRAL FLOTANTE */
+  .seal-center{
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px; height: 180px;
+    z-index: 5;
+    pointer-events: none;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,.5)) drop-shadow(0 0 50px rgba(232,207,148,.4));
+    animation: seal-pulse 4s ease-in-out infinite;
+  }
+  @keyframes seal-pulse{
+    0%, 100%{ transform: translate(-50%, -50%) scale(1); }
+    50%     { transform: translate(-50%, -50%) scale(1.04); }
+  }
+
+  .half-eyebrow{
+    font-size: 11px; letter-spacing: .32em; text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+  .half-skincare .half-eyebrow{ color: var(--gold-deep); }
+  .half-cocina .half-eyebrow{ color: var(--gold-amber-bright); }
+
+  .half h1{
+    font-size: clamp(40px, 4.5vw, 64px);
+    line-height: .98;
+    letter-spacing: -.02em;
+    margin-bottom: 18px;
+  }
+  .half-skincare h1{ color: var(--w-ink); }
+  .half-cocina h1{ color: var(--c-ivory); }
+  .half h1 em{
+    display: block;
+  }
+  .half-skincare h1 em{ color: var(--gold-deep); font-weight: 500; }
+  .half-cocina h1 em{ color: var(--gold-amber-bright); font-weight: 500; }
+
+  .half-lead{
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(16px, 1.5vw, 20px);
+    line-height: 1.55;
+    margin-bottom: 24px;
+    max-width: 380px;
+  }
+  .half-skincare .half-lead{ color: var(--w-ink-soft); }
+  .half-cocina .half-lead{ color: var(--c-ivory-soft); }
+
+  .half-list{ list-style: none; }
+  .half-list li{
+    padding: 10px 0;
+    font-size: 14px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid;
+  }
+  .half-skincare .half-list li{ border-color: rgba(201,163,93,.18); }
+  .half-cocina .half-list li{ border-color: rgba(224,144,64,.18); color: var(--c-ivory); }
+  .half-list li::before{
+    content: "✦";
+    flex-shrink: 0;
+  }
+  .half-skincare .half-list li::before{ color: var(--gold); }
+  .half-cocina .half-list li::before{ color: var(--gold-amber-bright); }
+
+  /* ============================================================
+     UNIDOS · sección que une skincare + cocina con CTA central
+     ============================================================ */
+  .unidos{
+    padding: 130px 40px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--c-soft) 0%, var(--c-deep) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .unidos::before{
+    content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .unidos .eyebrow{
+    font-size: 11px; letter-spacing: .32em; text-transform: uppercase;
+    color: var(--gold-bright); font-weight: 500;
+    display: inline-flex; gap: 14px; align-items: center; justify-content: center;
+    margin-bottom: 22px;
+  }
+  .unidos .eyebrow::before, .unidos .eyebrow::after{
+    content: ""; width: 30px; height: 1px; background: var(--gold);
+  }
+  .unidos h2{
+    font-size: clamp(38px, 5vw, 64px);
+    color: var(--c-ivory);
+    margin-bottom: 26px;
+    max-width: 760px; margin-left: auto; margin-right: auto;
+  }
+  .unidos .copy{
+    max-width: 720px; margin: 0 auto 40px;
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(20px, 2vw, 28px);
+    line-height: 1.55;
+    color: var(--c-ivory-soft);
+  }
+  .unidos .copy strong{
+    color: var(--gold-bright); font-style: normal; font-weight: 500;
+  }
+  .save-ribbon-big{
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #f5dea0 0%, #c9a35d 100%);
+    color: #1a1410;
+    border-radius: 999px;
+    font-size: 14px; letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 600;
+    box-shadow: 0 14px 34px -10px rgba(166,130,61,.6);
+  }
+
+  /* ============================================================
+     INCLUYE · grid mixto 5 productos
+     ============================================================ */
+  .includes-block{ padding: 130px 40px; background: var(--c-deep); }
+  .ib-row{
+    max-width: 1180px; margin: 0 auto;
+  }
+  .ib-row + .ib-row{ margin-top: 56px; }
+  .ib-row-eyebrow{
+    text-align: center;
+    font-size: 11px; letter-spacing: .32em; text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-bottom: 12px;
+  }
+  .ib-row-title{
+    text-align: center;
+    font-family: var(--serif); font-size: clamp(28px, 3.5vw, 42px);
+    color: var(--c-ivory);
+    margin-bottom: 32px;
+  }
+  .ib-grid-skincare{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .ib-grid-cocina{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 820px; margin: 0 auto; }
+
+  .ib-card{
+    padding: 24px 22px;
+    border-radius: 18px;
+    transition: transform .5s cubic-bezier(.2,.7,.3,1), border-color .5s ease, box-shadow .5s ease;
+    color: inherit; text-decoration: none; display: block;
+  }
+  .ib-card:hover{ transform: translateY(-5px); }
+  .ib-card .img-wrap{
+    aspect-ratio: 1/1;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .ib-card .img-wrap img{ width: 100%; height: 100%; object-fit: cover; }
+  .ib-card h4{
+    font-family: var(--serif); font-size: 22px; font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .ib-card .role{
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .ib-card p{ font-size: 13px; line-height: 1.55; }
+  .ib-card .price{
+    margin-top: 10px;
+    font-size: 12px; letter-spacing: .14em;
+  }
+
+  /* skincare cards (warm) */
+  .ib-card.is-skincare{
+    background: linear-gradient(180deg, #fff 0%, #f9f3ea 100%);
+    border: 1px solid rgba(201,163,93,.22);
+    color: var(--w-ink);
+  }
+  .ib-card.is-skincare:hover{
+    border-color: rgba(201,163,93,.5);
+    box-shadow: 0 32px 60px -28px rgba(166,130,61,.4);
+  }
+  .ib-card.is-skincare h4{ color: var(--w-ink); }
+  .ib-card.is-skincare .role{ color: var(--gold-deep); }
+  .ib-card.is-skincare p{ color: var(--w-ink-soft); }
+  .ib-card.is-skincare .price{ color: var(--w-ink-mute); }
+  .ib-card.is-skincare .price strong{ color: var(--gold-deep); }
+
+  /* cocina cards (dark) */
+  .ib-card.is-cocina{
+    background: linear-gradient(180deg, rgba(40,28,20,.55) 0%, rgba(20,17,14,.85) 100%);
+    border: 1px solid rgba(224,144,64,.22);
+    color: var(--c-ivory);
+  }
+  .ib-card.is-cocina:hover{
+    border-color: rgba(224,144,64,.5);
+    box-shadow: 0 32px 60px -28px rgba(0,0,0,.85);
+  }
+  .ib-card.is-cocina h4{ color: var(--c-ivory); }
+  .ib-card.is-cocina .role{ color: var(--gold-amber-bright); }
+  .ib-card.is-cocina p{ color: var(--c-ivory-soft); }
+  .ib-card.is-cocina .price{ color: var(--c-ivory-mute); }
+  .ib-card.is-cocina .price strong{ color: var(--gold-amber-bright); }
+
+  /* ============================================================
+     POR QUÉ ESTE PACK
+     ============================================================ */
+  .por-que{ padding: 130px 40px; background: var(--c-soft); }
+  .pq-grid{
+    max-width: 1180px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .pq-card{
+    padding: 36px 30px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(40,28,20,.55), rgba(20,17,14,.85));
+    border: 1px solid rgba(201,163,93,.22);
+    display: flex; gap: 22px; align-items: flex-start;
+    transition: transform .5s ease, border-color .5s ease;
+  }
+  .pq-card:hover{ transform: translateY(-4px); border-color: rgba(201,163,93,.5); }
+  .pq-icon{
+    width: 60px; height: 60px;
+    flex-shrink: 0;
+    display: grid; place-items: center;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(201,163,93,.18), rgba(138,106,50,.06));
+    border: 1px solid rgba(201,163,93,.3);
+    color: var(--gold-bright);
+  }
+  .pq-icon svg{ width: 30px; height: 30px; }
+  .pq-text h3{ font-family: var(--serif); font-size: 24px; color: var(--c-ivory); margin-bottom: 6px; font-weight: 500; }
+  .pq-text p{ font-size: 14px; line-height: 1.6; color: var(--c-ivory-soft); }
+
+  /* ============================================================
+     CTA FINAL · price card
+     ============================================================ */
+  .cta-final{
+    padding: 100px 40px 130px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201,163,93,.18), transparent 70%),
+      var(--c-deep);
+  }
+  .price-card{
+    max-width: 700px; margin: 0 auto;
+    padding: 56px 48px;
+    border-radius: 24px;
+    background:
+      radial-gradient(ellipse 100% 60% at 50% 0%, rgba(232,207,148,.16), transparent 70%),
+      linear-gradient(180deg, rgba(40,28,20,.7), rgba(14,10,6,.95));
+    border: 1px solid rgba(201,163,93,.4);
+    box-shadow:
+      0 60px 100px -40px rgba(0,0,0,.85),
+      0 30px 50px -20px rgba(166,130,61,.3),
+      inset 0 1px 0 rgba(232,207,148,.2);
+    position: relative;
+  }
+  .price-card::before{
+    content: ""; position: absolute; top: -2px; left: 50%; transform: translateX(-50%);
+    width: 140px; height: 4px;
+    background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+    border-radius: 0 0 4px 4px;
+  }
+  .price-card .label{
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500;
+    margin-bottom: 22px;
+  }
+  .price-was{ font-family: var(--serif); font-size: 22px; color: var(--c-ivory-mute); text-decoration: line-through; }
+  .price-now{
+    font-family: var(--serif); font-size: 80px; line-height: 1;
+    color: var(--gold-bright); font-weight: 500;
+    margin: 8px 0;
+  }
+  .price-savings{ font-size: 14px; color: var(--c-ivory-soft); margin-bottom: 30px; }
+  .price-savings strong{ color: var(--gold-bright); }
+
+  .btn-primary{
+    position: relative; padding: 22px 44px;
+    font-size: 12px; letter-spacing: .26em; text-transform: uppercase; font-weight: 600;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #f5dea0 0%, #e7c179 30%, #c9a35d 60%, #a6823d 100%);
+    color: #1a1410;
+    border: 1px solid rgba(255,255,255,.4);
+    box-shadow: 0 22px 44px -14px rgba(166,130,61,.65);
+    transition: transform .35s ease, filter .35s ease;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .btn-primary:hover{ transform: translateY(-3px); filter: brightness(1.08); }
+
+  .cta-meta{
+    margin-top: 22px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--c-ivory-soft);
+  }
+  .cta-meta span::before{ content: "✓ "; color: var(--gold-bright); font-weight: 700; }
+
+  /* Footer */
+  .footer{
+    padding: 60px 40px 50px;
+    border-top: 1px solid rgba(201,163,93,.18);
+    text-align: center;
+    font-size: 12px; letter-spacing: .14em;
+    color: var(--c-ivory-mute);
+    background: var(--c-deep);
+  }
+  .footer a{ color: var(--gold-bright); margin: 0 14px; }
+  .footer .top{
+    font-family: var(--serif); font-size: 22px;
+    color: var(--c-ivory); margin-bottom: 18px; letter-spacing: .2em;
+  }
+
+  .reveal{
+    opacity: 0; transform: translateY(28px);
+    transition: opacity .9s cubic-bezier(.2,.7,.3,1), transform .9s cubic-bezier(.2,.7,.3,1);
+  }
+  .reveal.is-visible{ opacity: 1; transform: translateY(0); }
+  .reveal.delay-1{ transition-delay: .1s; }
+  .reveal.delay-2{ transition-delay: .2s; }
+
+  @media (max-width: 900px){
+    .nav-links{ display: none; }
+    .nav{ padding: 14px 20px; background: rgba(20,17,14,.85); }
+    .hero-dual{ grid-template-columns: 1fr; }
+    .half{ padding: 110px 30px 60px; min-height: 60vh; }
+    .seal-center{ position: relative; transform: none; left: auto; top: auto; margin: -90px auto; width: 130px; height: 130px; }
+    .ib-grid-skincare{ grid-template-columns: 1fr; }
+    .ib-grid-cocina{ grid-template-columns: 1fr; }
+    .pq-grid{ grid-template-columns: 1fr; }
+    .price-now{ font-size: 60px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../index.html" class="logo"><span class="dot"></span>TÄLU</a>
+  <div class="nav-links">
+    <a href="../index.html#cocina">Cocina</a>
+    <a href="../index.html#skincare">Skincare</a>
+    <a href="../index.html#packs">Packs</a>
+    <a href="../contacto.html">Contacto</a>
+  </div>
+  <a href="#comprar" class="nav-cart" aria-label="Carrito">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1.4 9.5a2 2 0 0 1-2 1.7H8.4a2 2 0 0 1-2-1.7L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+  </a>
+</nav>
+
+<!-- ============================ HERO DUAL ============================ -->
+<section class="hero-dual">
+
+  <!-- Mitad SKINCARE -->
+  <div class="half half-skincare">
+    <div class="half-eyebrow">Para la piel</div>
+    <h1>3 cremas <em>ancestrales</em></h1>
+    <p class="half-lead">
+      Sebo de ternero grass-fed que reemplaza 6 productos.
+      Día, descongestivo, noche.
+    </p>
+    <ul class="half-list">
+      <li>TÄLU RÄW · día</li>
+      <li>TÄLU CLEAR · descongestivo</li>
+      <li>TÄLU PREMIUM · noche</li>
+    </ul>
+  </div>
+
+  <!-- Mitad COCINA -->
+  <div class="half half-cocina">
+    <div class="half-eyebrow">Para la cocina</div>
+    <h1>2 grasas <em>nobles</em></h1>
+    <p class="half-lead">
+      Sebo de res robusto y de ternero fino.
+      Toda tu cocina ancestral chilena.
+    </p>
+    <ul class="half-list">
+      <li>TALLOW Res · 410ml · robusto</li>
+      <li>TALLOW Ternero · fino</li>
+    </ul>
+  </div>
+
+  <!-- SELLO CENTRAL -->
+  <div class="seal-center">
+    <svg width="180" height="180" viewBox="0 0 200 200">
+      <defs>
+        <radialGradient id="seal-fam-grad" cx="50%" cy="50%">
+          <stop offset="0%" stop-color="#f5dea0"/>
+          <stop offset="50%" stop-color="#c9a35d"/>
+          <stop offset="100%" stop-color="#8a6a32"/>
+        </radialGradient>
+        <linearGradient id="ring-fam" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fff8e0"/>
+          <stop offset="50%" stop-color="#f5dea0"/>
+          <stop offset="100%" stop-color="#a6823d"/>
+        </linearGradient>
+      </defs>
+      <!-- exterior -->
+      <circle cx="100" cy="100" r="92" fill="url(#seal-fam-grad)" stroke="url(#ring-fam)" stroke-width="2"/>
+      <circle cx="100" cy="100" r="84" fill="none" stroke="rgba(255,255,255,.35)" stroke-width=".7"/>
+      <!-- texto rotando: "★ FAMILIA · TÄLU · ANCESTRAL" -->
+      <g style="transform-origin: 100px 100px; animation: seal-rot 50s linear infinite;">
+        <path id="circ-fam" d="M 100 100 m -76 0 a 76 76 0 1 1 152 0 a 76 76 0 1 1 -152 0" fill="none"/>
+        <text fill="#1a1410" font-family="Inter" font-size="9" letter-spacing="3.5" font-weight="600">
+          <textPath href="#circ-fam">★ FAMILIA · TÄLU · ANCESTRAL · CHILE · </textPath>
+        </text>
+      </g>
+      <!-- Centro: monograma TÄLU -->
+      <g transform="translate(100,100)">
+        <text x="0" y="-2" text-anchor="middle" font-family="Cormorant Garamond" font-size="40"
+              fill="#1a1410" font-weight="500" letter-spacing="2">TÄLU</text>
+        <text x="0" y="22" text-anchor="middle" font-family="Cormorant Garamond" font-size="13"
+              fill="#1a1410" font-style="italic" font-weight="500">familia</text>
+        <line x1="-34" y1="-30" x2="34" y2="-30" stroke="#1a1410" stroke-width=".8" opacity=".4"/>
+      </g>
+    </svg>
+    <style>@keyframes seal-rot{from{transform:rotate(0)}to{transform:rotate(360deg)}}</style>
+  </div>
+</section>
+
+<!-- ============================ UNIDOS ============================ -->
+<section class="unidos">
+  <span class="eyebrow">Una familia · dos rituales</span>
+  <h2>La piel que cuidas y la mesa que comes — del mismo origen</h2>
+  <p class="copy">
+    El sebo de ternero grass-fed es la base. Para la piel — <strong>biocompatibilidad ancestral.</strong>
+    Para la cocina — <strong>la grasa noble que hizo Chile.</strong> Un solo regalo cubre las dos
+    rutinas más importantes del día. <em>Por eso se llama Pack Familia.</em>
+  </p>
+  <div class="save-ribbon-big">★ AHORRA 30% · $28.860</div>
+</section>
+
+<!-- ============================ LO QUE INCLUYE ============================ -->
+<section class="includes-block">
+
+  <div class="ib-row">
+    <div class="ib-row-eyebrow">Para la piel</div>
+    <h3 class="ib-row-title">3 cremas ancestrales</h3>
+    <div class="ib-grid-skincare">
+      <a href="raw.html" class="ib-card is-skincare reveal">
+        <div class="img-wrap"><img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/pack_skincare_completa.png?v=1776378071" alt="TÄLU RÄW"></div>
+        <div class="role">para el día</div>
+        <h4>TÄLU RÄW</h4>
+        <p>Sebo de ternero puro 100%. Hidrata sin grasa, prepara la piel.</p>
+        <div class="price"><strong>$18.990</strong> precio individual</div>
+      </a>
+      <a href="clear.html" class="ib-card is-skincare reveal delay-1">
+        <div class="img-wrap"><img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/pack_skincare_completa.png?v=1776378071" alt="TÄLU CLEAR"></div>
+        <div class="role">para descongestionar</div>
+        <h4>TÄLU CLEAR</h4>
+        <p>Calma acné y rosácea sin químicos agresivos.</p>
+        <div class="price"><strong>$20.900</strong> precio individual</div>
+      </a>
+      <a href="premium.html" class="ib-card is-skincare reveal delay-2">
+        <div class="img-wrap"><img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/pack_skincare_completa.png?v=1776378071" alt="TÄLU PREMIUM"></div>
+        <div class="role">para la noche</div>
+        <h4>TÄLU PREMIUM</h4>
+        <p>Antiedad nocturno. Reparación profunda con sebo + activos premium.</p>
+        <div class="price"><strong>$24.990</strong> precio individual</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="ib-row">
+    <div class="ib-row-eyebrow">Para la cocina</div>
+    <h3 class="ib-row-title">2 grasas nobles</h3>
+    <div class="ib-grid-cocina">
+      <a href="tallow-res.html" class="ib-card is-cocina reveal">
+        <div class="img-wrap"><img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/image_a232df3a-fcd2-4a82-8e4a-64ffbcab3c94.png?v=1776195409" alt="TALLOW Res"></div>
+        <div class="role">para lo robusto</div>
+        <h4>TALLOW Res · 410ml</h4>
+        <p>Punto humo 250°C. Sella carnes, fríe papas, da cuerpo a la cazuela.</p>
+        <div class="price"><strong>$10.990</strong> precio individual</div>
+      </a>
+      <a href="tallow-ternero.html" class="ib-card is-cocina reveal delay-1">
+        <div class="img-wrap"><img src="https://cdn.shopify.com/s/files/1/0778/1679/1279/files/hf_20260421_225806_ddfd11bb-836b-4079-9bec-c47b123ed94f.png?v=1777068092" alt="TALLOW Ternero"></div>
+        <div class="role">para lo fino</div>
+        <h4>TALLOW Ternero</h4>
+        <p>Más liviano y suave. Verduras al sartén, repostería, salsas finas.</p>
+        <div class="price"><strong>$12.990</strong> precio individual</div>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================ POR QUÉ ============================ -->
+<section class="por-que">
+  <div style="text-align:center; max-width:760px; margin:0 auto 60px;" class="reveal">
+    <div style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:14px;">
+      ✦ Por qué este pack ✦
+    </div>
+    <h2 style="font-family:var(--serif);font-size:clamp(36px,5vw,60px);color:var(--c-ivory);">
+      Un solo pack · toda la rutina ancestral
+    </h2>
+  </div>
+
+  <div class="pq-grid">
+    <div class="pq-card reveal">
+      <div class="pq-icon">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M6 22a4 4 0 014-4h12a4 4 0 014 4v3H6v-3z"/>
+          <circle cx="16" cy="11" r="5"/>
+        </svg>
+      </div>
+      <div class="pq-text">
+        <h3>30% off · regalo perfecto</h3>
+        <p>Ahorras $28.860 vs comprar todo individual. Cumpleaños, fin de año, "porque sí" — no necesitas excusa.</p>
+      </div>
+    </div>
+    <div class="pq-card reveal delay-1">
+      <div class="pq-icon">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M16 3l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6L7 10l6-1 3-6z"/>
+        </svg>
+      </div>
+      <div class="pq-text">
+        <h3>Una sola filosofía</h3>
+        <p>Sebo de ternero grass-fed para piel y cocina. La misma vaca chilena que protege tu piel de noche, te alimenta al día siguiente.</p>
+      </div>
+    </div>
+    <div class="pq-card reveal">
+      <div class="pq-icon">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="16" cy="16" r="11"/>
+          <path d="M16 7v9l6 3"/>
+        </svg>
+      </div>
+      <div class="pq-text">
+        <h3>Stock para 60 días</h3>
+        <p>Las cremas duran 2-3 meses cada una. Las grasas un mes cocinando 5x/semana. Pack para varios meses, una sola compra.</p>
+      </div>
+    </div>
+    <div class="pq-card reveal delay-1">
+      <div class="pq-icon">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M16 3l11 5v8c0 7-5 12-11 13C10 28 5 23 5 16V8l11-5z"/>
+          <path d="M11 16l4 4 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="pq-text">
+        <h3>Garantía 60 días</h3>
+        <p>Si no te convence cualquiera de los 5 productos — devolvemos cada peso. Sin preguntas, sin formularios.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CTA FINAL ============================ -->
+<section class="cta-final" id="comprar">
+  <div class="price-card reveal">
+    <div class="label">Pack Familia · 5 productos</div>
+    <div class="price-was">$97.850</div>
+    <div class="price-now">$68.990</div>
+    <div class="price-savings">
+      Ahorra <strong>$28.860</strong> (30%) · 5 productos · El regalo más completo de TÄLU
+    </div>
+    <a href="https://taluchile.cl/products/pack-familia-talu-completo" class="btn-primary">
+      Llevar Pack Familia
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <div class="cta-meta">
+      <span>Envío gratis</span>
+      <span>Garantía 60 días</span>
+      <span>Skincare + Cocina</span>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="top">TÄLU</div>
+  <div>
+    <a href="../index.html">Inicio</a>
+    <a href="../index.html#cocina">Cocina</a>
+    <a href="../index.html#skincare">Skincare</a>
+    <a href="../contacto.html">Contacto</a>
+  </div>
+  <div style="margin-top:14px;">© TÄLU Chile · contacto@taluchile.cl</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
