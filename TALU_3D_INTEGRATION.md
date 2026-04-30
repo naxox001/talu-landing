@@ -117,9 +117,9 @@ En `<head>` de la landing:
 
 (El glow ámbar de fondo ayuda a que el jar destaque sin "escenarios" cargados — mismo recurso del mockup que aprobaste)
 
-## 5. Si querés un fallback poster (SEO + carga rápida)
+## 5. Si quieres un fallback poster (SEO + carga rápida)
 
-Cuando hagas el deploy, podés generar un poster JPG (1 fotograma del modelo) y agregarlo:
+Cuando hagas el deploy, puedes generar un poster JPG (1 fotograma del modelo) y agregarlo:
 
 ```html
 <model-viewer ...
@@ -143,7 +143,7 @@ Eso muestra una imagen estática hasta que carga el GLB.
 alt="TÄLU RAW · frasco de crema en base a sebo de res, vista 3D interactiva"
 ```
 
-## 8. Variables que podés ajustar después sin re-exportar
+## 8. Variables que puedes ajustar después sin re-exportar
 
 | Setting | Default | Para qué |
 |---|---|---|
@@ -154,7 +154,7 @@ alt="TÄLU RAW · frasco de crema en base a sebo de res, vista 3D interactiva"
 | `shadow-intensity` | 1.1 | Fuerza de la sombra |
 | `environment-image` | neutral | IBL: neutral / legacy / URL HDRi propio |
 
-## 9. Si querés cambiar el modelo más adelante
+## 9. Si quieres cambiar el modelo más adelante
 
 El `.blend` editable está en `Desktop/talu_raw_jar.blend`. Para re-exportar después de cambios:
 
