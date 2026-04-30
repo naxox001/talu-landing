@@ -1,0 +1,274 @@
+/* ============================================================
+   TÄLU · PREMIUM FX (CSS layer)
+   Botones magnéticos · ripple · glow pulse · letter reveal · iconos pro
+   Diseño "Editorial Magazine + Luxury Minimal" — DFII 18/15
+   ============================================================ */
+
+/* ============ Letter reveal (usa .char dentro de h1) ============ */
+.hero-text h1 .char,
+.hero-ternero h1 .char,
+.contact-wrap h1 .char {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  will-change: transform, opacity, filter;
+}
+.hero-em {
+  display: block;
+  font-style: italic;
+}
+
+/* ============ Botón primary PREMIUM con glow pulse continuo ============ */
+.btn-fx {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;  /* ripple necesita overflow:hidden interno (lo hace el JS) */
+}
+
+/* Glow pulse continuo (CSS, GPU-accelerated) */
+.btn-fx::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: linear-gradient(135deg,
+    rgba(244, 190, 114, 0.55),
+    rgba(224, 144, 64, 0.35),
+    rgba(168, 106, 42, 0.15));
+  filter: blur(14px);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity .5s ease;
+  animation: glow-pulse 2.4s ease-in-out infinite;
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: .4; transform: scale(1); }
+  50%      { opacity: .85; transform: scale(1.03); }
+}
+
+.btn-fx:hover::after {
+  opacity: 1;
+  filter: blur(20px);
+}
+
+/* Active scale + bright */
+.btn-fx:active {
+  transform: scale(.97) !important;
+  filter: brightness(1.15);
+}
+
+/* ============ Ripple keyframes (inyectado por JS) ============ */
+@keyframes ripple-expand {
+  from { transform: scale(0); opacity: 1; }
+  to   { transform: scale(1); opacity: 0; }
+}
+
+/* ============ Iconos Lucide professionalismo total ============ */
+[data-lucide] {
+  width: 1em;
+  height: 1em;
+  stroke-width: 1.5;
+  stroke: currentColor;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Icon-box wrapper (reemplaza los SVG custom) */
+.icon-box-pro {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg,
+    rgba(244, 190, 114, 0.18),
+    rgba(168, 106, 42, 0.06));
+  border: 1px solid rgba(244, 190, 114, 0.3);
+  color: var(--c-gold-bright, #f4be72);
+  flex-shrink: 0;
+  transition: transform .4s ease, border-color .4s ease, background .4s ease;
+}
+.icon-box-pro [data-lucide] {
+  width: 28px;
+  height: 28px;
+}
+.icon-box-pro:hover,
+.por-que-card:hover .icon-box-pro,
+.razon-card:hover .icon-box-pro {
+  transform: rotate(-6deg) scale(1.06);
+  border-color: rgba(244, 190, 114, 0.6);
+  background: linear-gradient(135deg,
+    rgba(244, 190, 114, 0.28),
+    rgba(168, 106, 42, 0.12));
+}
+
+/* Iconos grandes (big-icons section) */
+.icon-big-pro {
+  width: 110px;
+  height: 110px;
+  border-radius: 28px;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(244, 190, 114, 0.25), transparent 60%),
+    linear-gradient(135deg, rgba(40, 28, 20, 0.55), rgba(20, 17, 14, 0.85));
+  border: 1px solid rgba(244, 190, 114, 0.3);
+  color: var(--c-gold-bright, #f4be72);
+  margin: 0 auto 28px;
+  position: relative;
+  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.4))
+          drop-shadow(0 0 24px rgba(244, 190, 114, 0.15));
+  transition: all .55s cubic-bezier(.2, .7, .3, 1);
+}
+.icon-big-pro::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 24px;
+  border: 1px dashed rgba(244, 190, 114, 0.25);
+  pointer-events: none;
+  animation: icon-rotate 30s linear infinite;
+}
+@keyframes icon-rotate {
+  to { transform: rotate(360deg); }
+}
+.icon-big-pro [data-lucide] {
+  width: 52px;
+  height: 52px;
+  stroke-width: 1.4;
+}
+.big-icon-card:hover .icon-big-pro {
+  transform: translateY(-4px) scale(1.06);
+  border-color: rgba(244, 190, 114, 0.55);
+  filter: drop-shadow(0 22px 38px rgba(0, 0, 0, 0.55))
+          drop-shadow(0 0 32px rgba(244, 190, 114, 0.35));
+}
+
+/* Iconos warm (skincare) */
+.icon-box-warm {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg,
+    rgba(201, 163, 93, 0.18),
+    rgba(138, 106, 50, 0.06));
+  border: 1px solid rgba(201, 163, 93, 0.3);
+  color: var(--gold-deep, #8a6a32);
+  flex-shrink: 0;
+  transition: transform .4s ease, border-color .4s ease;
+}
+.icon-box-warm [data-lucide] {
+  width: 28px;
+  height: 28px;
+}
+.icon-box-warm:hover,
+.pq-card:hover .icon-box-warm,
+.por-que-card:hover .icon-box-warm {
+  transform: rotate(-6deg) scale(1.06);
+  border-color: rgba(201, 163, 93, 0.6);
+}
+
+/* ============ Botón secundario con line glow ============ */
+.btn-secondary {
+  position: relative;
+  overflow: hidden;
+}
+.btn-secondary::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--c-gold-bright, #f4be72);
+  transform: translateX(-50%);
+  transition: width .5s cubic-bezier(.2, .7, .3, 1);
+}
+.btn-secondary:hover::before {
+  width: 80%;
+}
+
+/* ============ Hero entrance: scroll-revealed elements stagger ============ */
+[data-stagger-parent] > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+[data-stagger-parent].is-active > * {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all .8s cubic-bezier(.2, .7, .3, 1);
+}
+[data-stagger-parent].is-active > *:nth-child(1) { transition-delay: .05s; }
+[data-stagger-parent].is-active > *:nth-child(2) { transition-delay: .15s; }
+[data-stagger-parent].is-active > *:nth-child(3) { transition-delay: .25s; }
+[data-stagger-parent].is-active > *:nth-child(4) { transition-delay: .35s; }
+[data-stagger-parent].is-active > *:nth-child(5) { transition-delay: .45s; }
+[data-stagger-parent].is-active > *:nth-child(6) { transition-delay: .55s; }
+
+/* ============ Selo: brillo barrer al hacer hover (group hover) ============ */
+.hero-seal,
+.hero-seal-massive {
+  position: relative;
+  cursor: pointer;
+}
+.hero-seal::after,
+.hero-seal-massive::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 999px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(244, 190, 114, 0.4) 20%,
+    transparent 40%,
+    transparent 100%
+  );
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity .6s ease;
+  z-index: -1;
+  animation: seal-orbit 8s linear infinite;
+}
+@keyframes seal-orbit {
+  to { transform: rotate(360deg); }
+}
+.hero-seal:hover::after,
+.hero-seal-massive:hover::after {
+  opacity: 1;
+}
+
+/* ============ Reduce motion ============ */
+@media (prefers-reduced-motion: reduce) {
+  .btn-fx::after,
+  .icon-big-pro::before,
+  .hero-seal::after,
+  .hero-seal-massive::after {
+    animation: none;
+  }
+  [data-stagger-parent] > * {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============ Cursor de magnetic effect ============ */
+.btn-primary,
+.btn-secondary {
+  cursor: pointer;
+  transition: transform .3s cubic-bezier(.2, .7, .3, 1),
+              box-shadow .3s ease,
+              filter .3s ease;
+}
+
+/* ============ Number count - leve cambio mientras corre ============ */
+.price-now,
+.gc-amount-display,
+[data-counter] {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
